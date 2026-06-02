@@ -2,12 +2,12 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 
 const NAV_ITEMS = [
-  { to: '/owner', label: '业主', hint: '目标 / 约束 / 业主输入' },
-  { to: '/integrator', label: '服务提供方', hint: '集成 / 维护 / 系统实现' },
-  { to: '/vendor', label: '产品供应商', hint: '产品 / 开发 / 能力证明' },
-  { to: '/translation-center', label: '追溯关系', hint: '输入 / 设计 / 能力 / 责任对应' },
-  { to: '/selection', label: '差距分析', hint: '满足情况 / 补偿措施 / 责任闭环' },
-  { to: '/report', label: '符合性判断', hint: '审核视角 / 证据判断 / 目标说明' }
+  { to: '/owner', label: '提出目标', hint: '业主输入 / 目标 / 约束' },
+  { to: '/integrator', label: '形成方案', hint: '集成 / 维护 / 系统实现' },
+  { to: '/vendor', label: '提供能力', hint: '产品 / 开发 / 能力证明' },
+  { to: '/translation-center', label: '建立对应', hint: '输入 / 设计 / 能力 / 责任' },
+  { to: '/selection', label: '分析差距', hint: '满足情况 / 补偿措施 / 闭环' },
+  { to: '/report', label: '形成判断', hint: '审核视角 / 证据判断 / 目标说明' }
 ];
 
 export function Header() {
@@ -25,7 +25,7 @@ export function Header() {
           </div>
           <div className={styles.brandText}>
             <strong>IEC 62443 Learning Hub</strong>
-            <span>通过一个共享案例理解 IEC 62443 的主角色、协作关系与判断逻辑</span>
+            <span>通过一个共享案例理解 IEC 62443 从目标到判断的主线流程</span>
           </div>
         </Link>
 

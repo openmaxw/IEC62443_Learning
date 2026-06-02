@@ -77,6 +77,12 @@
   margin: 0;
 }
 
+.sectionBlock header h2 {
+  color: #ffd6ae;
+  padding-left: 10px;
+  border-left: 3px solid rgba(255, 169, 64, 0.45);
+}
+
 .cardGrid,
 .tutorialGrid {
   display: grid;

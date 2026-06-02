@@ -1,4 +1,4 @@
-.page { width: min(1440px, calc(100vw - 24px)); margin: 0 auto; padding: 8px 0 18px; display: grid; gap: 12px; }
+.page { width: min(1440px, calc(100vw - 24px)); margin: 0 auto; padding: 8px 0 18px; display: grid; gap: 16px; }
 .toolbarRow { display: flex; justify-content: space-between; gap: 10px; align-items: center; flex-wrap: wrap; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: rgba(255,255,255,.03); }
 .titleGroup { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .titleGroup strong { font-size: var(--font-size-xl); color: var(--color-text-strong); }
@@ -22,15 +22,15 @@
 @media (max-width: 1100px) { .metaGrid { grid-template-columns: 1fr; } }
 @media (max-width: 768px) { .page { width: min(100vw - 16px, 1440px); } .toolbarRow, .heroTop { align-items: stretch; } }
 
-.guidanceRow { padding: 12px 14px; border: 1px solid rgba(199, 151, 68, 0.22); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(199, 151, 68, 0.08), rgba(255,255,255,.02)); }
-.guidanceRow p { margin: 0; color: rgba(195, 204, 214, 0.8); font-style: italic; }
+.guidanceRow { padding: 16px 18px; margin: 4px 0 8px; border: 1px solid rgba(255, 169, 64, 0.30); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(255, 169, 64, 0.16), rgba(255, 214, 170, 0.06), rgba(255,255,255,.02)); box-shadow: 0 8px 24px rgba(255, 169, 64, 0.08); }
+.guidanceRow p { margin: 0; max-width: 1120px; color: #ffe2c3; font-style: normal; font-weight: 600; line-height: 1.6; }
 .statusPanel { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: rgba(255,255,255,.018); }
 .statusSummary { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
 .statusItem { min-width: 0; padding: 6px 9px; border: 1px solid var(--color-table-border); border-radius: 999px; background: rgba(255,255,255,.024); display: inline-flex; align-items: center; gap: 6px; }
 .statusItem span { color: var(--color-text-muted); font-size: var(--font-size-xs); white-space: nowrap; }
 .statusItem strong { color: var(--color-text); font-size: var(--font-size-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .statusAside { min-width: 0; flex: 1; }
-.body { display: grid; gap: 12px; }
+.body { display: grid; gap: 16px; }
 .navRow { display: flex; justify-content: flex-end; }
 .navActions { display: flex; justify-content: space-between; gap: 10px; width: 100%; flex-wrap: wrap; padding: 12px 0 2px; border-top: 1px solid var(--color-table-border); }
 

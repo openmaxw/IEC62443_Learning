@@ -5,7 +5,7 @@ import learningStyles from '../Learning/LearningMode.module.css';
 import styles from './Landing.module.css';
 
 const POSITIONING = [
-  '本平台通过一个共享案例，把 IEC 62443 中的主角色、协作关系、能力边界与判断逻辑串起来。',
+  '本平台通过一个共享案例，把 IEC 62443 从提出目标、形成方案、提供能力、建立对应、分析差距到形成判断的主线串起来。',
   '它不是正式认证工具，也不是替代工程设计的软件，而是一个帮助学习者先看懂“谁在做什么、为什么这样配合”的学习与演示平台。',
   '学习者可以先通过首页建立对标准框架的基本理解，再进入案例页面查看角色如何在同一个实例中推进。'
 ];
@@ -88,7 +88,7 @@ export function Landing() {
           <span className={styles.eyebrow}>IEC 62443 Learning Hub</span>
           <h1>这个平台是做什么的</h1>
           <p>
-            本平台通过一个共享案例，把 IEC 62443 中的主角色、协作关系、能力边界与判断逻辑串起来。
+            本平台通过一个共享案例，把 IEC 62443 从提出目标、形成方案、提供能力、建立对应、分析差距到形成判断的主线串起来。
             它不是正式认证工具，也不是替代工程设计的软件，而是一个帮助学习者先看懂“谁在做什么、为什么这样配合”的学习与演示平台。
           </p>
           <div className={styles.actions}>

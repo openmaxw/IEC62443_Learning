@@ -3,7 +3,7 @@
 .headerRow span { color: var(--color-text-muted); }
 .matrixSection { display: grid; gap: 12px; padding: 18px; border-radius: 18px; border: 1px solid var(--color-border); background: rgba(255,255,255,.03); }
 .sectionHead { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
-.sectionHead h3 { margin: 0 0 6px; font-size: var(--font-size-2xl); }
+.sectionHead h3 { margin: 0 0 6px; font-size: var(--font-size-lg); color: #ffd6ae; padding-left: 10px; border-left: 3px solid rgba(255, 169, 64, 0.45); }
 .sectionHead p { margin: 0; max-width: 860px; color: var(--color-text-secondary); line-height: var(--line-height-relaxed); }
 .sectionHead > span { padding: 6px 10px; border-radius: 999px; color: #d7ecff; background: rgba(88,183,255,.1); border: 1px solid rgba(88,183,255,.18); font-size: var(--font-size-xs); font-weight: 700; }
 .traceTable th { white-space: nowrap; }

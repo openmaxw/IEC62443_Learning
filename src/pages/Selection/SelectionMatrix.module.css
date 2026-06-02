@@ -1,18 +1,28 @@
-.page { width: min(1440px, calc(100vw - 24px)); margin: 0 auto; padding: 8px 0 18px; display: grid; gap: 12px; }
+.page { width: min(1440px, calc(100vw - 24px)); margin: 0 auto; padding: 8px 0 18px; display: grid; gap: 16px; }
 
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 16px; border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: rgba(255,255,255,.025); }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 16px 18px; border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: rgba(255,255,255,.025); }
 
 .table { width: 100%; border-collapse: collapse; border: 1px solid var(--color-table-border); border-radius: var(--radius-md); overflow: hidden; }
 .table th, .table td { padding: 8px 10px; border-bottom: 1px solid var(--color-table-border); text-align: left; vertical-align: top; font-size: var(--font-size-sm); }
 .table th { color: var(--color-text-muted); background: var(--color-table-head); }
 .table td { background: rgba(255,255,255,.02); }
+.formTable { width: 100%; border-collapse: separate; border-spacing: 0; }
+.formTable thead { display: none; }
+.formTable tbody { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.formTable tr { display: grid; gap: 10px; padding: 14px; border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: rgba(255,255,255,.022); }
+.formTable th,
+.formTable td { display: grid; gap: 6px; padding: 0; border: 0; background: transparent; }
+.formTable th { color: var(--color-text); }
+.formTable input,
+.formTable textarea,
+.formTable select { width: 100%; }
 
 .actions { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .empty { padding: 12px 14px; border: 1px dashed rgba(170, 184, 195, 0.26); border-radius: var(--radius-md); background: rgba(255,255,255,.018); color: var(--color-text-muted); font-size: var(--font-size-sm); }
 
 .meta { display: block; margin-top: 6px; color: var(--color-text-secondary); font-size: 12px; }
 
-@media (max-width: 980px) { .hero { grid-template-columns: 1fr; } .actions { justify-content: flex-end; flex-wrap: wrap; } }
+@media (max-width: 980px) { .hero, .formTable tbody { grid-template-columns: 1fr; } .actions { justify-content: flex-end; flex-wrap: wrap; } }
 @media (max-width: 640px) { .page { width: min(100vw - 16px, 1440px); } }
 
 .invalidField input,

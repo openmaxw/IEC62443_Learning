@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { Button, DataTable, NotePanel, SectionBlock, StatusSummaryPanel } from '../../components/Common';
+import { Button, DataTable, SectionBlock, StatusSummaryPanel } from '../../components/Common';
 import { ProjectStageShell } from '../../components/ProjectFlow';
 import { useIntegratorPath, useOwnerPath } from '../../hooks/useProject';
 import { getIntegratorResultViewModel, resolveMatchLabel } from '../../domain/viewModels/resultViewModels';
@@ -15,29 +15,16 @@ export function IntegratorResult() {
   if (!viewModel.hasPlan) {
     return (
       <ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据">
-        <div className={styles.empty}><Link to="/integrator"><Button variant="primary">前往设计响应</Button></Link></div>
+        <div className={styles.empty}><Link to="/integrator"><Button variant="primary">进入本页</Button></Link></div>
       </ProjectStageShell>
     );
   }
 
   return (
-    <ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看设计响应结论、能力需求与需求—设计对应关系。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />} prevAction={{ to: isReviewMode ? '/report' : '/integrator', label: isReviewMode ? '返回交付摘要' : '返回设计响应' }} nextAction={isReviewMode ? undefined : { to: '/vendor', label: '进入能力声明' }}>
+    <ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看设计响应结论、能力需求与需求—设计对应关系。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />} prevAction={{ to: isReviewMode ? '/report' : '/integrator', label: isReviewMode ? '返回上一页' : '返回本页' }} nextAction={isReviewMode ? undefined : { to: '/vendor', label: '进入下一步' }}>
       {({ statusBar }) => (
       <>
-      <div className={styles.hero}>
-        <div>
-          <span className={styles.kicker}>设计响应</span>
-          <h2>推荐目标 SL-{viewModel.targetSL}</h2>
-          <p></p>
-        </div>
-        <div className={styles.summaryChips}>
-          <span className={styles.chip}>Zone {viewModel.summary.zoneCount}</span>
-          <span className={styles.chip}>流 {viewModel.summary.flowCount}</span>
-          <span className={styles.chip}>能力 {viewModel.summary.capabilityCount}</span>
-        </div>
-      </div>
-
-      <SectionBlock title="设计依据摘要">
+      <SectionBlock title="设计依据">
         <div className={styles.summaryGrid}>
           <div><span>关键系统/角色</span><strong>{viewModel.designBasisSummary?.keySystems || '未填写'}</strong></div>
           <div><span>外部连接方式</span><strong>{viewModel.designBasisSummary?.externalConnections || '未填写'}</strong></div>
@@ -107,14 +94,14 @@ export function IntegratorResult() {
               </tr>
             )) : (
               <tr>
-                <td colSpan="3" className={styles.emptyCell}>暂无可用匹配数据，请先完成需求汇总与设计输入。</td>
+                <td colSpan="3" className={styles.emptyCell}>暂无匹配结果，请先完成前序输入。</td>
               </tr>
             )}
           </tbody>
         </DataTable>
       </SectionBlock>
       {statusBar}
-      <NotePanel title="设计响应说明" notes={["如需补充设计依据、通信边界或资产归组信息，请返回设计响应页面完善后再查看本页。"]} />
+      
       </>
       )}
     </ProjectStageShell>

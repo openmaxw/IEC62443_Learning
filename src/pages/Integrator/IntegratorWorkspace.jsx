@@ -27,6 +27,17 @@ function isSameObject(a, b) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
+function splitDisplayItems(value) {
+  if (!value) return [];
+  return value.split(/[、，,；;\n]+/).map((item) => item.trim()).filter(Boolean);
+}
+
+function DisplayChips({ value }) {
+  const items = splitDisplayItems(value);
+  if (!items.length) return <strong>未填写</strong>;
+  return <div className={styles.displayChips}>{items.map((item) => <span key={item} className={styles.displayChip}>{item}</span>)}</div>;
+}
+
 function groupRequirementRows(rows) {
   const grouped = new Map();
   rows.forEach((item) => {
@@ -94,7 +105,7 @@ export function IntegratorWorkspace() {
   }, [plan, state.integratorDesign?.draft, actions]);
 
   if (!workspaceViewModel.hasPrerequisites) {
-    return <ProjectStageShell stageNumber="02" title="系统实现" projectName={state.projectMeta?.projectName} outputLabel="设计响应结果" prevAction={{ to: '/owner', label: '上一步' }} ><div className={styles.empty}>请先完成需求与目标阶段。</div></ProjectStageShell>;
+    return <ProjectStageShell stageNumber="02" title="形成方案" projectName={state.projectMeta?.projectName} outputLabel="设计响应结果" prevAction={{ to: '/owner', label: '上一步' }} ><div className={styles.empty}>请先完成需求与目标阶段。</div></ProjectStageShell>;
   }
 
   const step = STEPS[currentStep];
@@ -185,7 +196,7 @@ export function IntegratorWorkspace() {
 
   switch (step.id) {
     case 'basis':
-      content = <div className={styles.workspace}><div className={styles.block}><div className={styles.blockTitle}>业主输入摘要</div><div className={styles.contextGrid}><div><span>关键系统/角色</span><strong>{assessment.keySystems || '未填写'}</strong></div><div><span>外部连接方式</span><strong>{assessment.externalConnections || '未填写'}</strong></div><div><span>维护接入方式</span><strong>{assessment.maintenanceAccessPath || '未填写'}</strong></div><div><span>初始网络边界</span><strong>{assessment.initialBoundaryNotes || '未填写'}</strong></div><div><span>工艺连续性要求</span><strong>{assessment.continuityRequirements || '未填写'}</strong></div><div><span>合规补充说明</span><strong>{assessment.complianceNotes || '未填写'}</strong></div><div><span>项目类型</span><strong>{getScenarioTypeLabel(projectMeta?.scenarioType)}</strong></div><div><span>目标 SL</span><strong>SL-{plan.targetSL}</strong></div></div></div><div className={`${styles.block} ${invalidClass('designBasis')}`}><div className={styles.blockTitle}>设计原则说明</div><FieldHint text="用于说明本轮分区、通信与边界设计的总体原则，帮助后续结果页解释为什么这样设计。" /><textarea className={styles.fullText} value={plan.designBasis || ''} onChange={(event) => updatePlan((prev) => ({ ...prev, designBasis: event.target.value }))} placeholder="示例：按照关键控制区与远程接入区隔离的原则设计，优先控制远程维护边界与跨区通信。" /></div><div className={styles.grid}><div className={styles.block}><div className={styles.blockTitle}>目标安全等级</div><select value={plan.targetSL} onChange={(event) => updatePlan((prev) => ({ ...prev, targetSL: Number(event.target.value) }))}>{[1, 2, 3, 4].map((level) => <option key={level} value={level}>SL-{level}</option>)}</select></div><div className={styles.block}><div className={styles.blockTitle}>功能需求关注点</div><div className={styles.blockHint}>系统根据需求澄清结果推导出的 IEC 62443 FR 关注方向，按 FR1-FR7 顺序展示。</div><div className={styles.noteList}>{(plan.requiredFR || []).length ? formatFrFocus(plan.requiredFR).map((item) => <div key={item.code} className={styles.note}><strong>{item.code} · {item.name}</strong><span>{item.description}</span></div>) : <div className={styles.emptyCell}>暂无 FR 关注项</div>}</div></div></div></div>;
+      content = <div className={styles.workspace}><div className={styles.block}><div className={styles.blockTitle}>业主输入摘要</div><div className={styles.contextGrid}><div><span>关键系统/角色</span><DisplayChips value={assessment.keySystems} /></div><div><span>外部连接方式</span><DisplayChips value={assessment.externalConnections} /></div><div><span>维护接入方式</span><DisplayChips value={assessment.maintenanceAccessPath} /></div><div><span>初始网络边界</span><DisplayChips value={assessment.initialBoundaryNotes} /></div><div><span>工艺连续性要求</span><DisplayChips value={assessment.continuityRequirements} /></div><div><span>合规补充说明</span><DisplayChips value={assessment.complianceNotes} /></div><div><span>项目类型</span><strong>{getScenarioTypeLabel(projectMeta?.scenarioType)}</strong></div><div><span>目标 SL</span><strong>SL-{plan.targetSL}</strong></div></div></div><div className={`${styles.block} ${invalidClass('designBasis')}`}><div className={styles.blockTitle}>设计原则说明</div><FieldHint text="说明本轮系统实现的总体原则。" /><textarea className={styles.fullText} value={plan.designBasis || ''} onChange={(event) => updatePlan((prev) => ({ ...prev, designBasis: event.target.value }))} placeholder="示例：按照关键控制区与远程接入区隔离的原则设计，优先控制远程维护边界与跨区通信。" /></div><div className={styles.grid}><div className={styles.block}><div className={styles.blockTitle}>目标安全等级</div><select value={plan.targetSL} onChange={(event) => updatePlan((prev) => ({ ...prev, targetSL: Number(event.target.value) }))}>{[1, 2, 3, 4].map((level) => <option key={level} value={level}>SL-{level}</option>)}</select></div><div className={styles.block}><div className={styles.blockTitle}>功能需求关注点</div><div className={styles.blockHint}>系统根据需求澄清结果推导出的 IEC 62443 FR 关注方向，按 FR1-FR7 顺序展示。</div><div className={styles.noteList}>{(plan.requiredFR || []).length ? formatFrFocus(plan.requiredFR).map((item) => <div key={item.code} className={styles.note}><strong>{item.code} · {item.name}</strong><span>{item.description}</span></div>) : <div className={styles.emptyCell}>暂无 FR 关注项</div>}</div></div></div></div>;
       break;
     case 'zones':
       content = <div className={styles.grid}><div className={`${styles.block} ${invalidClass('zones')}`}><div className={styles.blockTitle}>Zone 草案</div><div className={styles.optionGrid}>{ZONE_TEMPLATES.map((zone) => <button key={zone.id} type="button" className={`${styles.optionCell} ${plan.zones.includes(zone.id) ? styles.optionCellActive : ''}`} onClick={() => toggleItem('zones', zone.id)}><strong>{zone.name}</strong><span>{zone.description}</span></button>)}</div></div><div className={`${styles.block} ${invalidClass('conduits')}`}><div className={styles.blockTitle}>Conduit 类型</div><div className={styles.optionGrid}>{CONDUIT_TEMPLATES.map((conduit) => <button key={conduit.id} type="button" className={`${styles.optionCell} ${plan.conduits.includes(conduit.id) ? styles.optionCellActive : ''}`} onClick={() => toggleItem('conduits', conduit.id)}><strong>{conduit.name}</strong><span>{conduit.description}</span></button>)}</div></div></div>;
@@ -203,7 +214,7 @@ export function IntegratorWorkspace() {
   return (
     <ProjectStageShell
       stageNumber="02"
-      title="系统实现"
+      title="形成方案"
       projectName={state.projectMeta?.projectName}
       outputLabel="系统实现结果"
       statusText={isReviewStep ? '设计输入已形成规划结果候选' : '正在完善系统规划输入'}

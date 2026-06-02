@@ -57,7 +57,6 @@ export function Dashboard() {
             <div className={styles.nextActionCard}>
               <strong>{viewModel.nextAction?.label || '当前阶段已基本完成'}</strong>
               <span>{viewModel.nextAction?.description || '可以转入学习总结收束案例重点，或回到具体页面继续补充讲解内容。'}</span>
-              <em className={styles.noteText}>该建议根据当前项目状态生成，便于您优先处理关键步骤。</em>
               <div className={styles.inlineActions}>
                 {viewModel.nextAction ? <Link to={viewModel.nextAction.route}><Button variant="primary" size="small">前往处理</Button></Link> : <Link to="/report"><Button variant="secondary" size="small">查看总结与审核</Button></Link>}
               </div>
@@ -73,20 +72,9 @@ export function Dashboard() {
           </Card>
         </section>
 
-        <section className={styles.notePanel}>
-          <strong>使用说明</strong>
-          <em>建议先完成需求澄清，再形成设计响应和能力声明，最后进入匹配闭环与交付摘要；如需快速了解整体流程，可先加载示例案例查看示例。</em>
-        </section>
+        
 
-        <section className={styles.roleGuideGrid}>
-          {ROLE_GUIDES.map((item) => (
-            <article key={item.role} className={styles.roleGuideCard}>
-              <span>{item.role}</span>
-              <strong>{item.focus}</strong>
-              <Link to={item.route}>{item.action}</Link>
-            </article>
-          ))}
-        </section>
+        
 
         <section className={styles.cardGrid}>
           {viewModel.cards.map((card) => (

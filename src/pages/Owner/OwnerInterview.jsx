@@ -137,6 +137,7 @@ export function OwnerInterview() {
   const navigate = useNavigate();
   const { state, actions } = useProject();
   const [currentStep, setCurrentStep] = useState(0);
+  const [activeGuidance, setActiveGuidance] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
   const [missingFields, setMissingFields] = useState([]);
   const [formData, setFormData] = useState(() => state.ownerProfile?.draft || state.ownerProfile?.assessment || {
@@ -181,6 +182,10 @@ export function OwnerInterview() {
   };
   const ownershipOption = REMOTE_OWNERSHIP_OPTIONS.find((item) => item.value === formData.remoteOperationsOwnership);
 
+  const showGuidance = (title, description) => {
+    setActiveGuidance(`${title}：${description}`);
+  };
+
   const getStepValidationResult = (stepId = step.id) => {
     if (stepId === 'industry') {
       const fields = [!(state.projectMeta?.projectName || formData.projectName) ? 'projectName' : '', !(state.projectMeta?.industry || formData.industry) ? 'industry' : ''].filter(Boolean);
@@ -217,10 +222,12 @@ export function OwnerInterview() {
       return;
     }
     clearValidation();
+    setActiveGuidance('');
     setCurrentStep((prev) => Math.min(prev + 1, STEPS.length - 1));
   };
 
   const validateBeforeStepChange = (targetStep) => {
+    setActiveGuidance('');
     if (targetStep <= currentStep) {
       clearValidation();
       setCurrentStep(targetStep);
@@ -262,13 +269,13 @@ export function OwnerInterview() {
       content = <div className={styles.stack}><div className={styles.formGrid}><div className={invalidClass('projectName')}><FieldHint title="项目名称" /><input value={state.projectMeta?.projectName || ''} onChange={(event) => updateProjectMeta('projectName', event.target.value)} placeholder="示例：某化工装置 OT 安全分区协同演示" /></div><div className={invalidClass('industry')}><FieldHint title="行业场景" /><select value={state.projectMeta?.industry || ''} onChange={(event) => updateProjectMeta('industry', event.target.value)}><option value="">请选择行业</option>{INDUSTRIES.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></div><div><FieldHint title="业主单位" /><input value={state.projectMeta?.organizationName || ''} onChange={(event) => updateProjectMeta('organizationName', event.target.value)} placeholder="示例：某石化有限公司" /></div><div><FieldHint title="工厂/装置/站点" /><input value={state.projectMeta?.siteName || ''} onChange={(event) => updateProjectMeta('siteName', event.target.value)} placeholder="示例：乙烯装置 A 区" /></div><div><FieldHint title="项目类型" /><select value={state.projectMeta?.scenarioType || ''} onChange={(event) => updateProjectMeta('scenarioType', event.target.value)}><option value="">请选择项目类型</option><option value="new-build">新建</option><option value="retrofit">改造</option><option value="expansion">扩建</option><option value="assessment">评估</option></select></div><div><FieldHint title="项目目标" /><input value={state.projectMeta?.projectObjective || ''} onChange={(event) => updateProjectMeta('projectObjective', event.target.value)} placeholder="示例：完成控制区分段与远程维护边界加固" /></div></div></div>;
       break;
     case 'impacts':
-      content = <table className={styles.matrix}><thead><tr><th>后果项</th><th>选择</th></tr></thead><tbody>{IMPACT_FIELDS.map((field) => <tr key={field.key}><td><div className={styles.fieldInfo}><strong>{field.label}</strong><span>{field.hint}</span></div></td><td><LevelCards field={field} value={formData[field.key]} onChange={(value) => updateFieldWithValidation(field.key, value)} invalid={isMissing(field.key)} /></td></tr>)}</tbody></table>;
+      content = <div className={styles.choiceGrid}>{IMPACT_FIELDS.map((field) => <div key={field.key} className={styles.choiceCard}><div className={styles.choiceLabel} onClick={() => showGuidance(field.label, field.hint)}><strong>{field.label}</strong></div><LevelCards field={field} value={formData[field.key]} onChange={(value) => { updateFieldWithValidation(field.key, value); showGuidance(`${field.label} / ${(field.levels?.[value]) ? value : ''}`.replace(/ \/ $/, ''), field.levels?.[value] || field.hint); }} invalid={isMissing(field.key)} /></div>)}</div>;
       break;
     case 'exposure':
-      content = <table className={styles.matrix}><thead><tr><th>项目项</th><th>选择</th></tr></thead><tbody>{EXPOSURE_FIELDS.map((field) => <tr key={field.key}><td><div className={styles.fieldInfo}><strong>{field.label}</strong><span>{field.hint}</span></div></td><td><OptionCards field={field} value={formData[field.key]} onChange={(value) => updateFieldWithValidation(field.key, value)} options={field.options} invalid={isMissing(field.key)} /></td></tr>)}</tbody></table>;
+      content = <div className={styles.choiceGrid}>{EXPOSURE_FIELDS.map((field) => <div key={field.key} className={styles.choiceCard}><div className={styles.choiceLabel} onClick={() => showGuidance(field.label, field.hint)}><strong>{field.label}</strong></div><OptionCards field={field} value={formData[field.key]} onChange={(value) => { updateFieldWithValidation(field.key, value); const option = field.options?.find((item) => item.value === value); showGuidance(`${field.label} / ${option?.label || value}`, option?.description || field.hint); }} options={field.options} invalid={isMissing(field.key)} /></div>)}</div>;
       break;
     case 'maturity':
-      content = <table className={styles.matrix}><thead><tr><th>基础项</th><th>选择</th></tr></thead><tbody>{MATURITY_FIELDS.map((field) => <tr key={field.key}><td><div className={styles.fieldInfo}><strong>{field.label}</strong><span>{field.hint}</span></div></td><td><LevelCards field={field} value={formData[field.key]} onChange={(value) => updateFieldWithValidation(field.key, value)} invalid={isMissing(field.key)} /></td></tr>)}</tbody></table>;
+      content = <div className={styles.choiceGrid}>{MATURITY_FIELDS.map((field) => <div key={field.key} className={styles.choiceCard}><div className={styles.choiceLabel} onClick={() => showGuidance(field.label, field.hint)}><strong>{field.label}</strong></div><LevelCards field={field} value={formData[field.key]} onChange={(value) => { updateFieldWithValidation(field.key, value); showGuidance(`${field.label} / ${(field.levels?.[value]) ? value : ''}`.replace(/ \/ $/, ''), field.levels?.[value] || field.hint); }} invalid={isMissing(field.key)} /></div>)}</div>;
       break;
     case 'constraints':
       content = <div className={styles.stack}><div className={styles.entryPanel}><div className={styles.entryPanelHead}><strong>窗口约束</strong></div><div className={styles.formLine}><div className={`${styles.inputCard} ${invalidClass('maintenanceWindow')}`}><FieldHint title="常规维护窗口" /><input value={formData.maintenanceWindow} onChange={(event) => updateFieldWithValidation('maintenanceWindow', event.target.value)} placeholder="示例：每周三 14:00-16:00" /></div><div className={`${styles.inputCard} ${invalidClass('upgradeWindow')}`}><FieldHint title="改造窗口" /><input value={formData.upgradeWindow} onChange={(event) => updateFieldWithValidation('upgradeWindow', event.target.value)} placeholder="示例：月度停车窗口 / 法定检修期" /></div></div></div><div className={styles.formGrid}><div className={`${styles.inputCard} ${invalidClass('keySystems')}`}><FieldHint title="关键系统/角色" hint="列出后续方案设计、权限控制和访问审计需要重点关注的系统与岗位。" /><textarea value={formData.keySystems} onChange={(event) => updateFieldWithValidation('keySystems', event.target.value)} placeholder="示例：DCS 控制器、操作员站、工程师站、历史数据库、远程运维跳板" rows={4} /></div><div className={`${styles.inputCard} ${invalidClass('externalConnections')}`}><FieldHint title="外部连接方式" hint="说明与上层系统、第三方平台或外部单位之间的数据交换和连接方式。" /><textarea value={formData.externalConnections} onChange={(event) => updateFieldWithValidation('externalConnections', event.target.value)} placeholder="示例：与 MES 交换生产数据；设备商通过受控远程维护通道接入" rows={4} /></div><div className={`${styles.inputCard} ${invalidClass('maintenanceAccessPath')}`}><FieldHint title="维护接入方式" hint="描述现场或厂外运维人员进入目标系统的典型路径。" /><textarea value={formData.maintenanceAccessPath} onChange={(event) => updateFieldWithValidation('maintenanceAccessPath', event.target.value)} placeholder="示例：厂外 VPN -> DMZ 跳板机 -> 工程师站" rows={4} /></div><div className={`${styles.inputCard} ${invalidClass('initialBoundaryNotes')}`}><FieldHint title="初始网络边界" hint="记录现有网络隔离、边界设备和明显薄弱点，便于后续做分区设计。" /><textarea value={formData.initialBoundaryNotes} onChange={(event) => updateFieldWithValidation('initialBoundaryNotes', event.target.value)} placeholder="示例：现有控制网与信息网之间已有防火墙，但工程师站与控制器仍在同一扁平网段" rows={4} /></div><div className={`${styles.inputCard} ${invalidClass('continuityRequirements')}`}><FieldHint title="工艺连续性要求" hint="填写不可中断的关键控制要求、允许切换的窗口和连续运行约束。" /><textarea value={formData.continuityRequirements} onChange={(event) => updateFieldWithValidation('continuityRequirements', event.target.value)} placeholder="示例：裂解炉控制不可中断，停车切换必须在计划窗口内执行" rows={4} /></div><div className={`${styles.inputCard} ${invalidClass('complianceNotes')}`}><FieldHint title="合规补充说明" hint="补充安环、审计、留痕或行业监管方面的特殊要求。" /><textarea value={formData.complianceNotes} onChange={(event) => updateFieldWithValidation('complianceNotes', event.target.value)} placeholder="示例：涉及安环与关键工艺连续性要求，远程访问必须留痕" rows={4} /></div></div><table className={styles.matrix}><thead><tr><th>约束项</th><th>选择</th></tr></thead><tbody><tr><td><div className={styles.fieldInfo}><strong>责任归属</strong></div></td><td><OptionCards value={formData.remoteOperationsOwnership} onChange={(value) => updateFieldWithValidation('remoteOperationsOwnership', value)} options={REMOTE_OWNERSHIP_OPTIONS} invalid={isMissing('remoteOperationsOwnership')} /></td></tr><tr><td><div className={styles.fieldInfo}><strong>验收偏好</strong></div></td><td><OptionCards value={formData.acceptancePreference} onChange={(value) => updateFieldWithValidation('acceptancePreference', value)} options={ACCEPTANCE_PREFERENCE_OPTIONS} invalid={isMissing('acceptancePreference')} /></td></tr></tbody></table></div>;
@@ -365,19 +372,18 @@ export function OwnerInterview() {
   return (
     <ProjectStageShell
       stageNumber="01"
-      title="需求与目标"
+      title="提出目标"
       projectName={state.projectMeta?.projectName || formData.projectName}
       outputLabel="标准化项目输入"
       statusText={isSummaryStep ? '已形成业主输入与目标摘要，可生成需求与目标摘要' : '正在梳理业主输入、目标要求和约束条件'}
       statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成需求与目标摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, isSummaryStep ? '可生成需求与目标摘要' : '待继续完善']} />}
-      guidance={{ summary: `${step.guidance} 当前页面重点解释业主在案例里提供什么输入、目标和约束，以及这些内容如何成为后续系统、产品和审核的起点。` }}
+      guidance={{ summary: activeGuidance || `${step.guidance} 当前页面重点解释业主在案例里提供什么输入、目标和约束，以及这些内容如何成为后续系统、产品和审核的起点。` }}
     >
       {({ statusBar }) => (
         <>
           <section className={styles.workspace}>
             <StepTabs items={STEPS} currentIndex={currentStep} onChange={validateBeforeStepChange} />
-            <div className={styles.notePanel}><strong>业主在本阶段做什么</strong><span>定义业务场景、目标要求、运行约束和验收关注，为后续系统实现、产品能力和审核判断提供起点。</span><strong>输入来自哪里</strong><span>来自真实业务场景、关键资产、运行后果、维护方式和企业约束。</span><strong>输出流向哪里</strong><span>输出到系统实现、产品与开发、协作与差距以及总结与审核页面，成为全链路的源头输入。</span><strong>决策依据</strong><span>依据业务后果、风险关注、连续性要求、维护方式和组织责任边界。</span></div>
-            <div className={`${styles.panel} ${isSummaryStep ? styles.documentPanel : ''}`}>{content}</div>
+                        <div className={`${styles.panel} ${isSummaryStep ? styles.documentPanel : ''}`}>{content}</div>
             {statusBar}
           </section>
           <WorkflowNavBar
