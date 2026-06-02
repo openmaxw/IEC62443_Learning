@@ -1,0 +1,124 @@
+.page {
+  width: min(1440px, calc(100vw - 24px));
+  margin: 0 auto;
+  padding: 8px 0 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.hero {
+  display: grid;
+  gap: 12px;
+  padding: 24px 26px;
+  border: 1px solid var(--color-table-border);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(255,138,42,.10), rgba(88,183,255,.08), rgba(255,255,255,.02));
+  box-shadow: var(--shadow-panel);
+}
+
+.heroText {
+  display: grid;
+  gap: 10px;
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.12;
+}
+
+.hero p,
+.infoCard p,
+.tutorialCard p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sectionBlock {
+  display: grid;
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--color-table-border);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.02);
+}
+
+.sectionBlock header {
+  display: grid;
+  gap: 4px;
+}
+
+.sectionBlock header span {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.sectionBlock header h2,
+.tutorialCard h3,
+.infoCard h3 {
+  margin: 0;
+}
+
+.cardGrid,
+.tutorialGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.infoCard,
+.tutorialCard {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-table-border);
+  background: rgba(255,255,255,.03);
+}
+
+.infoCard ul,
+.tutorialCard ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+@media (max-width: 1100px) {
+  .cardGrid,
+  .tutorialGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    width: min(100vw - 16px, 1440px);
+  }
+
+  .hero {
+    padding: 18px;
+  }
+
+  .sectionBlock {
+    padding: 14px;
+  }
+}

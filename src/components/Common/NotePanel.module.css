@@ -1,0 +1,2 @@
+.panel { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--color-table-border); border-radius: var(--radius-md); background: rgba(255,255,255,.02); }
+.panel em { color: var(--color-text-muted); font-style: italic; line-height: var(--line-height-relaxed); }

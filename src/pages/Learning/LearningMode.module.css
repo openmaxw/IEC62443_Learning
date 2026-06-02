@@ -1,0 +1,25 @@
+.page { width: min(1480px, calc(100vw - 32px)); margin: 0 auto; padding: 28px 0 42px; display: grid; gap: 18px; }
+.hero { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end; padding: 28px; border-radius: var(--radius-xl); border: 1px solid var(--color-table-border); background: linear-gradient(135deg, rgba(255,138,42,.12), rgba(88,183,255,.08), rgba(255,255,255,.02)); box-shadow: var(--shadow-panel); }
+.hero h1 { margin: 12px 0 8px; max-width: 980px; font-size: clamp(30px, 3vw, 42px); line-height: 1.12; letter-spacing: -0.02em; }
+.hero p { margin: 0; max-width: 900px; color: var(--color-text-secondary); font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); }
+.heroActions { display: flex; flex-wrap: wrap; gap: 10px; }
+.article { display: grid; gap: 18px; }
+.article p { margin: 0; color: var(--color-text-secondary); line-height: var(--line-height-relaxed); font-size: var(--font-size-md); }
+.article blockquote { margin: 0; padding: 14px 16px; border-left: 3px solid var(--color-primary); border-radius: var(--radius-md); background: rgba(255,138,42,.08); color: #ffe4cb; line-height: var(--line-height-relaxed); font-weight: 700; }
+.flow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.flow span { padding: 8px 11px; border-radius: 999px; color: #d7ecff; background: rgba(88,183,255,.08); border: 1px solid rgba(88,183,255,.16); font-size: var(--font-size-sm); font-weight: 700; }
+.roleGrid, .conceptGrid, .alignmentGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.roleCard, .conceptCard, .misconceptionCard, .alignmentGrid article { padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--color-table-border); background: rgba(255,255,255,.03); display: grid; gap: 10px; }
+.roleCard strong, .conceptCard strong, .misconceptionCard strong, .alignmentGrid strong { color: var(--color-text); font-size: var(--font-size-lg); }
+.roleCard blockquote { font-size: var(--font-size-sm); color: #ffd9b5; }
+.meta { color: #b9dcff !important; font-size: var(--font-size-sm) !important; font-weight: 700; }
+.noteText { margin-top: 12px !important; color: var(--color-text-muted) !important; font-style: italic; }
+.tag { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; padding: 4px 8px; border-radius: 999px; color: #d7ecff; background: rgba(88,183,255,.12); border: 1px solid rgba(88,183,255,.22); font-size: var(--font-size-xs); font-weight: 800; }
+.slTag { color: #ffe4cb; background: rgba(255,138,42,.14); border-color: rgba(255,138,42,.28); }
+.conceptCard span { width: max-content; padding: 4px 9px; border-radius: 999px; color: #061018; background: var(--color-primary); font-size: var(--font-size-xs); font-weight: 900; letter-spacing: .08em; }
+.memoryBanner { padding: 14px 18px; border-radius: var(--radius-lg); color: #ffe4cb; background: linear-gradient(135deg, rgba(255,138,42,.18), rgba(88,183,255,.08)); border: 1px solid rgba(255,138,42,.24); text-align: center; font-weight: 900; letter-spacing: .05em; }
+.misconceptionList { display: grid; gap: 12px; }
+.misconceptionCard { border-left: 3px solid var(--color-primary); }
+.alignmentGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1180px) { .hero { grid-template-columns: 1fr; } .roleGrid, .conceptGrid { grid-template-columns: 1fr; } .alignmentGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) { .page { width: min(100vw - 24px, 1480px); padding-top: 12px; } .hero { padding: 18px; } .alignmentGrid { grid-template-columns: 1fr; } }

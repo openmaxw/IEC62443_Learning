@@ -1,0 +1,7 @@
+.footer { padding: 22px 18px 28px; border-top: 1px solid rgba(255,255,255,.06); background: rgba(8, 12, 16, 0.45); }
+.shell { width: min(920px, calc(100vw - 24px)); margin: 0 auto; display: grid; gap: 4px; text-align: center; }
+.title { margin: 0 0 4px; color: #ffe0c2; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.meta { margin: 0; color: var(--color-text-muted); font-size: 12px; line-height: 1.7; }
+.link { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.link:hover { opacity: 0.9; }
+@media (max-width: 768px) { .footer { padding: 18px 12px 22px; } .shell { width: min(100vw - 16px, 920px); } .title { letter-spacing: 0.04em; } }

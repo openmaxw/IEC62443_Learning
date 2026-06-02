@@ -1,0 +1,105 @@
+.panel { border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.015)); padding: 12px; box-shadow: none; }
+.documentPanel { padding: 0; background: transparent; border: none; box-shadow: none; }
+.matrix { width: 100%; border-collapse: collapse; }
+.matrix th, .matrix td { padding: 8px 10px; border-bottom: 1px solid var(--color-table-border); text-align: left; vertical-align: top; font-size: var(--font-size-sm); }
+.matrix th { color: var(--color-text-muted); font-weight: 700; background: rgba(255,255,255,.02); }
+.fieldInfo { display: grid; gap: 4px; }
+.fieldInfo strong { font-size: var(--font-size-md); color: var(--color-text); }
+.fieldInfo span { font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); }
+.formLine { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.stack { display: grid; gap: 12px; }
+
+.optionGroup { display: grid; gap: 8px; }
+.optionExplain { color: rgba(195, 204, 214, 0.78); font-style: italic; font-size: var(--font-size-sm); line-height: var(--line-height-relaxed); }
+.assetMatrix { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.assetCell { appearance: none; -webkit-appearance: none; min-height: 36px; padding: 0 10px; border-radius: var(--radius-sm); border: 1px solid var(--color-table-border); background: rgba(255,255,255,.03); color: var(--color-text-secondary); text-align: left; font-size: var(--font-size-sm); cursor: pointer; transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast); }
+.assetCell:hover { transform: translateY(-1px); border-color: var(--select-hover-border); background: var(--select-hover-bg); }
+.assetCell:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.assetActive { border-color: var(--select-border); background: var(--select-bg); color: var(--select-text); box-shadow: var(--select-shadow); }
+
+.documentPage { padding: 18px 20px; border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.012)); display: grid; gap: 16px; }
+.documentHeader { display: grid; gap: 4px; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }
+.documentHeader span { color: var(--color-text-muted); font-size: var(--font-size-sm); letter-spacing: .08em; text-transform: uppercase; }
+.documentHeader h2 { margin: 0; font-size: 24px; }
+.documentHeader p { margin: 0; color: var(--color-text-secondary); line-height: var(--line-height-relaxed); max-width: 70ch; }
+.documentSection { display: grid; gap: 8px; margin-top: 4px; }
+.summaryTop { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; align-items: start; }
+.documentColumns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
+.documentSection h3 { margin: 0; font-size: var(--font-size-xl); }
+.documentGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+
+.documentGrid span, .documentEntryHead span { display: block; color: var(--color-text-muted); font-size: var(--font-size-xs); margin-bottom: 4px; }
+
+.documentQuadList { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.documentEntryWide { grid-column: span 2; }
+.documentEntryHead { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.documentEntry p { margin: 4px 0 0; color: var(--color-text-secondary); line-height: 1.55; }
+.assetSummary { display: flex; flex-wrap: wrap; gap: 6px; }
+.assetTag { padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,.03); color: #d7ecff; border: 1px solid rgba(94,146,183,.22); font-size: var(--font-size-sm); }
+.emptyText { color: var(--color-text-muted); }
+.radarCard { padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: rgba(255,255,255,.02); display: grid; gap: 10px; }
+.radarHeader strong { display: block; font-size: var(--font-size-xl); color: var(--color-text); margin-bottom: 4px; }
+.radarHeader span { display: none; }
+.radarLayout { display: grid; grid-template-columns: 1fr; gap: 0; align-items: start; justify-items: center; }
+.radarSvg { width: 100%; max-width: 320px; min-width: 260px; overflow: visible; justify-self: center; }
+.radarRing { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 1; }
+.radarAxis { stroke: rgba(255,255,255,.12); stroke-width: 1; }
+.radarArea { fill: rgba(43,122,163,.18); stroke: rgba(43,122,163,.88); stroke-width: 2; }
+.radarDot { fill: var(--color-primary); stroke: #edf3f7; stroke-width: 1.5; }
+.radarLabel { fill: var(--color-text-secondary); font-size: 10px; }
+
+.formGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.optionHints { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.optionHint { appearance: none; -webkit-appearance: none; width: 100%; padding: 10px 12px; border: 1px solid var(--color-table-border); border-radius: var(--radius-md); background: rgba(255,255,255,.03); display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 8px; text-align: left; color: inherit; cursor: pointer; transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast); }
+.optionHint:hover { transform: translateY(-1px); border-color: var(--select-hover-border); background: var(--select-hover-bg); box-shadow: 0 4px 14px rgba(20,74,104,.08); }
+.optionHint:focus-visible { outline: none; box-shadow: var(--shadow-focus); border-color: rgba(43, 122, 163, 0.6); }
+.optionHint strong { font-size: var(--font-size-md); color: var(--color-text); line-height: 1.7; white-space: nowrap; }
+.optionHint span { font-size: var(--font-size-sm); color: rgba(195, 204, 214, 0.78); line-height: var(--line-height-relaxed); font-style: italic; }
+.optionHintActive { border-color: var(--select-border); background: var(--select-bg); box-shadow: var(--select-shadow); }
+.optionHintActive strong { color: var(--select-text); }
+.optionHintActive span { color: rgba(221,236,245,.86); }
+@media (max-width: 1100px) { .assetMatrix, .documentGrid, .radarLayout, .formGrid, .documentColumns, .documentQuadList, .summaryTop { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 760px) { .documentGrid, .documentQuadList, .radarLayout, .summaryTop { grid-template-columns: 1fr; } .documentEntryWide { grid-column: auto; } .documentGrid > div, .documentEntry, .formGrid > div { min-height: auto; } }
+@media (max-width: 900px) { .optionHints { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .formLine { grid-template-columns: 1fr; } }
+.entryPanel { padding: 14px; border: 1px solid rgba(246, 195, 91, 0.24); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(246, 195, 91, 0.1), rgba(255,255,255,0.02)); display: grid; gap: 10px; }
+.entryPanelHead { display: grid; gap: 4px; }
+.entryPanelHead strong { font-size: var(--font-size-xl); color: #fff1cf; }
+.entryPanelHead span { font-size: var(--font-size-sm); color: rgba(195, 204, 214, 0.78); line-height: var(--line-height-relaxed); font-style: italic; }
+.inputCard { padding: 12px; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); background: rgba(12, 18, 24, 0.48); }
+.formGrid input,
+.formGrid select,
+.inputCard input,
+.inputCard select,
+.inputCard textarea {
+  width: 100%;
+}
+.formGrid input::placeholder,
+.inputCard input::placeholder,
+.inputCard textarea::placeholder { color: var(--color-text-muted); }
+.formGrid select,
+.inputCard select {
+  -moz-appearance: none;
+}
+.formGrid select option,
+.inputCard select option {
+  background: #101820;
+  color: var(--color-text);
+}
+
+.fieldHint span { color: rgba(195, 204, 214, 0.74); font-style: italic; }
+.fieldHint strong { display: block; }
+.inputCard textarea {
+  min-height: 104px;
+  resize: vertical;
+  line-height: var(--line-height-relaxed);
+}
+
+.invalidField input,
+.invalidField select,
+.invalidField textarea,
+.invalidField .optionHint,
+.invalidField .assetCell {
+  border-color: rgba(255, 95, 95, 0.82) !important;
+  box-shadow: 0 0 0 1px rgba(255, 95, 95, 0.36), 0 0 0 3px rgba(255, 95, 95, 0.08) !important;
+}

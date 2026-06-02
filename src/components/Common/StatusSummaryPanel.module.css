@@ -1,0 +1,9 @@
+.aside { display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; }
+.noteCard { min-width: 0; display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid rgba(255, 138, 42, 0.22); border-radius: 999px; background: rgba(255, 138, 42, 0.06); }
+.noteCard span { color: var(--color-text-muted); font-size: var(--font-size-xs); }
+.noteCard strong { color: var(--color-text); font-size: var(--font-size-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.noteCard em { display: none; }
+.pills { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.pill { padding: 5px 8px; border-radius: 999px; border: 1px solid rgba(255, 138, 42, 0.22); background: rgba(255, 138, 42, 0.08); color: #ffd7bb; font-size: var(--font-size-xs); font-weight: 600; }
+
+@media (max-width: 900px) { .aside { align-items: flex-start; flex-direction: column; } .pills { justify-content: flex-start; } }

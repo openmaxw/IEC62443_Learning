@@ -1,0 +1,27 @@
+.page { width: min(1480px, calc(100vw - 32px)); margin: 0 auto; padding: 28px 0 42px; display: grid; gap: 18px; }
+.hero { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end; padding: 28px; border-radius: var(--radius-xl); border: 1px solid var(--color-table-border); background: linear-gradient(135deg, rgba(94,146,183,.1), rgba(255,255,255,.02)); }
+.hero h1 { margin: 12px 0 8px; max-width: 980px; font-size: clamp(30px, 3vw, 42px); line-height: 1.12; letter-spacing: -0.02em; }
+.hero p { margin: 0; max-width: 900px; color: var(--color-text-secondary); font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); }
+.heroActions { display: flex; flex-wrap: wrap; gap: 10px; }
+.article { display: grid; gap: 18px; }
+.article p { margin: 0; color: var(--color-text-secondary); line-height: var(--line-height-relaxed); font-size: var(--font-size-md); }
+.article blockquote { margin: 0; padding: 14px 16px; border-left: 3px solid var(--color-primary); border-radius: var(--radius-md); background: rgba(255,138,42,.08); color: #ffe4cb; line-height: var(--line-height-relaxed); font-weight: 700; }
+.viewpointCard { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; padding: 18px; border-radius: var(--radius-lg); border: 1px solid rgba(255,138,42,.24); background: linear-gradient(135deg, rgba(255,138,42,.11), rgba(88,183,255,.06)); }
+.viewpointCard span { display: inline-flex; width: fit-content; margin-bottom: 8px; padding: 5px 9px; border-radius: 999px; color: #ffd2ad; background: rgba(255,138,42,.12); border: 1px solid rgba(255,138,42,.18); font-size: var(--font-size-xs); font-weight: 800; }
+.viewpointCard h2 { margin: 0 0 8px; font-size: clamp(20px, 2.2vw, 28px); letter-spacing: -0.02em; }
+.viewpointCard p { max-width: 780px; }
+.viewpointCard a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 14px; border-radius: 999px; color: #1b0e04; background: linear-gradient(135deg, #ffad66, #ff8a2a); font-size: var(--font-size-sm); font-weight: 800; white-space: nowrap; }
+.cardGrid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.infoCard, .featureCard, .roleCard { padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--color-table-border); background: rgba(255,255,255,.03); display: grid; gap: 10px; }
+.infoCard strong, .featureCard strong, .roleCard strong { color: var(--color-text); font-size: var(--font-size-lg); }
+ul { margin: 0; padding-left: 18px; color: var(--color-text-secondary); line-height: var(--line-height-relaxed); }
+.flow { display: flex; flex-wrap: wrap; gap: 10px; }
+.flow span { padding: 8px 11px; border-radius: 999px; color: #d7ecff; background: rgba(88,183,255,.08); border: 1px solid rgba(88,183,255,.16); font-size: var(--font-size-sm); font-weight: 700; }
+.featureList, .roleList { display: grid; gap: 12px; }
+.featureCard { grid-template-columns: 1.1fr 1.2fr auto; align-items: start; }
+.featureCard a { color: #d7ecff; font-size: var(--font-size-sm); white-space: nowrap; }
+.roleCard { grid-template-columns: .9fr 1fr 1.1fr; align-items: start; }
+.roleCard blockquote { font-size: var(--font-size-sm); }
+.quoteList { display: grid; gap: 10px; }
+@media (max-width: 1180px) { .hero { grid-template-columns: 1fr; } .cardGrid3 { grid-template-columns: 1fr; } .featureCard, .roleCard, .viewpointCard { grid-template-columns: 1fr; } .viewpointCard a { width: fit-content; } }
+@media (max-width: 768px) { .page { width: min(100vw - 24px, 1480px); padding-top: 12px; } .hero { padding: 18px; } }

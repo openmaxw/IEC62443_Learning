@@ -1,0 +1,274 @@
+.page {
+  width: min(1440px, calc(100vw - 24px));
+  margin: 0 auto;
+  padding: 8px 0 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(43, 122, 163, 0.14), rgba(94, 146, 183, 0.08));
+  border: 1px solid var(--color-table-border);
+  box-shadow: var(--shadow-md);
+}
+
+.hero h1 {
+  margin: 4px 0 6px;
+  font-size: clamp(18px, 1.8vw, 24px);
+}
+
+.hero p,
+.progressText,
+.empty {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.heroAction { min-width: 220px; display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+.heroStats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.heroStat { padding: 10px 12px; border: 1px solid rgba(255,138,42,.18); border-radius: var(--radius-md); background: linear-gradient(135deg, rgba(255,138,42,.08), rgba(255,255,255,.03)); display: grid; gap: 4px; }
+.heroStat span { color: var(--color-text-muted); font-size: var(--font-size-xs); }
+.heroStat strong { color: #ffe6d2; font-size: var(--font-size-lg); }
+
+.progressInline { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+
+.progressValue {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.nextActionCard {
+  display: grid;
+  gap: 8px;
+}
+
+.nextActionCard strong {
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+}
+
+.nextActionCard span {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.inlineActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.noteText,
+.notePanel em {
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+.notePanel {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-table-border);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,.02);
+}
+
+.statusHighlight {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid rgba(43, 122, 163, 0.22);
+  border-radius: var(--radius-md);
+  background: rgba(43, 122, 163, 0.08);
+}
+
+.statusHighlight span {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.statusHighlight strong {
+  color: var(--color-text);
+}
+
+.statusTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.statusTag {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color-table-border);
+  background: rgba(255,255,255,.03);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.listBlock {
+  display: grid;
+  gap: 8px;
+}
+
+.linkRow {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(199, 151, 68, 0.24);
+  background: var(--color-warning-soft);
+  color: #e6cf9f;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.linkRow:hover {
+  transform: translateY(-1px);
+  border-color: rgba(199, 151, 68, 0.4);
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.statusCard {
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-table-border);
+  background: rgba(255,255,255,.02);
+  display: grid;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.statusCard p {
+  line-height: var(--line-height-relaxed);
+}
+
+.substepBlock {
+  display: grid;
+  gap: 8px;
+}
+
+.substepSummary {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.substepList {
+  display: grid;
+  gap: 6px;
+}
+
+.substepItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-table-border);
+  background: rgba(255,255,255,.02);
+}
+
+.substepItem span {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  min-width: 42px;
+}
+
+.substepItem strong {
+  font-size: var(--font-size-sm);
+}
+
+.substepDone {
+  border-color: rgba(68,209,123,.25);
+  background: rgba(68,209,123,.08);
+}
+
+.substepTodo {
+  border-color: rgba(199, 151, 68, 0.18);
+  background: rgba(199, 151, 68, 0.06);
+}
+
+.statusHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.statusHead strong {
+  font-size: var(--font-size-xl);
+  color: #ffe6d2;
+}
+
+.ready,
+.pending {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.ready {
+  color: var(--color-success);
+  background: var(--color-success-soft);
+}
+
+.pending {
+  color: var(--color-warning);
+  background: var(--color-warning-soft);
+}
+
+@media (max-width: 1100px) {
+  .progressSection,
+  .cardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .grid {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .heroStats { grid-template-columns: 1fr; }
+
+  .heroAction { min-width: 220px; display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+}
+
+@media (max-width: 768px) {
+  .page {
+    width: min(100vw - 16px, 1440px);
+  }
+
+  .cardGrid,
+  .progressSection {
+    grid-template-columns: 1fr;
+  }
+}
+.roleGuideGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.roleGuideCard { display: grid; gap: 8px; padding: 12px 14px; border-radius: var(--radius-lg); border: 1px solid rgba(94,146,183,.24); background: linear-gradient(180deg, rgba(94,146,183,.08), rgba(255,255,255,.02)); }
+.roleGuideCard span { color: var(--color-text-muted); font-size: var(--font-size-xs); font-weight: 700; }
+.roleGuideCard strong { color: var(--color-text); font-size: var(--font-size-sm); line-height: var(--line-height-normal); }
+.roleGuideCard a { width: fit-content; color: #d7ecff; font-size: var(--font-size-xs); font-weight: 700; }
+@media (max-width: 1100px) { .roleGuideGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) { .roleGuideGrid { grid-template-columns: 1fr; } }

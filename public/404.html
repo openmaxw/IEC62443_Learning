@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+      const segment = '/IEC62443';
+      const { pathname, search, hash } = window.location;
+      const normalized = pathname.startsWith(segment) ? pathname.slice(segment.length) : pathname;
+      const target = `${segment}/?redirect=${encodeURIComponent(normalized + search + hash)}`;
+      window.location.replace(target);
+    </script>
+  </head>
+  <body></body>
+</html>

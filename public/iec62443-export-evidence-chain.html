@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>从“产品参数”到“项目证据链”｜IEC 62443 出海要求</title>
+  <meta name="description" content="工业企业如何应对 IEC 62443 出海要求：从产品参数到项目证据链。" />
+  <style>
+    :root {
+      --paper: #ffffff;
+      --page: #eef1f4;
+      --ink: #17212b;
+      --muted: #5f6b76;
+      --subtle: #8a96a3;
+      --line: #d8dee5;
+      --line-strong: #9eabb8;
+      --head: #0f1821;
+      --accent: #b85f1d;
+      --accent-soft: #fff3ea;
+      --blue: #1f5f8b;
+      --blue-soft: #edf6fc;
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", "Times New Roman", serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(184, 95, 29, .08), transparent 28rem),
+        radial-gradient(circle at 88% 2%, rgba(31, 95, 139, .07), transparent 24rem),
+        linear-gradient(180deg, #f8f9fb, var(--page));
+      font-size: 16px;
+      line-height: 1.82;
+    }
+    a { color: inherit; }
+    .paper {
+      width: min(920px, calc(100vw - 28px));
+      margin: 30px auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 55px rgba(39, 52, 68, .12);
+    }
+    .inner { padding: 58px 70px 62px; }
+    .docType {
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1px solid rgba(184, 95, 29, .28);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      letter-spacing: .08em;
+      margin-bottom: 22px;
+    }
+    h1, h2, h3 { font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif; color: var(--head); line-height: 1.32; }
+    h1 { margin: 0; font-size: 34px; letter-spacing: -.02em; font-weight: 750; }
+    .subtitle { margin-top: 12px; color: var(--muted); font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; font-size: 17px; line-height: 1.7; }
+    .meta { display: grid; gap: 3px; margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    .abstract { margin-top: 30px; padding: 18px 20px; border: 1px solid var(--line); background: #fafbfc; }
+    .abstract h2 { margin: 0 0 8px; padding: 0; border: 0; font-size: 18px; }
+    .abstract p { margin: 0; }
+    .keywords { margin-top: 12px; color: var(--muted); font-size: 14px; }
+    .toc { margin-top: 26px; padding: 16px 20px; background: #fbfcfd; border: 1px solid var(--line); }
+    .toc strong { font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; color: var(--head); }
+    .toc ol { margin: 8px 0 0; padding-left: 22px; color: var(--muted); }
+    section { margin-top: 34px; }
+    h2 { margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-size: 22px; font-weight: 720; }
+    h3 { margin: 18px 0 6px; font-size: 17px; font-weight: 720; }
+    p { margin: 0 0 13px; }
+    strong { font-weight: 720; color: var(--head); }
+    .leadQuestion { margin-top: 24px; padding: 20px 22px; border-left: 4px solid var(--accent); background: var(--accent-soft); color: #4b260e; font-size: 19px; font-weight: 720; font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; }
+    .note { margin: 18px 0; padding: 14px 16px; border-left: 3px solid var(--blue); background: var(--blue-soft); color: #24465d; }
+    table { width: 100%; margin: 18px 0 10px; border-collapse: collapse; font-size: 14px; line-height: 1.65; }
+    th, td { border: 1px solid var(--line); padding: 10px 12px; vertical-align: top; }
+    th { background: #f2f5f7; font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; text-align: left; font-weight: 720; }
+    .twoCols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+    .box { border: 1px solid var(--line); padding: 16px; background: #fbfcfd; }
+    .box h3 { margin-top: 0; }
+    .steps { counter-reset: step; display: grid; gap: 12px; margin-top: 14px; }
+    .step { counter-increment: step; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
+    .step::before { content: counter(step); width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--accent); background: #fff; font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; font-weight: 720; line-height: 1; margin-top: 2px; }
+    .flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 15px 0; font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; font-size: 13px; }
+    .flow span { border: 1px solid var(--line); background: #fbfcfd; padding: 8px 10px; text-align: center; }
+    .appendix { display: grid; grid-template-columns: 1fr 132px; gap: 18px; align-items: center; border: 1px solid var(--line); background: #fbfcfd; padding: 18px; margin-top: 16px; }
+    .qr { width: 132px; border: 1px solid var(--line); background: #fff; padding: 5px; }
+    .link { color: var(--blue); word-break: break-all; font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; }
+    .refs { margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .refs li { margin: 8px 0; }
+    .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 13px; }
+    @media print {
+      body { background: #fff; color: var(--ink); }
+      .paper { margin: 0; width: 100%; border: none; box-shadow: none; background: #fff; }
+      .inner { padding: 26mm 22mm; }
+      a { color: inherit; }
+    }
+    @media (max-width: 720px) {
+      .paper { width: 100%; margin: 0; border-left: none; border-right: none; }
+      .inner { padding: 34px 22px 42px; }
+      h1 { font-size: 28px; }
+      .subtitle { font-size: 15px; }
+      .twoCols, .appendix { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; }
+      table { font-size: 13px; }
+      th, td { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <article class="paper">
+    <div class="inner">
+      <span class="docType">技术观点简报</span>
+      <h1>从“产品参数”到“项目证据链”：工业企业如何应对 IEC 62443 出海要求</h1>
+      <p class="subtitle">设备商、集成商和业主方如何把需求、设计、能力边界和交付责任对齐起来</p>
+      <div class="meta">
+        <span>作者：Max Wang</span>
+              </div>
+
+      <div class="abstract">
+        <h2>摘要</h2>
+        <p>越来越多工业企业在出海项目、海外客户审查和供应链准入中遇到 IEC 62443 要求。本文认为，企业需要准备的不只是功能清单，而是一条从需求、设计、产品能力到运行维护的项目证据链。文章围绕典型客户追问、组件与系统要求、不同角色责任和前期准备路径展开，说明工业企业如何从“产品参数”走向“项目证据链”。</p>
+        <div class="keywords"><strong>关键词：</strong>IEC 62443；OT 安全；出海合规；产品能力；项目证据链</div>
+      </div>
+
+      <nav class="toc">
+        <strong>目录</strong>
+        <ol>
+          <li>从客户追问看 IEC 62443 的审查逻辑</li>
+          <li>IEC 62443 在出海项目中的出现背景</li>
+          <li>产品功能清单的局限性</li>
+          <li>项目证据链的关键环节</li>
+          <li>不同角色的表达责任</li>
+          <li>出海企业的前期准备路径</li>
+          <li>项目前期梳理的实践入口</li>
+        </ol>
+      </nav>
+
+      <section>
+        <h2>1. 从客户追问看 IEC 62443 的审查逻辑</h2>
+        <div class="leadQuestion">“你们的设备是否满足 IEC 62443-4-2？”</div>
+        <p>很多出海企业第一次听到这个问题时，会先拿出一张功能清单：支持账号管理、日志记录、加密通信、固件升级和远程维护。这样的回答并没有错，但通常还不够。</p>
+        <p>客户接下来可能会问：这些能力适用于哪个固件版本？日志字段能否支持现场审计？远程维护经过哪条访问路径？账号是否接入集中身份管理？固件升级由谁触发、谁验证，失败后如何回退？</p>
+        <div class="note">这些追问并不是额外刁难，而是 IEC 62443 审查逻辑下很自然会出现的问题。它把企业从“有没有功能”带到“这些功能在项目中如何成立、如何证明、由谁承接”。</div>
+      </section>
+
+      <section>
+        <h2>2. IEC 62443 在出海项目中的出现背景</h2>
+        <p>欧美监管并不是简单要求所有工业企业都必须取得 IEC 62443 认证，但工业网络安全要求正在更明确地进入产品准入、关键基础设施审查和供应链评估。对工业自动化和 OT 场景而言，IEC 62443 因为覆盖系统、组件、开发流程和运行管理，正在成为很多项目用来组织安全要求和审查材料的重要参考。</p>
+        <div class="twoCols">
+          <div class="box"><h3>欧盟方向</h3><p>欧盟《网络韧性法案》（CRA）已经正式生效，主要义务将在 2027 年 12 月 11 日起适用。CRA 强制的是带有数字元素产品的网络安全要求，而 IEC 62443 在工业场景中常被用来组织安全开发、组件能力、系统设计、漏洞响应和技术文档。</p></div>
+          <div class="box"><h3>美国方向</h3><p>NIST SP 800-82 Rev.3、CISA 跨行业网络安全绩效目标，以及电力领域 NERC CIP 等要求，长期围绕资产识别、访问控制、远程维护、日志审计、事件响应、恢复能力和供应链安全提出要求。</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. 产品功能清单的局限性</h2>
+        <p>很多企业第一次面对 IEC 62443 要求时，会自然地从产品功能出发：账号、权限、日志、加密、升级、备份、远程维护。这些当然重要，但它们只是起点。</p>
+        <table>
+          <thead><tr><th>审查问题</th><th>含义</th></tr></thead>
+          <tbody>
+            <tr><td>能力是否适用于这个项目</td><td>同一个产品能力，在不同固件版本、配置、网络架构和集成方式下，成立条件可能并不一样。</td></tr>
+            <tr><td>能力是否能被系统设计承接</td><td>设备支持日志，现场是否有集中日志平台？设备支持远程维护，远程访问是否经过受控通道？</td></tr>
+            <tr><td>能力是否能被运行维护持续执行</td><td>固件升级、漏洞处置、账号复核、日志留存、备份恢复和事件响应，都不是一次性交付动作。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>4. 项目证据链的关键环节</h2>
+        <p>功能清单只能回答“有没有”；项目证据链要回答的是“在这个项目里，是否成立、如何证明、由谁负责”。</p>
+        <table>
+          <thead><tr><th>证据链环节</th><th>需要回答的问题</th></tr></thead>
+          <tbody>
+            <tr><td>需求来源</td><td>这项安全要求来自哪个业务场景、风险目标或验收关注？</td></tr>
+            <tr><td>设计响应</td><td>系统架构、Zone / Conduit、边界控制和访问路径如何回应这些需求？</td></tr>
+            <tr><td>产品能力</td><td>设备或软件具体支撑哪些能力，证据是什么，适用边界在哪里？</td></tr>
+            <tr><td>集成条件</td><td>哪些能力依赖配置、外部系统、集中日志、身份管理或边界设备？</td></tr>
+            <tr><td>运维承接</td><td>补丁、账号、日志、备份、事件响应和漏洞处置如何持续执行？</td></tr>
+            <tr><td>差距闭环</td><td>不满足或部分满足的内容由谁负责，采用什么补偿措施？</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>5. 不同角色的表达责任</h2>
+        <div class="twoCols">
+          <div class="box"><h3>业主方</h3><p>把业务语言转成项目输入，说明业务场景、关键系统、外部连接、远程维护方式、业务后果、风险接受原则和验收关注。</p></div>
+          <div class="box"><h3>集成商</h3><p>把方案语言转成设计依据，说清区域划分依据、关键通信路径、边界控制策略、远程访问路径和残余风险处置。</p></div>
+          <div class="box"><h3>设备商</h3><p>把功能语言转成能力边界，说明安全能力、证据、版本与配置条件、外部依赖，以及不能覆盖的部分。</p></div>
+          <div class="box"><h3>运维方</h3><p>把制度语言转成持续措施，说明执行频率、责任人、记录方式和异常处置路径。</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>6. 出海企业的前期准备路径</h2>
+        <div class="steps">
+          <div class="step"><p><strong>选一个典型项目做试跑。</strong>不要从抽象条款开始，而是从真实或接近真实的项目出发，整理资产、连接、远程维护、业务后果和验收关注。</p></div>
+          <div class="step"><p><strong>形成一套基础材料。</strong>至少准备项目输入摘要、设计响应摘要、产品能力说明、依赖与限制说明、差距项和补偿措施。</p></div>
+          <div class="step"><p><strong>提前识别责任边界。</strong>尽早判断哪些由产品解决，哪些由集成解决，哪些由运维或补偿措施解决。</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>7. 实践入口：先把一个项目梳理出来</h2>
+        <p>针对 IEC 62443 项目前期常见的需求澄清、设计响应和能力对齐问题，笔者整理了一个 IEC 62443 需求转译与对齐平台，作为学习演示和项目早期梳理参考。</p>
+        <div class="flow"><span>模糊安全诉求</span><span>标准化项目输入</span><span>设计响应</span><span>设备能力声明</span><span>匹配闭环</span><span>交付摘要</span></div>
+        <div class="appendix">
+          <div>
+            <p><strong>平台访问地址</strong></p>
+            <p><a class="link" href="https://openmaxw.github.io/IEC62443/" target="_blank" rel="noopener">https://openmaxw.github.io/IEC62443/</a></p>
+            <p>可先进入“项目总览”加载演示项目，再从“需求澄清”开始，查看设计响应、能力声明、匹配闭环和交付摘要。</p>
+          </div>
+          <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbwAAAHyCAIAAAAfgOyUAAAWrklEQVR4nO3deXCU9f3A8e+GEE7lrhSQQy1ordbWKaDWOlRRQKYeIx11dKoCtdrDcSgtVkBQ0apM6TVy1Tpaxz9qWwSVY9rOUA+UQYEqVWi1oijQIpcEY8CQ3x87v0yaQNgPLMtufL3+kt1nn312k7z9Znc/eTK1tbUJgNyUHe0DACglogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAHlR/sAGspkMkf7EI6a2travOynuT6HuTw/uTz2fO0nF76mhy9fz2G+WGkCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEFN3seS6KbRY1F/maHc7XbHUp3lch56/zNZ9eyOfw0/xzUUhWmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAElOXuei2KbUy7kfRXysRfb7HApzt0XUnP9uSgkK02AANEECBBNgADRBAgQTYAA0QQIEE2AANEECBBNgADRBAgQTYCAZjt7TtOKbYY9F811xr+5zmg3V1aaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAWbPS0y+5p2L7bzeuRxPsc3C58JcefNjpQkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRDQbGfPm+vMb74eV75mvfN1fvBiO894Kc6556K5/lwUkpUmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAQEnOnjfXueBcFPJ85cU2V15sM+OFfFy5+DT/XBSSlSZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkBAxnmQP51KcSa6kMdTbHPlFA8rTYAA0QQIEE2AANEECBBNgADRBAgQTYAA0QQIEE2AANEECBBNgICiO+95sc0FF9t+ik0pnq+8kIrt615sf3OgFL/nrTQBAkQTIEA0AQJEEyBANAECRBMgQDQBAkQTIEA0AQJEEyBANAECSvK854U8j7ZZ3cJoro+9kDP1pfh9WIpfdytNgADRBAgQTYAA0QQIEE2AANEECBBNgADRBAgQTYAA0QQIEE2AgGZ73vN83Vch99NcZ+Ed8+Ertvtqruepz4WVJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQEDRnfe82Oa486WQ887Ftp98aa7zzsX2HBbb3wEoNlaaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAUU3e56LQs6n50sh58FzUWz3VUjFNhNdbM9zKX6vFpKVJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQED50T6AI6XY5lU/zbO6xTbrXYpz5aWokN/zhWSlCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAaIJENBsZ89zUYpzr4U8t3W+5GsGuRTn9wv59Sq27+diO558sdIECBBNgADRBAgQTYAA0QQIEE2AANEECBBNgADRBAgQTYAA0QQIyBTbObJzUcj54kKes7vY5sHzpbnOIOeiuf58FdvPTiFZaQIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSU5Ox5LprrzHguCvm4mut9laJi+1oU2zno88VKEyBANAECRBMgQDQBAkQTIEA0AQJEEyBANAECRBMgQDQBAkQTIKD8aB/AkdJcZ2OLbW66FM9tXWxfr0J+r+ZLc31cubDSBAgQTYAA0QQIEE2AANEECBBNgADRBAgQTYAA0QQIEE2AANEECCi6854Xcqa1FGdji+2xF3I/uSjFvydQSL4Wh89KEyBANAECRBMgQDQBAkQTIEA0AQJEEyBANAECRBMgQDQBAkQTIKDoZs9zUch58Ob6/JTi48qXQs5EF9t9leJ+io2VJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQEDRzZ4317nXYjseCqOQfychX3wfNs1KEyBANAECRBMgQDQBAkQTIEA0AQJEEyBANAECRBMgQDQBAkQTIKDoZs8pHs4v37RCntM8Xwr5tx3ypdi+N6w0AQJEEyBANAECRBMgQDQBAkQTIEA0AQJEEyBANAECRBMgQDQBAsqP9gE0VIrnic6XYpuxzZdCnqe+FGerc5Gvx1XI+yq25zBfrDQBAkQTIEA0AQJEEyBANAECRBMgQDQBAkQTIEA0AQJEEyBANAECim72PBelOKNdinO4+ZovLrbHXsjzlZfiudELqRQfl5UmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAQEnOnueikPPOhZyfLcVzUpvRblqxzeaX4vdzIVlpAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBDTb2fPmqtjmuIttbjoXxTa/X2yz3oXcTymy0gQIEE2AANEECBBNgADRBAgQTYAA0QQIEE2AANEECBBNgADRBAgwe15iCjk3XYrnpM5FIY85X1+LQs7CF/LrXooz7FaaAAGiCRAgmgABogkQIJoAAaIJECCaAAGiCRAgmgABogkQIJoAAc129rwUZ6JzUWzn4y7F2eFCHnMh57gLOeeei+b6twusNAECRBMgQDQBAkQTIEA0AQJEEyBANAECRBMgQDQBAkQTIEA0AQIyxTb7WYqzzPlSiufINu/ctOb6POeikI+9kKw0AQJEEyBANAECRBMgQDQBAkQTIEA0AQJEEyBANAECRBMgQDQBAopu9hygmFlpAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCafLl27ds1kMpWVlfnd7auvvjpy5MhOnTplMplMJrNmzZr87p/iIZpH3Mknn5zJZP7whz80uORAnn766cY7WbBgwTXXXHPiiSe2b9++Xbt2p5xyyi233PLmm2/meAzV1dUzZsw466yzOnXq1KFDh6985SsPPPDA9u3b6zaoqal57rnnxo8fP2jQoO7du1dUVPTq1WvUqFF/+9vfDrrzm2++OXvkP/3pTw95yw0bNvziF78YOnRov379WrVq1blz5yFDhvz2t7/dt29fLg+wwVPaunXrE0444brrrnvttddyuflh2rp169e//vVnnnlmx44dBbg7jrJajrABAwaklJ544okGlxzIU089Vf/m77///tlnn73fLVu0aDF58uSampqmD+Cdd945+eSTG9/8lltuqdtm0aJFBzqeO+64o4md//Wvf81kMi1atEgp3XvvvYe85YGek4suuqi6urrpB9jEzSsqKv70pz/V37JLly4ppV27dh10nw20a9cupVRVVdX4qpkzZ6aUBg4cuH79+n379kX3TGmx0jxq6me0vpEjR9Zts3Xr1nPOOWfZsmXt2rWbMGHCihUrdu7cWVVV9eabb86cObN///533nnn66+/3sS9VFVVDR06dO3atT179nz00Uf/+9//VldXr1mz5sc//nHnzp3rNisvLz/33HOnT5++fPnyTZs27d69e/ny5RdeeGFKaerUqc8+++x+d15ZWXnDDTeceuqp2S2bcNAtTzzxxEmTJi1duvS9996rqqr65z//efvtt2cymSVLlvzyl79seud16p7S7du3L1y4sH///nv27Bk9evSHH36Y4x4OzRtvvJFSuuqqq/r06ZPJZI7ofXH0FTDQn1IHWmkeKJr1jRo1KqXUrVu3NWvWNL62pqbm7rvvfv3115vYw+TJk1NKnTt3Xr9+ffTIq6urTz/99JTSTTfdtN8Nvv3tb5eXl7/88suXXHJJanKlmfuW9X3/+99PKZ199tkH3XK/T+natWuzC9vf//73dRceiZXmmDFjUkpz586N7pNSZKVZvNatW5d9JfTBBx889dRTG29QVlZ2++23n3LKKQfaQ01NzezZs1NKEyZM6NOnT/QAKioqRowYkVL6z3/+0/jaP//5z3PmzJkwYcKZZ57Z9H5y37KBs846K6W0e/fu0K3qDBgw4MQTT0wp/etf/2pisw0bNtx///3nnntujx49KioqPvvZz1522WX1X8ydNWtWJpPJHkabNm3qXjndvHnzlClTMpnMb37zm5TS2LFjs5dfc8012Ru+/fbbN954Y/ZV2k6dOg0ZMuTxxx9vfACZTKa8vLy2tnbu3LkDBw489thjM5nMxx9/XP+qBx988Iwzzmjbtu1xxx137bXXbty4MaVUVVU1adKk/v37t27dumfPnuPGjcveiiOq/GgfAAf09NNP19bW9urV6/LLLz+0Pbz66qvZ3l199dWHtoctW7aklPr169fg8g8//HDMmDGnnXbapEmTmt5D7ls2tnLlypRSdrV7OJr+lfmyyy575ZVX6v65efPmJ598cv78+bNnzx47duwh3+lzzz03cuTIulcG9uzZs3Tp0qVLly5evPiRRx5pfEg33njj3Llz6/5Z/x2w73znO3PmzMn+d1VV1WOPPfbSSy+99NJLw4YNe/nll7OXb9y48Wc/+9m77777xBNPHPIxk5OjvNL9FDjkX8+vuuqqlNI3v/nNQ77rRx55JKXUq1ev6urqyZMn9+3bt6KiokePHldeeeWqVasOevN33323ffv2ZWVlf//73xtcNXr06PLy8ldeeSX7zyZ+6c59yzp79+59++2377nnnhYtWhx77LFNv/6QdTi/nl9xxRV33XXXK6+88sEHH3z00Udr166dOHFiWVlZu3bttm3bVrdZE7+ejx49Ov3vr+eVlZXdu3dPKQ0cOHDZsmUff/zxxo0b77zzzrKyspTSrFmz6t88+5NYVlZ26623vvHGG3v37m1wVcuWLadOnfrvf/97165dTz/9dNeuXVNKffr06dy580MPPbRx48Zt27bNmjUr+2BXr1590KeLwyGaR1zo3fNWrVrVbXbBBRek/32PO2rGjBkppUGDBg0ZMqTBHVVUVDRd7aqqquy79uPGjWtw1eLFi1NKkyZNqrvkQCnMfcuscePG1T/Ib3zjG6+99louj7TBk7xjx46FCxdmL+zYseOOHTvqtszxNc3rr7++wVctFM3swrBLly7bt2+vv+WPfvSjlNJJJ51U/8Lsg/3e977XeM/Zq+666676F953333ZyxctWlT/8uwr4DNmzGj6oXGYvKZZ7A7n3djsr3grVqx44YUX7rnnnnfeeWfXrl3PP//84MGD9+zZc/3112d/+25s7969V1555bJlyy666KJ77723/lU7d+4cM2bM6aefPnHixKbvPfctD2T16tWLFy+u/f92HNSoUaOyryp27NhxxIgR69ata9my5dy5czt06NDErT755JM5c+YMGTKkW7du5eXl2T08/PDDKaX169cf2pFnXxIdO3Zsx44d618+fvz4lNKbb775/vvvN7jJzTfffKC9fetb36r/zy9/+csppc985jPDhg1rfPmmTZsO7ZjJkWgeNftd6NV/Ib9bt24ppexL/ofmmGOOSSnt27dv4sSJt912W+/evdu3b3/OOecsWrSoe/fulZWVf/zjHxvfas+ePaNGjZo/f/7QoUOffPLJli1b1r/21ltv3bx588MPP1xRUdH0vee+ZZ3p06fX1tZWV1e//fbbv/71r6uqqsaPH58NTUhFRUWfPn2uvfbaFStWXHHFFU1sWVNTM3z48BtvvHHp0qUffPBBTU1N/WsP+X2VbBM///nPN7i8a9eu2S9rg2hmMpkTTjhhv7sqKys7/vjj61/Svn37lFLfvn0bbJm9vLq6+tCOmRyJZvHKvte8bNmyHKdiGqt7A+fSSy+tf3nHjh2zv7BnP2BYX1VV1SWXXDJ//vwLLrhg/vz5rVu3brDBggULPvnkkzPPPLP+BM78+fNTSrfddlsmk/nqV78a3bKBioqKvn37fve7312wYEFK6ec///nOnTtzebx1/x+qrq5ev379o48++sUvfrHpmzz++ON/+ctfOnTo8NBDD7311lsfffRR9tPpEyZMyOUeDyS7Os79t4SysrJWrVrt96oD7cQHQo8W0SxeI0eOzGQy77333rx58w5tD1/60pey7zw0tt+f6srKyhEjRixevPjCCy986qmn2rRpc2j3my+DBw9u06ZNTU3NW2+9dYTuYunSpSmlqVOn3nDDDSeccEL2E0Vpf/87CUWqV69e+93J1q1bsy+J9OzZ8zCOmqNJNIvXgAEDsr9a3nTTTf/4xz8ab7Bv375p06Y1/sms06VLl6997Wsppez6rs7OnTuzsaj/8c+dO3cOHTp06dKlw4cP3+8aM+uDDz5o/KpC/bd3nn/++eiWB7J8+fKqqqqU0nHHHdf0locs+8ts27Zt61+4Zs2ahQsXNtgyuxLctWtXLrs977zzUkpz585tsP306dNTSieddJJoli7RLGozZ87s27fvli1bBg8e/JOf/GTlypWVlZXV1dVvvfXW7NmzTzvttIkTJzZ4Ga6B7Kcj77777vvvv3/Dhg27d+9+8cUXL7744s2bN3fu3Dn7fmtKadu2beeff/5LL700cuTIefPmHaiYR8iCBQsuv/zyefPmrVu3bvfu3bt27Vq7du1999138cUXp5TOP//8I5eYM844I6U0ZcqUJUuWVFZWbty48Xe/+93QoUP37t3bYMvevXunlB566KFc/kLS1Vdf3b179y1btgwfPnz58uV79uzZvHnztGnTHnjggZTSD3/4w/w/EgomT+/Cc0DRP9jR4A9kvP/++9nBmMbKy8vvuOOOg/7BjilTpjS+bdu2bZcsWVK3Tf2PVTd25plnNn0XuQ9H7nfLJj6Pfeqpp27YsOGgu819MrXBR462bduWrWF9Xbp0yY4D1P+sz7Rp0xpstmnTpuxVjT9yVFtb++yzz2bfiGvg2muvbfBHPVJKLVq02O/R7veqF198MaU0aNCgBpf/6le/Sof3GTVyYaVZ7Hr06PHCCy/Mnz//qquu6tevX9u2bdu0aXPyySf/4Ac/WLt27ZQpUw70qmWdO+6445lnnrnwwgs7derUsmXL3r1733DDDatWrTroX9komEsvvXTRokXXXXfdF77whWOOOSY7yzhs2LDZs2evXLky+/rgEdKpU6cXXnjhmmuu6dq1a8uWLY8//vjRo0evWrXqc5/7XIMtx48fP3ny5P79+x/oHZsGzj333NWrV48dO7ZPnz4tW7bs0KHDeeed99hjj+13HIgSkqnN+UNwAFhpAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkCAaAIEiCZAgGgCBIgmQIBoAgSIJkDA/wGY6EVTAEhOIgAAAABJRU5ErkJggg==" alt="扫码访问 IEC 62443 需求转译与对齐平台" />
+        </div>
+      </section>
+
+      <section>
+        <h2>参考依据</h2>
+        <ol class="refs">
+          <li>European Commission，Cyber Resilience Act / Regulation (EU) 2024/2847：欧盟网络韧性法案已生效，主要义务将自 2027 年 12 月 11 日起适用。</li>
+          <li>NIST SP 800-82 Rev. 3，Guide to Operational Technology (OT) Security：面向 OT 安全的指南文件。</li>
+          <li>CISA，Cross-Sector Cybersecurity Performance Goals：面向关键基础设施的跨行业网络安全绩效目标。</li>
+          <li>NERC，Critical Infrastructure Protection (CIP) Reliability Standards：电力领域关键基础设施保护相关强制性可靠性标准。</li>
+        </ol>
+      </section>
+
+      <div class="footer">作者：Max Wang，工业网络安全与 IEC 62443 项目前期需求转译工具实践者。</div>
+    </div>
+  </article>
+</body>
+</html>
