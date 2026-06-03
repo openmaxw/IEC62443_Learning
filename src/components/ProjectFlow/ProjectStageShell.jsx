@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Badge, Button } from '../Common';
+import { Button } from '../Common';
 import styles from './ProjectStageShell.module.css';
 
 export function ProjectStageShell({
@@ -23,15 +23,7 @@ export function ProjectStageShell({
 
   return (
     <div className={styles.page}>
-      <section className={styles.toolbarRow}>
-        <div className={styles.titleGroup}>
-          <Badge variant="primary" size="medium">阶段 {stageNumber}</Badge>
-          <strong>{title}</strong>
-        </div>
-        <div className={styles.actionGroup}>
-          {toolbar}
-        </div>
-      </section>
+      {toolbar ? <section className={styles.toolbarRow}><div className={styles.actionGroup}>{toolbar}</div></section> : null}
       {guidance ? (
         <section className={styles.guidanceRow}>
           <p>{guidance.summary}</p>

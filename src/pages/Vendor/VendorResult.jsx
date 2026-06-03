@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { ActionBar, Button, DataTable, SectionBlock, StatusBadge, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
-import { ProjectStageShell } from '../../components/ProjectFlow';
+import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useVendorPath } from '../../hooks/useProject';
 import { getVendorResultViewModel } from '../../domain/viewModels/dashboardVendorViewModels';
 import styles from './VendorResult.module.css';
@@ -12,11 +12,11 @@ export function VendorResult() {
   const viewModel = getVendorResultViewModel(vendorPath);
 
   if (!viewModel.hasCapability) {
-    return <ProjectStageShell stageNumber="03" title="能力声明摘要" projectName={viewModel.projectName} outputLabel="产品响应摘要"><div className={styles.empty}><Link to="/vendor"><Button variant="primary">进入本页</Button></Link></div></ProjectStageShell>;
+    return <CaseStageLayout><ProjectStageShell stageNumber="03" title="能力声明摘要" projectName={viewModel.projectName} outputLabel="产品响应摘要"><div className={styles.empty}><Link to="/vendor"><Button variant="primary">进入本页</Button></Link></div></ProjectStageShell></CaseStageLayout>;
   }
 
   return (
-    <ProjectStageShell stageNumber="03" title="能力声明摘要" projectName={viewModel.projectName} outputLabel="产品响应摘要" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看设备能力对项目需求的满足情况、依赖条件与限制说明。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="03" title="能力声明摘要" projectName={viewModel.projectName} outputLabel="产品响应摘要" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看设备能力对项目需求的满足情况、依赖条件与限制说明。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
         <>
           <SectionBlock title="声明概览">
@@ -53,6 +53,6 @@ export function VendorResult() {
           <ActionBar align="end"><Link to={isReviewMode ? '/report' : '/selection'}><Button variant={isReviewMode ? 'ghost' : 'primary'} size="medium">{isReviewMode ? '返回上一页' : '进入下一步'}</Button></Link></ActionBar>
         </>
       )}
-    </ProjectStageShell>
+    </ProjectStageShell></CaseStageLayout>
   );
 }

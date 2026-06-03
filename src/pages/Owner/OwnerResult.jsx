@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { ActionBar, Button, Card, PillTag, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
-import { ProjectStageShell } from '../../components/ProjectFlow';
+import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useOwnerPath } from '../../hooks/useProject';
 import { getOwnerResultViewModel } from '../../domain/viewModels/resultViewModels';
 import styles from './OwnerResult.module.css';
@@ -15,7 +15,7 @@ export function OwnerResult() {
   const viewModel = getOwnerResultViewModel(ownerPath);
 
   if (!viewModel.hasAssessment) {
-    return <ProjectStageShell stageNumber="01" title="项目输入摘要" projectName={viewModel.projectName} outputLabel="待生成" ><div className={styles.emptyState}><strong>尚未形成项目输入</strong><Link to="/owner"><Button variant="primary" size="medium">进入本页</Button></Link></div></ProjectStageShell>;
+    return <CaseStageLayout><ProjectStageShell stageNumber="01" title="项目输入摘要" projectName={viewModel.projectName} outputLabel="待生成" ><div className={styles.emptyState}><strong>尚未形成项目输入</strong><Link to="/owner"><Button variant="primary" size="medium">进入本页</Button></Link></div></ProjectStageShell></CaseStageLayout>;
   }
 
   const boundaryItems = [
@@ -33,7 +33,7 @@ export function OwnerResult() {
   ];
 
   return (
-    <ProjectStageShell stageNumber="01" title="项目输入摘要" projectName={viewModel.projectName} outputLabel="标准化项目输入" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看业主侧输入澄清后的项目边界、重点要求与验收关注事项。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="01" title="项目输入摘要" projectName={viewModel.projectName} outputLabel="标准化项目输入" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看业主侧输入澄清后的项目边界、重点要求与验收关注事项。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
       <>
       <article className={styles.document}>
@@ -50,6 +50,6 @@ export function OwnerResult() {
       </ActionBar>
       </>
       )}
-    </ProjectStageShell>
+    </ProjectStageShell></CaseStageLayout>
   );
 }

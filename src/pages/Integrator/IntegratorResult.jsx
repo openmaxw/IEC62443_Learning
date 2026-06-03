@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { ActionBar, Button, DataTable, PillTag, SectionBlock, StatusBadge, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
-import { ProjectStageShell } from '../../components/ProjectFlow';
+import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useIntegratorPath, useOwnerPath } from '../../hooks/useProject';
 import { getIntegratorResultViewModel, resolveMatchLabel } from '../../domain/viewModels/resultViewModels';
 import styles from './IntegratorResult.module.css';
@@ -17,9 +17,9 @@ export function IntegratorResult() {
 
   if (!viewModel.hasPlan) {
     return (
-      <ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据">
+      <CaseStageLayout><ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据">
         <div className={styles.empty}><Link to="/integrator"><Button variant="primary">进入本页</Button></Link></div>
-      </ProjectStageShell>
+      </ProjectStageShell></CaseStageLayout>
     );
   }
 
@@ -33,7 +33,7 @@ export function IntegratorResult() {
   ];
 
   return (
-    <ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看设计响应结论、能力需求与需求—设计对应关系。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看设计响应结论、能力需求与需求—设计对应关系。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
       <>
       <SectionBlock title="设计依据">
@@ -74,6 +74,6 @@ export function IntegratorResult() {
       </ActionBar>
       </>
       )}
-    </ProjectStageShell>
+    </ProjectStageShell></CaseStageLayout>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StatusSummaryPanel, StepTabs, WorkflowNavBar } from '../../components/Common';
-import { ProjectStageShell } from '../../components/ProjectFlow';
+import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useProject } from '../../hooks/useProject';
 import { generateRiskProfile } from '../../utils/riskEngine';
 import { ACCEPTANCE_PREFERENCE_OPTIONS, REMOTE_OWNERSHIP_OPTIONS } from '../../data/enums';
@@ -370,7 +370,7 @@ export function OwnerInterview() {
   const isSummaryStep = currentStep === STEPS.length - 1;
 
   return (
-    <ProjectStageShell
+    <CaseStageLayout><ProjectStageShell
       stageNumber="01"
       title="提出目标"
       projectName={state.projectMeta?.projectName || formData.projectName}
@@ -394,6 +394,6 @@ export function OwnerInterview() {
           />
         </>
       )}
-    </ProjectStageShell>
+    </ProjectStageShell></CaseStageLayout>
   );
 }

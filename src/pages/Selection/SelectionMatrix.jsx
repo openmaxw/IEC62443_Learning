@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, DataTable, SectionBlock, StatusBadge, StatusSummaryPanel, StepTabs, WorkflowNavBar } from '../../components/Common';
-import { ProjectStageShell } from '../../components/ProjectFlow';
+import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { getCapabilityDisplay } from '../../data/capabilities';
 import { useIntegratorPath, useProject, useVendorPath } from '../../hooks/useProject';
 import { getSelectionViewModel } from '../../domain/viewModels/selectionReportViewModels';
@@ -163,7 +163,7 @@ export function SelectionMatrix({ initialStep = 0 }) {
   }
 
   return (
-    <ProjectStageShell stageNumber="04" title="分析差距" projectName={viewModel.projectName} outputLabel="匹配差距闭环" statusText={viewModel.statusSummary.headline} guidance={{ summary: step.guidance }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={validationMessage || viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="04" title="分析差距" projectName={viewModel.projectName} outputLabel="匹配差距闭环" statusText={viewModel.statusSummary.headline} guidance={{ summary: step.guidance }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={validationMessage || viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
         <section className={styles.page}>
           <StepTabs items={STEPS} currentIndex={currentStep} onChange={goToStepWithValidation} />
@@ -174,6 +174,6 @@ export function SelectionMatrix({ initialStep = 0 }) {
           <WorkflowNavBar leftLabel={currentStep === 0 ? '返回上一页' : '上一步'} rightLabel={isReviewStep ? '保存并进入下一步' : '下一步'} onLeftClick={currentStep === 0 ? () => navigate('/vendor/result') : () => setCurrentStep((prev) => Math.max(prev - 1, 0))} onRightClick={isReviewStep ? handleFinalSave : handleNextStep} />
         </section>
       )}
-    </ProjectStageShell>
+    </ProjectStageShell></CaseStageLayout>
   );
 }

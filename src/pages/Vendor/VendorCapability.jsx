@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, DataTable, StatusSummaryPanel, SummaryStatGrid, StepTabs, SurfacePanel, WorkflowNavBar } from '../../components/Common';
-import { ProjectStageShell } from '../../components/ProjectFlow';
+import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useIntegratorPath, useProject } from '../../hooks/useProject';
 import { getVendorCapabilityViewModel } from '../../domain/viewModels/workspaceTranslationViewModels';
 import { CAPABILITY_OPTIONS, PRODUCT_TYPES, CAPABILITY_CATEGORIES, getCapabilityDisplay } from '../../data/capabilities';
@@ -248,7 +248,7 @@ export function VendorCapability() {
   }
 
   return (
-    <ProjectStageShell stageNumber="03" title="提供能力" projectName={capabilityViewModel.projectName} outputLabel="产品与开发结果" statusText={isSummaryStep ? '产品与开发内容已可生成结果页' : '正在完善产品能力、开发证据、依赖条件和限制说明'} statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成产品与开发摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, `覆盖项目要求 ${claimedRequiredCount}/${requirementRows.length || 0}`]} />} guidance={{ summary: `${step.guidance} 当前页面重点解释产品供应商如何提供能力、证据与开发支撑。` }}>
+    <CaseStageLayout><ProjectStageShell stageNumber="03" title="提供能力" projectName={capabilityViewModel.projectName} outputLabel="产品与开发结果" statusText={isSummaryStep ? '产品与开发内容已可生成结果页' : '正在完善产品能力、开发证据、依赖条件和限制说明'} statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成产品与开发摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, `覆盖项目要求 ${claimedRequiredCount}/${requirementRows.length || 0}`]} />} guidance={{ summary: `${step.guidance} 当前页面重点解释产品供应商如何提供能力、证据与开发支撑。` }}>
       {({ statusBar }) => (
       <section className={styles.workspace}>
                 <StepTabs items={STEPS} currentIndex={currentStep} onChange={validateBeforeStepChange} />
@@ -263,6 +263,6 @@ export function VendorCapability() {
         />
       </section>
       )}
-    </ProjectStageShell>
+    </ProjectStageShell></CaseStageLayout>
   );
 }

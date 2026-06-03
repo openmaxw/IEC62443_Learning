@@ -1,5 +1,5 @@
 .page {
-  width: min(1200px, calc(100vw - 24px));
+  width: min(1440px, calc(100vw - 24px));
   margin: 0 auto;
   padding: 8px 0 20px;
 }
@@ -189,7 +189,7 @@
 
 @media (max-width: 768px) {
   .page {
-    width: min(100vw - 16px, 1200px);
+    width: min(100vw - 16px, 1440px);
   }
 
   .hero,

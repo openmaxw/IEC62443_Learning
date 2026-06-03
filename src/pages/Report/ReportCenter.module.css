@@ -1,4 +1,4 @@
-.page { width: min(1440px, calc(100vw - 24px)); margin: 0 auto; padding: 8px 0 18px; display: grid; gap: 12px; }
+.page { width: 100%; min-width: 0; padding: 8px 0 18px; display: grid; gap: 12px; }
 .grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
 .grid div, .item { padding: 10px 12px; border-radius: var(--radius-md); background: linear-gradient(135deg, rgba(255,138,42,.05), rgba(255,255,255,.025)); border: 1px solid rgba(255,138,42,.12); }
 .grid span { display: block; color: var(--color-text-muted); font-size: var(--font-size-xs); margin-bottom: 4px; }
@@ -15,7 +15,7 @@
 .link { color: var(--color-primary); font-weight: 700; }
 .capabilityMeta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 @media (max-width: 980px) { .grid, .judgementGrid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 640px) { .grid, .judgementGrid { grid-template-columns: 1fr; } .page { width: min(100vw - 16px, 1440px); } }
+@media (max-width: 640px) { .grid, .judgementGrid { grid-template-columns: 1fr; } }
 .exportActions { display: grid; justify-items: end; gap: 6px; }
 .exportActions span { color: var(--color-text-muted); font-size: var(--font-size-xs); text-align: right; }
 .exportActionsInline { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 6px; }

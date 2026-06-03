@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, DataTable, PillTag, SectionBlock, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
-import { ProjectStageShell } from '../../components/ProjectFlow';
+import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useProject, useOwnerPath, useIntegratorPath, useVendorPath } from '../../hooks/useProject';
 import { getReportCenterViewModel } from '../../domain/viewModels/selectionReportViewModels';
 import { copyMarkdownToClipboard, exportReportAsMarkdown } from '../../utils/reportGenerator';
@@ -35,7 +35,7 @@ export function ReportCenter() {
   };
 
   return (
-    <ProjectStageShell
+    <CaseStageLayout><ProjectStageShell
       stageNumber="05"
       title="形成判断"
       projectName={viewModel.projectName}
@@ -67,6 +67,6 @@ export function ReportCenter() {
         <SectionBlock title="审核判断样例（审核视角，非标准主角色）"><div className={styles.list}><Card className={styles.item}><strong>SL2 判断示例</strong><div className={styles.judgementGrid}><div><span>已具备</span><p>边界访问控制、事件日志、Syslog 输出、远程访问边界控制具备明确设计与产品支撑。</p></div><div><span>部分具备</span><p>细粒度 RBAC 仍需开发版本或集中管理平台配合。</p></div><div><span>外部补偿</span><p>项目级审计报表依赖集中日志或 SIEM 平台，以及运行期维护流程。</p></div><div><span>教学结论</span><p>补齐日志平台、权限管理补偿和运行记录后，可作为支撑 SL2 目标说明的示例。</p></div></div></Card><Card className={styles.item}><strong>认证扩展示例</strong><div className={styles.judgementGrid}><div><span>3-3</span><p>关注系统级安全需求是否完整转译，并形成可验证的设计与职责分工。</p></div><div><span>4-1</span><p>关注产品安全开发、缺陷处理和可信交付证据是否可追溯。</p></div><div><span>4-2</span><p>关注技术安全能力是否具备实现基础，以及声明边界是否清晰。</p></div><div><span>当前定位</span><p>本平台先提供教学型判断框架，后续可继续细化为更具体的审核检查点。</p></div></div></Card></div></SectionBlock>
       </section>
       )}
-    </ProjectStageShell>
+    </ProjectStageShell></CaseStageLayout>
   );
 }

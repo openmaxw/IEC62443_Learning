@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, DataTable, PillTag, StatusSummaryPanel, StepTabs, StructuredRecordTable, SummaryStatGrid, SurfacePanel, WorkflowNavBar } from '../../components/Common';
-import { ProjectStageShell } from '../../components/ProjectFlow';
+import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useOwnerPath, useProject } from '../../hooks/useProject';
 import { getIntegratorWorkspaceViewModel } from '../../domain/viewModels/workspaceTranslationViewModels';
 import { ZONE_TEMPLATES, CONDUIT_TEMPLATES } from '../../data/zones';
@@ -105,7 +105,7 @@ export function IntegratorWorkspace() {
   }, [plan, state.integratorDesign?.draft, actions]);
 
   if (!workspaceViewModel.hasPrerequisites) {
-    return <ProjectStageShell stageNumber="02" title="形成方案" projectName={state.projectMeta?.projectName} outputLabel="设计响应结果" prevAction={{ to: '/owner', label: '上一步' }} ><div className={styles.empty}>请先完成需求与目标阶段。</div></ProjectStageShell>;
+    return <CaseStageLayout><ProjectStageShell stageNumber="02" title="形成方案" projectName={state.projectMeta?.projectName} outputLabel="设计响应结果" prevAction={{ to: '/owner', label: '上一步' }} ><div className={styles.empty}>请先完成需求与目标阶段。</div></ProjectStageShell></CaseStageLayout>;
   }
 
   const step = STEPS[currentStep];
@@ -212,7 +212,7 @@ export function IntegratorWorkspace() {
   }
 
   return (
-    <ProjectStageShell
+    <CaseStageLayout><ProjectStageShell
       stageNumber="02"
       title="形成方案"
       projectName={state.projectMeta?.projectName}
@@ -234,6 +234,6 @@ export function IntegratorWorkspace() {
         />
       </section>
       )}
-    </ProjectStageShell>
+    </ProjectStageShell></CaseStageLayout>
   );
 }

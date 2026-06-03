@@ -1,14 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 
-const NAV_ITEMS = [
-  { to: '/owner', label: '提出目标', hint: '业主输入 / 目标 / 约束' },
-  { to: '/integrator', label: '形成方案', hint: '集成 / 维护 / 系统实现' },
-  { to: '/vendor', label: '提供能力', hint: '产品 / 开发 / 能力证明' },
-  { to: '/translation-center', label: '建立对应', hint: '输入 / 设计 / 能力 / 责任' },
-  { to: '/selection', label: '分析差距', hint: '满足情况 / 补偿措施 / 闭环' },
-  { to: '/report', label: '形成判断', hint: '审核视角 / 证据判断 / 目标说明' },
-  { to: '/tutorial', label: 'IEC 62443 简明教程', hint: '框架 / 角色 / 概念 / FAQ' }
+const TOP_ITEMS = [
+  { to: '/tutorial', label: '入门教程' },
+  { to: '/owner', label: '案例演示' }
 ];
 
 export function Header() {
@@ -26,17 +21,12 @@ export function Header() {
           </div>
           <div className={styles.brandText}>
             <strong>IEC 62443 Learning Hub</strong>
-            <span>通过一个共享案例理解 IEC 62443 从目标到判断的主线流程</span>
+            <span>用于理解 IEC 62443 如何在项目中形成完整闭环的教学系统</span>
           </div>
         </Link>
 
         <nav className={styles.nav}>
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.to} to={item.to} className={`${styles.navLink} ${isActive(item.to) ? styles.active : ''}`}>
-              <span>{item.label}</span>
-              <small>{item.hint}</small>
-            </Link>
-          ))}
+          {TOP_ITEMS.map((item) => <Link key={item.to} to={item.to} className={`${styles.topLink} ${isActive(item.to) ? styles.active : ''}`}><span>{item.label}</span></Link>)}
         </nav>
       </div>
     </header>
