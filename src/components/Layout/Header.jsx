@@ -7,7 +7,8 @@ const NAV_ITEMS = [
   { to: '/vendor', label: '提供能力', hint: '产品 / 开发 / 能力证明' },
   { to: '/translation-center', label: '建立对应', hint: '输入 / 设计 / 能力 / 责任' },
   { to: '/selection', label: '分析差距', hint: '满足情况 / 补偿措施 / 闭环' },
-  { to: '/report', label: '形成判断', hint: '审核视角 / 证据判断 / 目标说明' }
+  { to: '/report', label: '形成判断', hint: '审核视角 / 证据判断 / 目标说明' },
+  { to: '/tutorial', label: 'IEC 62443 简明教程', hint: '框架 / 角色 / 概念 / FAQ' }
 ];
 
 export function Header() {

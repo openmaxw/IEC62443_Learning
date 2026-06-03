@@ -14,6 +14,7 @@ import { SelectionMatrix } from './pages/Selection/SelectionMatrix';
 import { ReportCenter } from './pages/Report/ReportCenter';
 import { LearningMode } from './pages/Learning/LearningMode';
 import { PlatformGuide } from './pages/PlatformGuide/PlatformGuide';
+import { Iec62443Tutorial } from './pages/Tutorial/Iec62443Tutorial';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { DeveloperView } from './pages/Developer/DeveloperView';
 import { MaintenanceView } from './pages/Maintenance/MaintenanceView';
@@ -55,6 +56,7 @@ export default function App() {
               <Route path="/report" element={<ReportCenter />} />
               <Route path="/learning" element={<LearningMode />} />
               <Route path="/platform-guide" element={<PlatformGuide />} />
+              <Route path="/tutorial" element={<Iec62443Tutorial />} />
             </Routes>
           </main>
         </AppErrorBoundary>

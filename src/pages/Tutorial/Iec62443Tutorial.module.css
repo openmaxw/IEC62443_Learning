@@ -1,0 +1,199 @@
+.page {
+  width: min(1200px, calc(100vw - 24px));
+  margin: 0 auto;
+  padding: 8px 0 20px;
+}
+
+.article {
+  display: grid;
+  gap: 14px;
+}
+
+.hero,
+.section {
+  display: grid;
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--color-table-border);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.022);
+}
+
+.hero {
+  background: linear-gradient(135deg, rgba(255,138,42,.10), rgba(88,183,255,.08), rgba(255,255,255,.02));
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.section h2 {
+  color: #ffd6ae;
+  font-size: var(--font-size-xl);
+}
+
+.section h3 {
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+}
+
+.grid2,
+.roleGrid,
+.faqList,
+.caseBlock {
+  display: grid;
+  gap: 12px;
+}
+
+.grid2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.roleGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.caseBlock {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card,
+.roleCard,
+.faqCard,
+.caseItem {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--color-table-border);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,.024);
+}
+
+.caseItem strong {
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+}
+
+.caseItem p {
+  color: rgba(221, 236, 245, 0.88);
+}
+
+.roleHead {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(159, 175, 188, 0.12);
+}
+
+.roleHead strong {
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+}
+
+.roleHead span {
+  color: rgba(195, 204, 214, 0.78);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.roleBlock {
+  display: grid;
+  gap: 6px;
+}
+
+.roleBlock ul {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(221, 236, 245, 0.9);
+}
+
+.quoteList {
+  display: grid;
+  gap: 8px;
+}
+
+.roleCard blockquote {
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid rgba(94,146,183,.42);
+  background: rgba(94,146,183,.08);
+  color: rgba(221, 236, 245, 0.92);
+}
+
+.note,
+.tip {
+  padding: 10px 12px;
+  border: 1px solid rgba(94,146,183,.18);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(94,146,183,.08), rgba(255,255,255,.02));
+  color: rgba(195, 204, 214, 0.84);
+}
+
+.compareNote {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 138, 42, 0.18);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(255,138,42,.08), rgba(255,255,255,.02));
+}
+
+.compareNote strong {
+  color: #ffd6ae;
+  font-size: var(--font-size-sm);
+}
+
+.compareNote span {
+  color: rgba(237, 243, 247, 0.9);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-table-border);
+}
+
+.table th,
+.table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-table-border);
+  text-align: left;
+  vertical-align: top;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.table th {
+  background: var(--color-table-head);
+  color: var(--color-text-muted);
+}
+
+.table td {
+  background: rgba(255,255,255,.018);
+  color: rgba(237, 243, 247, 0.9);
+}
+
+@media (max-width: 900px) {
+  .grid2,
+  .roleGrid,
+  .caseBlock {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    width: min(100vw - 16px, 1200px);
+  }
+
+  .hero,
+  .section {
+    padding: 14px;
+  }
+}
