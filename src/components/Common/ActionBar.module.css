@@ -1,0 +1,16 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.start { justify-content: flex-start; }
+.end { justify-content: flex-end; }
+.between { justify-content: space-between; }
+
+@media (max-width: 980px) {
+  .bar.between {
+    justify-content: flex-start;
+  }
+}

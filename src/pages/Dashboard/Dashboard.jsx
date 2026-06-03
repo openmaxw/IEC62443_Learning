@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Button, Card } from '../../components/Common';
+import { Button, Card, HeroPanel, PillTag } from '../../components/Common';
 import { ProjectStageShell } from '../../components/ProjectFlow';
 import { useOwnerPath, useIntegratorPath, useVendorPath, useProject, useProjectStatus } from '../../hooks/useProject';
 import { getDashboardViewModel } from '../../domain/viewModels/dashboardVendorViewModels';
@@ -40,7 +40,7 @@ export function Dashboard() {
       hideStatus
     >
       <section className={styles.page}>
-        <section className={styles.hero}>
+        <HeroPanel className={styles.hero}>
           <div>
             <h1>{viewModel.projectName || '当前项目'}</h1>
             <p>{viewModel.projectDescription}</p>
@@ -49,7 +49,7 @@ export function Dashboard() {
           <div className={styles.heroAction}>
             {viewModel.nextAction ? <Link to={viewModel.nextAction.route}><Button variant="primary" size="small">下一步：{viewModel.nextAction.label}</Button></Link> : <Link to="/report"><Button variant="secondary" size="small">查看总结与审核</Button></Link>}
           </div>
-        </section>
+        </HeroPanel>
 
         <section className={styles.grid}>
 
@@ -81,7 +81,7 @@ export function Dashboard() {
             <article key={card.id} className={styles.statusCard}>
               <div className={styles.statusHead}>
                 <strong>{card.title}</strong>
-                <span className={card.ready ? styles.ready : styles.pending}>{card.ready ? '已具备' : '待补齐'}</span>
+                <PillTag tone={card.ready ? 'success' : 'warning'}>{card.ready ? '已具备' : '待补齐'}</PillTag>
               </div>
               <p>{card.detail}</p>
               {card.substeps ? <div className={styles.substepBlock}><div className={styles.substepSummary}>子步骤 {card.substeps.completed} / {card.substeps.total}</div><div className={styles.substepList}>{card.substeps.items.map((item) => <div key={item.id} className={`${styles.substepItem} ${item.completed ? styles.substepDone : styles.substepTodo}`}><span>{item.id}</span><strong>{item.label}</strong></div>)}</div></div> : null}

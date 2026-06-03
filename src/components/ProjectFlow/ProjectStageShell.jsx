@@ -5,10 +5,7 @@ import styles from './ProjectStageShell.module.css';
 export function ProjectStageShell({
   stageNumber,
   title,
-  projectName,
-  outputLabel,
   toolbar,
-  statusText,
   statusPanel,
   prevAction,
   nextAction,

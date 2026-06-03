@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { Button, SectionBlock } from '../../components/Common';
+import { useNavigate } from 'react-router-dom';
+import { Button, HeroPanel, InfoBanner, SectionBlock } from '../../components/Common';
 import { useProject } from '../../hooks/useProject';
 import learningStyles from '../Learning/LearningMode.module.css';
 import styles from './Landing.module.css';
@@ -83,7 +83,7 @@ export function Landing() {
 
   return (
     <main className={styles.page}>
-      <section className={styles.hero}>
+      <HeroPanel className={styles.hero} align="stack">
         <div className={styles.heroText}>
           <span className={styles.eyebrow}>IEC 62443 Learning Hub</span>
           <h1>这个平台是做什么的</h1>
@@ -96,7 +96,7 @@ export function Landing() {
             <Button onClick={handleReset} variant="secondary">全新输入</Button>
           </div>
         </div>
-      </section>
+      </HeroPanel>
 
       <section className={styles.sectionBlock}>
         <header>
@@ -155,7 +155,7 @@ export function Landing() {
         </div>
       </SectionBlock>
 
-      <div className={learningStyles.memoryBanner}>先理解主角色，再理解扩展视角，最后进入案例页面看它们如何在同一个实例中被串起来。</div>
+      <InfoBanner className={learningStyles.memoryBanner} tone="warning">先理解主角色，再理解扩展视角，最后进入案例页面看它们如何在同一个实例中被串起来。</InfoBanner>
 
     </main>
   );

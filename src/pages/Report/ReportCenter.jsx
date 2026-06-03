@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, DataTable, SectionBlock, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
+import { Button, Card, DataTable, PillTag, SectionBlock, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
 import { ProjectStageShell } from '../../components/ProjectFlow';
 import { useProject, useOwnerPath, useIntegratorPath, useVendorPath } from '../../hooks/useProject';
 import { getReportCenterViewModel } from '../../domain/viewModels/selectionReportViewModels';
@@ -57,14 +57,14 @@ export function ReportCenter() {
 
         <SectionBlock title="协作差距与补偿措施">
           <SummaryStatGrid items={[{ label: '待闭环差距', value: viewModel.gapRows.length }, { label: '已保存协作差距与补偿措施', value: viewModel.gapClosureItems.length }, { label: '高严重度', value: viewModel.highRiskCount }, { label: '依赖外部补偿', value: viewModel.externalCount }]} />
-          {viewModel.gapClosureItems.length ? <div className={styles.list}>{viewModel.gapClosureItems.map((item) => <article key={item.id} className={styles.item}><strong>{item.display.label}</strong><div className={styles.capabilityMeta}><span className={styles.standardTag}>{item.display.frText}</span><span className={styles.standardTag}>{item.display.srText}</span></div><span>{item.owner || '责任方未填写'}</span><p><strong>补偿措施：</strong>{item.mitigation || '未填写'}</p><p><strong>验收影响：</strong>{item.acceptanceImpact || '未填写'}</p><p><strong>残余风险：</strong>{item.residualRisk || '未填写'}</p></article>)}</div> : <div className={styles.empty}>暂无已保存的闭环决策。</div>}
+          {viewModel.gapClosureItems.length ? <div className={styles.list}>{viewModel.gapClosureItems.map((item) => <Card key={item.id} className={styles.item}><strong>{item.display.label}</strong><div className={styles.capabilityMeta}><PillTag tone="primary">{item.display.frText}</PillTag><PillTag tone="primary">{item.display.srText}</PillTag></div><span>{item.owner || '责任方未填写'}</span><p><strong>补偿措施：</strong>{item.mitigation || '未填写'}</p><p><strong>验收影响：</strong>{item.acceptanceImpact || '未填写'}</p><p><strong>残余风险：</strong>{item.residualRisk || '未填写'}</p></Card>)}</div> : <div className={styles.empty}>暂无已保存的闭环决策。</div>}
         </SectionBlock>
 
         <SectionBlock title="IEC 62443 映射依据">
           <DataTable><thead><tr><th>能力项</th><th>Part</th><th>FR / SR</th><th>条款摘要</th><th>系统解释</th><th>当前限制</th></tr></thead><tbody>{viewModel.mappingRows.length ? viewModel.mappingRows.map((item) => <tr key={item.requirement.id || item.requirement.capabilityId}><td>{item.display.label}</td><td>{item.mapping.part}</td><td>{item.mapping.fr} / {item.mapping.sr}</td><td>{item.mapping.requirementSummary}</td><td>{item.mapping.systemInterpretation}</td><td>{item.mapping.limitation}</td></tr>) : <tr><td colSpan="6">暂无映射依据，请先完成前序输入。</td></tr>}</tbody></DataTable>
         </SectionBlock>
         {statusBar}
-        <SectionBlock title="审核判断样例（审核视角，非标准主角色）"><div className={styles.list}><article className={styles.item}><strong>SL2 判断示例</strong><div className={styles.judgementGrid}><div><span>已具备</span><p>边界访问控制、事件日志、Syslog 输出、远程访问边界控制具备明确设计与产品支撑。</p></div><div><span>部分具备</span><p>细粒度 RBAC 仍需开发版本或集中管理平台配合。</p></div><div><span>外部补偿</span><p>项目级审计报表依赖集中日志或 SIEM 平台，以及运行期维护流程。</p></div><div><span>教学结论</span><p>补齐日志平台、权限管理补偿和运行记录后，可作为支撑 SL2 目标说明的示例。</p></div></div></article><article className={styles.item}><strong>认证扩展示例</strong><div className={styles.judgementGrid}><div><span>3-3</span><p>关注系统级安全需求是否完整转译，并形成可验证的设计与职责分工。</p></div><div><span>4-1</span><p>关注产品安全开发、缺陷处理和可信交付证据是否可追溯。</p></div><div><span>4-2</span><p>关注技术安全能力是否具备实现基础，以及声明边界是否清晰。</p></div><div><span>当前定位</span><p>本平台先提供教学型判断框架，后续可继续细化为更具体的审核检查点。</p></div></div></article></div></SectionBlock>
+        <SectionBlock title="审核判断样例（审核视角，非标准主角色）"><div className={styles.list}><Card className={styles.item}><strong>SL2 判断示例</strong><div className={styles.judgementGrid}><div><span>已具备</span><p>边界访问控制、事件日志、Syslog 输出、远程访问边界控制具备明确设计与产品支撑。</p></div><div><span>部分具备</span><p>细粒度 RBAC 仍需开发版本或集中管理平台配合。</p></div><div><span>外部补偿</span><p>项目级审计报表依赖集中日志或 SIEM 平台，以及运行期维护流程。</p></div><div><span>教学结论</span><p>补齐日志平台、权限管理补偿和运行记录后，可作为支撑 SL2 目标说明的示例。</p></div></div></Card><Card className={styles.item}><strong>认证扩展示例</strong><div className={styles.judgementGrid}><div><span>3-3</span><p>关注系统级安全需求是否完整转译，并形成可验证的设计与职责分工。</p></div><div><span>4-1</span><p>关注产品安全开发、缺陷处理和可信交付证据是否可追溯。</p></div><div><span>4-2</span><p>关注技术安全能力是否具备实现基础，以及声明边界是否清晰。</p></div><div><span>当前定位</span><p>本平台先提供教学型判断框架，后续可继续细化为更具体的审核检查点。</p></div></div></Card></div></SectionBlock>
       </section>
       )}
     </ProjectStageShell>

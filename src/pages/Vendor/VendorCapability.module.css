@@ -1,7 +1,7 @@
-.workspace, .page { display: grid; gap: 12px; }
+.workspace, .page { display: grid; gap: 10px; }
 
 .panel { border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.015)); padding: 12px; box-shadow: none; }
-.modeHint, .productHint, .warningHint { padding: 10px 12px; border: 1px solid rgba(88, 183, 255, 0.18); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(88,183,255,.08), rgba(255,255,255,.02)); color: rgba(195, 204, 214, 0.8); font-size: var(--font-size-sm); line-height: var(--line-height-relaxed); }
+.modeHint, .productHint, .warningHint { padding: 8px 10px; border: 1px solid rgba(88, 183, 255, 0.18); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(88,183,255,.08), rgba(255,255,255,.02)); color: rgba(195, 204, 214, 0.8); font-size: var(--font-size-xs); line-height: var(--line-height-normal); }
 .warningHint { display: grid; gap: 4px; border-color: rgba(255, 180, 84, 0.28); background: linear-gradient(180deg, rgba(255, 180, 84, 0.12), rgba(255,255,255,.02)); }
 .warningHint strong { color: var(--color-text); }
 
@@ -37,8 +37,8 @@
 }
 .fieldCellHint {
   color: var(--color-text-muted);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-relaxed);
+  font-size: 11px;
+  line-height: var(--line-height-normal);
 }
 
 .toolbarActions { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -46,7 +46,7 @@
 .table th, .table td { padding: 8px 10px; border-bottom: 1px solid var(--color-table-border); text-align: left; vertical-align: top; font-size: var(--font-size-sm); }
 .table th { color: var(--color-text-muted); font-weight: 700; background: rgba(255,255,255,.02); }
 .requiredRow td:first-child { color: #ddecf5; font-weight: 700; }
-.metaText { font-style: italic; margin-top: 4px; color: var(--color-text-muted); font-size: var(--font-size-xs); font-family: var(--font-mono); }
+.metaText { margin-top: 4px; color: var(--color-text-muted); font-size: 11px; font-family: var(--font-mono); }
 .appTag { display: inline-flex; align-items: center; justify-content: center; min-width: 76px; padding: 4px 10px; border-radius: 999px; font-size: var(--font-size-xs); font-weight: 700; }
 .appTagFit { border: 1px solid rgba(68,209,123,.35); background: rgba(68,209,123,.12); color: #dcffe8; }
 .appTagNeutral { border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: rgba(195, 204, 214, 0.78); }
@@ -66,16 +66,46 @@
 @media (max-width: 1100px) { .bottomBar { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .formTable, .formTable tbody, .formTable tr, .formTable th, .formTable td { display: block; width: 100%; } .formTable th { border-bottom: none; } }
 
-.invalidField input,
-.invalidField select,
-.invalidField textarea {
-  border-color: rgba(255, 95, 95, 0.82) !important;
-  box-shadow: 0 0 0 1px rgba(255, 95, 95, 0.36), 0 0 0 3px rgba(255, 95, 95, 0.08) !important;
-}
-
 .toolbarRow.invalidField {
   border: 1px solid rgba(255, 95, 95, 0.82);
   border-radius: var(--radius-md);
   padding: 8px;
   box-shadow: 0 0 0 1px rgba(255, 95, 95, 0.36), 0 0 0 3px rgba(255, 95, 95, 0.08);
 }
+
+
+.tableForm {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-table-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.tableForm th,
+.tableForm td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-table-border);
+  vertical-align: top;
+}
+.tableForm th {
+  width: 220px;
+  background: var(--color-table-head);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-align: left;
+}
+.tableForm td {
+  background: rgba(255,255,255,.018);
+}
+.tableField {
+  display: grid;
+  gap: 6px;
+}
+.tableFieldHint {
+  color: rgba(195, 204, 214, 0.68);
+  font-size: 11px;
+  line-height: var(--line-height-normal);
+}
+@media (max-width: 820px) { .tableForm, .tableForm tbody, .tableForm tr, .tableForm th, .tableForm td { display: block; width: 100%; } .tableForm th { border-bottom: none; } }

@@ -13,8 +13,8 @@
 .medium { min-height: 24px; padding: 0 10px; font-size: 11px; }
 .large { min-height: 28px; padding: 0 12px; font-size: 12px; }
 .default { color: var(--color-text-secondary); background: rgba(255, 255, 255, 0.05); border-color: var(--color-border); }
-.primary { color: #fff2e4; background: rgba(255, 138, 42, 0.18); border-color: rgba(255, 138, 42, 0.36); }
+.primary { color: #fff2e4; background: rgba(255, 138, 42, 0.14); border-color: rgba(255, 138, 42, 0.28); }
 .success { color: #e3fff0; background: rgba(66, 211, 146, 0.16); border-color: rgba(66, 211, 146, 0.32); }
 .warning { color: #fff0ca; background: rgba(246, 195, 91, 0.16); border-color: rgba(246, 195, 91, 0.32); }
 .danger { color: #ffe0e5; background: rgba(255, 107, 125, 0.16); border-color: rgba(255, 107, 125, 0.32); }
-.info { color: #dff2ff; background: rgba(88, 183, 255, 0.16); border-color: rgba(88, 183, 255, 0.32); }
+.info { color: #dff2ff; background: rgba(88, 183, 255, 0.12); border-color: rgba(88, 183, 255, 0.24); }

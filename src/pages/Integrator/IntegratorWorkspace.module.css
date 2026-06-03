@@ -1,12 +1,13 @@
-.panel { border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.015)); padding: 12px; box-shadow: none; }
+.panel { border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.015)); padding: 10px; box-shadow: none; }
 
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.block { border: 1px solid var(--color-table-border); border-radius: var(--radius-md); background: rgba(255,255,255,.018); padding: 12px; display: grid; gap: 10px; }
-.blockTitle { font-size: var(--font-size-lg); font-weight: 800; color: #ffd6ae; letter-spacing: .01em; padding-left: 10px; border-left: 3px solid rgba(255, 169, 64, 0.45); }
-.blockHint { color: rgba(195, 204, 214, 0.78); font-style: italic;  color: rgba(195, 204, 214, 0.78); font-size: var(--font-size-sm); line-height: var(--line-height-relaxed); }
+.block { border: 1px solid var(--color-table-border); border-radius: var(--radius-md); background: rgba(255,255,255,.018); padding: 10px; display: grid; gap: 8px; }
+.blockTitle { font-size: var(--font-size-md); font-weight: 700; color: var(--color-text); }
+.blockHint { color: rgba(195, 204, 214, 0.74); font-size: var(--font-size-xs); line-height: var(--line-height-normal); }
 .contextGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .contextGrid div { padding: 10px 12px; border: 1px solid var(--color-table-border); border-radius: var(--radius-md); background: rgba(255,255,255,.025); display: grid; gap: 8px; }
 .contextGrid span { display: block; color: var(--color-text-muted); font-size: var(--font-size-xs); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .05em; }
+.summaryCardGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .fullText { min-height: 80px; }
 .block input,
 .block select,
@@ -24,8 +25,8 @@
 .optionCell { padding: 10px 12px; border: 1px solid var(--color-table-border); border-radius: var(--radius-md); background: rgba(255,255,255,.025); display: grid; gap: 4px; text-align: left; transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast); }
 .optionCell:hover { transform: translateY(-1px); border-color: var(--select-hover-border); background: var(--select-hover-bg); box-shadow: 0 4px 14px rgba(20,74,104,.08); }
 .optionCell:focus-visible { outline: none; box-shadow: var(--shadow-focus); border-color: rgba(43, 122, 163, 0.6); }
-.optionCell strong { color: var(--color-text); font-size: var(--font-size-md); }
-.optionCell span { color: rgba(195, 204, 214, 0.78); font-size: var(--font-size-sm); line-height: var(--line-height-normal); }
+.optionCell strong { color: var(--color-text); font-size: var(--font-size-sm); }
+.optionCell span { color: rgba(195, 204, 214, 0.78); font-size: var(--font-size-xs); line-height: var(--line-height-normal); }
 .optionCellActive { border-color: var(--select-border); background: var(--select-bg); box-shadow: var(--select-shadow); }
 .optionCellActive strong { color: var(--select-text); }
 .optionCellActive span { color: rgba(221,236,245,.86); }
@@ -34,8 +35,8 @@
 .table { border: 1px solid var(--color-table-border); }
 .table th, .table td { border-bottom: 1px solid var(--color-table-border); }
 .emptyCell { color: var(--color-text-muted); }
-.note { padding: 10px 12px; border: 1px solid rgba(94, 146, 183, 0.18); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(94,146,183,.08), rgba(255,255,255,.02)); font-size: var(--font-size-sm); color: rgba(195, 204, 214, 0.8); display: grid; gap: 4px; }
-.note strong { color: var(--color-text); font-size: var(--font-size-md); }
+.note { padding: 8px 10px; border: 1px solid rgba(94, 146, 183, 0.16); border-radius: var(--radius-md); background: linear-gradient(180deg, rgba(94,146,183,.08), rgba(255,255,255,.02)); font-size: var(--font-size-xs); color: rgba(195, 204, 214, 0.8); display: grid; gap: 3px; }
+.note strong { color: var(--color-text); font-size: var(--font-size-sm); }
 .note p { margin: 0; }
 
 .empty { padding: 12px 14px; border: 1px dashed rgba(170, 184, 195, 0.26); border-radius: var(--radius-md); background: rgba(255,255,255,.018); color: var(--color-text-muted); font-size: var(--font-size-sm); }
@@ -43,7 +44,7 @@
 .capabilityCode { font-family: var(--font-mono); font-size: var(--font-size-sm); color: #ffd6b8; }
 .capabilityMeta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .standardTag { display: inline-flex; align-items: center; min-height: 22px; padding: 0 8px; border-radius: 999px; border: 1px solid rgba(94,146,183,.22); background: rgba(94,146,183,.10); color: #d7ecff; font-size: var(--font-size-xs); font-weight: 700; }
-@media (max-width: 1100px) { .grid, .contextGrid, .optionGrid, .inlineForm { grid-template-columns: 1fr; } }
+@media (max-width: 1100px) { .grid, .contextGrid, .optionGrid, .inlineForm, .summaryCardGrid { grid-template-columns: 1fr; } }
 
 .reviewStack { display: grid; gap: 10px; align-items: start; }
 .compactNoteList { display: grid; gap: 6px; }
@@ -79,3 +80,40 @@
   font-size: var(--font-size-sm);
   font-weight: 700;
 }
+
+
+.tableForm {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-table-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.tableForm th,
+.tableForm td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-table-border);
+  vertical-align: top;
+}
+.tableForm th {
+  width: 220px;
+  background: var(--color-table-head);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-align: left;
+}
+.tableForm td {
+  background: rgba(255,255,255,.018);
+}
+.tableField {
+  display: grid;
+  gap: 6px;
+}
+.tableFieldHint {
+  color: rgba(195, 204, 214, 0.68);
+  font-size: 11px;
+  line-height: var(--line-height-normal);
+}
+@media (max-width: 820px) { .tableForm, .tableForm tbody, .tableForm tr, .tableForm th, .tableForm td { display: block; width: 100%; } .tableForm th { border-bottom: none; } }

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Badge, Button, NotePanel, SectionBlock } from '../../components/Common';
+import { Badge, Button, HeroPanel, InfoBanner, NotePanel, SectionBlock } from '../../components/Common';
 import styles from './PlatformGuide.module.css';
 
 const FRAMEWORK_FLOW = ['业主提出目标', '集成商形成系统响应', '设备商声明产品能力', '开发者提供开发证据', '维护方落实持续控制', '审核者检查通过条件'];
@@ -39,7 +39,7 @@ const PAGE_USAGE = [
 export function PlatformGuide() {
   return (
     <div className={styles.page}>
-      <section className={styles.hero}>
+      <HeroPanel className={styles.hero}>
         <div>
           <Badge variant="info" size="large">框架导读</Badge>
           <h1>如何通过一个实例理解 IEC 62443 的角色协作框架</h1>
@@ -49,54 +49,31 @@ export function PlatformGuide() {
           <Link to="/dashboard"><Button variant="primary" size="medium">进入框架总览</Button></Link>
           <Link to="/report"><Button variant="secondary" size="medium">查看总结与审核</Button></Link>
         </div>
-      </section>
+      </HeroPanel>
 
       <SectionBlock title="框架主线">
         <div className={styles.flow}>{FRAMEWORK_FLOW.map((item) => <span key={item}>{item}</span>)}</div>
       </SectionBlock>
 
       <SectionBlock title="先建立三个认识">
-        <div className={styles.cardGrid3}>
-          {FRAMEWORK_VIEW.map((item) => (
-            <article key={item.title} className={styles.infoCard}>
-              <strong>{item.title}</strong>
-              <ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul>
-            </article>
-          ))}
-        </div>
+        <div className={styles.cardGrid}>{FRAMEWORK_VIEW.map((item) => <article key={item.title} className={styles.card}><strong>{item.title}</strong><ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul></article>)}</div>
       </SectionBlock>
 
       <SectionBlock title="六类关键参与方">
-        <div className={styles.cardGrid3}>
-          {ROLE_GUIDES.map((role) => (
-            <article key={role.title} className={styles.roleCard}>
-              <strong>{role.title}</strong>
-              <p>{role.summary}</p>
-              <ul>{role.points.map((point) => <li key={point}>{point}</li>)}</ul>
-            </article>
-          ))}
-        </div>
+        <div className={styles.cardGrid}>{ROLE_GUIDES.map((item) => <article key={item.title} className={styles.card}><strong>{item.title}</strong><span>{item.summary}</span><ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul></article>)}</div>
       </SectionBlock>
 
       <SectionBlock title="各页面在解释什么">
-        <div className={styles.featureList}>
-          {PAGE_USAGE.map((page) => (
-            <article key={page.title} className={styles.featureCard}>
-              <div>
-                <strong>{page.title}</strong>
-                <p>{page.usage}</p>
-              </div>
-              <ul>{page.points.map((point) => <li key={point}>{point}</li>)}</ul>
-              <Link to={page.route}>进入页面</Link>
-            </article>
-          ))}
-        </div>
+        <div className={styles.cardGrid}>{PAGE_USAGE.map((item) => <article key={item.title} className={styles.card}><div className={styles.cardHead}><strong>{item.title}</strong><Link to={item.route}><Button variant="ghost" size="small">进入页面</Button></Link></div><span>{item.usage}</span><ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul></article>)}</div>
       </SectionBlock>
 
-      <NotePanel title="说明" notes={[
-        '销售、产品经理、FAE 和 TS 可以使用本平台学习，但平台主线讲的是 IEC 62443 角色体系本身。',
-        '关于 3-3、4-1、4-2 等更细的审核关注点，建议在现有框架稳定后再逐步补入更具体的检查说明。'
-      ]} />
+      <InfoBanner tone="info">
+        <NotePanel title="说明" notes={[
+          '本平台优先解释“谁负责什么、为什么这样协作”，而不是逐条替代 IEC 62443 原文。',
+          '如需进入案例链路，建议从框架总览或直接进入需求与目标页面开始。',
+          '若从审核视角理解本平台，可在完成案例链路后查看总结与审核页面。'
+        ]} />
+      </InfoBanner>
     </div>
   );
 }

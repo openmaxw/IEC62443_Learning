@@ -21,8 +21,8 @@
 .primary:hover:not(.disabled) { transform: translateY(-1px); filter: brightness(1.04); }
 .secondary {
   color: var(--color-text);
-  border-color: rgba(255, 138, 42, 0.28);
-  background: linear-gradient(135deg, rgba(255, 138, 42, 0.14), rgba(255, 255, 255, 0.03));
+  border-color: rgba(255, 138, 42, 0.22);
+  background: linear-gradient(135deg, rgba(255, 138, 42, 0.10), rgba(255, 255, 255, 0.03));
 }
 .secondary:hover:not(.disabled) {
   transform: translateY(-1px);
@@ -32,7 +32,7 @@
 .ghost {
   color: var(--color-text-secondary);
   background: rgba(255, 255, 255, 0.02);
-  border-color: var(--color-table-border);
+  border-color: rgba(159, 175, 188, 0.14);
 }
 .ghost:hover:not(.disabled) {
   color: var(--color-text);

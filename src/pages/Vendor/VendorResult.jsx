@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { Button, DataTable, SectionBlock, StatusBadge, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
+import { ActionBar, Button, DataTable, SectionBlock, StatusBadge, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
 import { ProjectStageShell } from '../../components/ProjectFlow';
 import { useVendorPath } from '../../hooks/useProject';
 import { getVendorResultViewModel } from '../../domain/viewModels/dashboardVendorViewModels';
@@ -26,31 +26,31 @@ export function VendorResult() {
           <SectionBlock title="能力响应">
             <DataTable>
               <thead><tr><th>能力要求</th><th>满足状态</th><th>实现方式</th><th>证据类型</th><th>处置判断</th></tr></thead>
-              <tbody>{viewModel.claims.length ? viewModel.claims.map((item) => <tr key={item.capabilityId}><td><strong>{item.label || item.capabilityId}</strong></td><td><StatusBadge tone={item.closureRequired ? 'warning' : 'success'}>{item.statusLabel}</StatusBadge></td><td>{item.implementationTypeLabel}</td><td>{item.evidenceType || '未填写'}</td><td>{item.closureRequired ? '需在匹配闭环中确认责任、条件或补偿' : '当前可直接引用'}</td></tr>) : <tr><td colSpan="5" className={styles.empty}>暂无能力声明。</td></tr>}</tbody>
+              <tbody>{viewModel.claims.length ? viewModel.claims.map((item) => <tr key={item.capabilityId}><td className={styles.contentCell}>{item.label || item.capabilityId}</td><td><StatusBadge tone={item.closureRequired ? 'warning' : 'success'}>{item.statusLabel}</StatusBadge></td><td>{item.implementationTypeLabel}</td><td>{item.evidenceType || '未填写'}</td><td>{item.closureRequired ? '需在匹配闭环中确认责任、条件或补偿' : '当前可直接引用'}</td></tr>) : <tr><td colSpan="5" className={styles.empty}>暂无能力声明。</td></tr>}</tbody>
             </DataTable>
           </SectionBlock>
 
           <SectionBlock title="边界与依赖">
             <DataTable>
               <thead><tr><th>能力要求</th><th>适用范围</th><th>依赖条件</th><th>限制说明</th></tr></thead>
-              <tbody>{viewModel.claims.length ? viewModel.claims.map((item) => <tr key={item.capabilityId}><td><strong>{item.label || item.capabilityId}</strong></td><td>{item.claimScope || '未填写'}</td><td>{item.dependencyNote || '未填写'}</td><td>{item.limitationNote || '未填写'}</td></tr>) : <tr><td colSpan="4" className={styles.empty}>暂无边界与依赖信息。</td></tr>}</tbody>
+              <tbody>{viewModel.claims.length ? viewModel.claims.map((item) => <tr key={item.capabilityId}><td className={styles.contentCell}>{item.label || item.capabilityId}</td><td>{item.claimScope || '未填写'}</td><td>{item.dependencyNote || '未填写'}</td><td>{item.limitationNote || '未填写'}</td></tr>) : <tr><td colSpan="4" className={styles.empty}>暂无边界与依赖信息。</td></tr>}</tbody>
             </DataTable>
           </SectionBlock>
 
           <SectionBlock title="待闭环项">
             <DataTable>
               <thead><tr><th>能力要求</th><th>原因</th><th>建议处理</th></tr></thead>
-              <tbody>{viewModel.closureRows.length ? viewModel.closureRows.map((item) => <tr key={item.capabilityId}><td><strong>{item.label || item.capabilityId}</strong></td><td>{item.statusLabel}</td><td>{item.status === 'external' ? '确认外部系统、责任边界和验收证据。' : item.status === 'configured' ? '确认配置条件、授权许可和启用记录。' : item.status === 'compensating' ? '确认补偿控制与残余风险接受。' : '补充实现路径或登记缺口。'}</td></tr>) : <tr><td colSpan="3" className={styles.empty}>暂无待闭环项。</td></tr>}</tbody>
+              <tbody>{viewModel.closureRows.length ? viewModel.closureRows.map((item) => <tr key={item.capabilityId}><td className={styles.contentCell}>{item.label || item.capabilityId}</td><td>{item.statusLabel}</td><td>{item.status === 'external' ? '确认外部系统、责任边界和验收证据。' : item.status === 'configured' ? '确认配置条件、授权许可和启用记录。' : item.status === 'compensating' ? '确认补偿控制与残余风险接受。' : '补充实现路径或登记缺口。'}</td></tr>) : <tr><td colSpan="3" className={styles.empty}>暂无待闭环项。</td></tr>}</tbody>
             </DataTable>
           </SectionBlock>
 
           <SectionBlock title="统一约束">
-            <SummaryStatGrid columns={2} compact items={[{ label: '统一依赖', value: viewModel.latest.dependencies || '未填写' }, { label: '统一限制', value: viewModel.latest.limitations || '未填写' }]} />
+            <SummaryStatGrid columns={2} compact valueTone="soft" items={[{ label: '统一依赖', value: viewModel.latest.dependencies || '未填写' }, { label: '统一限制', value: viewModel.latest.limitations || '未填写' }]} />
           </SectionBlock>
 
           {statusBar}
 
-          <div className={styles.actions}><Link to={isReviewMode ? '/report' : '/selection'}><Button variant={isReviewMode ? 'ghost' : 'primary'} size="medium">{isReviewMode ? '返回上一页' : '进入下一步'}</Button></Link></div>
+          <ActionBar align="end"><Link to={isReviewMode ? '/report' : '/selection'}><Button variant={isReviewMode ? 'ghost' : 'primary'} size="medium">{isReviewMode ? '返回上一页' : '进入下一步'}</Button></Link></ActionBar>
         </>
       )}
     </ProjectStageShell>
