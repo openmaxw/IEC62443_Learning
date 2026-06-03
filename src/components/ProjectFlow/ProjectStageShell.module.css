@@ -20,8 +20,13 @@
 @media (max-width: 1100px) { .metaGrid { grid-template-columns: 1fr; } }
 @media (max-width: 768px) { .toolbarRow, .heroTop { align-items: stretch; } }
 
-.guidanceRow { padding: 16px 18px; margin: 4px 0 8px; border: 1px solid rgba(255, 169, 64, 0.30); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(255, 169, 64, 0.16), rgba(255, 214, 170, 0.06), rgba(255,255,255,.02)); box-shadow: 0 8px 24px rgba(255, 169, 64, 0.08); }
-.guidanceRow p { margin: 0; max-width: 1120px; color: #ffe2c3; font-style: normal; font-weight: 600; line-height: 1.6; }
+.guidanceRow { padding: 16px 18px; margin: 4px 0 8px; border: 1px solid rgba(255, 169, 64, 0.22); border-radius: var(--radius-lg); background: rgba(255, 169, 64, 0.08); box-shadow: none; }
+.guidanceLabel { display: inline-flex; align-items: center; min-height: 22px; width: fit-content; padding: 0 8px; border-radius: 999px; border: 1px solid rgba(255, 214, 170, 0.18); background: rgba(18, 26, 34, 0.28); color: #ffd6ae; font-size: 10px; font-weight: 700; letter-spacing: .04em; margin-bottom: 8px; }
+.guidanceRow p { margin: 0; max-width: 1120px; color: rgba(255, 226, 195, 0.94); font-style: normal; font-weight: 600; line-height: 1.6; }
+.guidanceGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.guidanceItem { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid rgba(255, 214, 170, 0.14); border-radius: var(--radius-md); background: rgba(18, 26, 34, 0.32); }
+.guidanceItem strong { color: #ffd6ae; font-size: var(--font-size-sm); }
+.guidanceItem span { color: rgba(237, 243, 247, 0.9); font-size: var(--font-size-sm); line-height: var(--line-height-normal); }
 .statusPanel { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; border: 1px solid var(--color-table-border); border-radius: var(--radius-lg); background: rgba(255,255,255,.018); }
 .statusSummary { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
 .statusItem { min-width: 0; padding: 6px 9px; border: 1px solid var(--color-table-border); border-radius: 999px; background: rgba(255,255,255,.024); display: inline-flex; align-items: center; gap: 6px; }
@@ -32,4 +37,4 @@
 .navRow { display: flex; justify-content: flex-end; }
 .navActions { display: flex; justify-content: space-between; gap: 10px; width: 100%; flex-wrap: wrap; padding: 12px 0 2px; border-top: 1px solid var(--color-table-border); }
 
-@media (max-width: 1100px) { .statusPanel { align-items: stretch; flex-direction: column; } .statusSummary { flex-wrap: wrap; } }
+@media (max-width: 1100px) { .statusPanel { align-items: stretch; flex-direction: column; } .statusSummary { flex-wrap: wrap; } .guidanceGrid { grid-template-columns: 1fr; } }

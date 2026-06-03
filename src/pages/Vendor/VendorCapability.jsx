@@ -248,7 +248,7 @@ export function VendorCapability() {
   }
 
   return (
-    <CaseStageLayout><ProjectStageShell stageNumber="03" title="提供能力" projectName={capabilityViewModel.projectName} outputLabel="产品与开发结果" statusText={isSummaryStep ? '产品与开发内容已可生成结果页' : '正在完善产品能力、开发证据、依赖条件和限制说明'} statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成产品与开发摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, `覆盖项目要求 ${claimedRequiredCount}/${requirementRows.length || 0}`]} />} guidance={{ summary: `${step.guidance} 当前页面重点解释产品供应商如何提供能力、证据与开发支撑。` }}>
+    <CaseStageLayout><ProjectStageShell stageNumber="03" title="提供能力" projectName={capabilityViewModel.projectName} outputLabel="产品与开发结果" statusText={isSummaryStep ? '产品与开发内容已可生成结果页' : '正在完善产品能力、开发证据、依赖条件和限制说明'} statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成产品与开发摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, `覆盖项目要求 ${claimedRequiredCount}/${requirementRows.length || 0}`]} />} guidance={{ summary: `${step.guidance} 当前页面重点解释产品供应商如何提供能力、证据与开发支撑。`, details: [{ label: '本页作用', text: '说明产品或组件可以提供哪些能力，以及这些能力的边界、依赖和证据。' }, { label: '阅读重点', text: '重点区分原生满足、依赖条件、限制说明和待闭环项。' }, { label: '完成标志', text: '形成可用于项目匹配的能力声明摘要。' }] }}>
       {({ statusBar }) => (
       <section className={styles.workspace}>
                 <StepTabs items={STEPS} currentIndex={currentStep} onChange={validateBeforeStepChange} />

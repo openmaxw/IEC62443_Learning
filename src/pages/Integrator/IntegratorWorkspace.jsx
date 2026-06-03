@@ -219,7 +219,7 @@ export function IntegratorWorkspace() {
       outputLabel="系统实现结果"
       statusText={isReviewStep ? '设计输入已形成规划结果候选' : '正在完善系统规划输入'}
       statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isReviewStep ? '复核无误后可生成系统实现摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, isReviewStep ? '可生成系统实现摘要' : '待继续补齐']} />}
-      guidance={{ summary: step.guidance }}
+      guidance={{ summary: step.guidance, details: [{ label: '本页作用', text: '把项目输入转成系统设计、分区边界、通信控制和能力需求。' }, { label: '阅读重点', text: '重点看 Zone、Conduit、通信矩阵、边界控制和设计依据。' }, { label: '完成标志', text: '形成可追溯的系统设计响应与能力需求清单。' }] }}
     >
       {({ statusBar }) => (
       <section className={styles.workspace}>

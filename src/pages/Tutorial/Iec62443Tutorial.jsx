@@ -111,6 +111,23 @@ export function Iec62443Tutorial() {
         </section>
 
         <section className={styles.section}>
+          <h2>1.1 IEC 62443 为什么面向 OT / IACS</h2>
+          <p>IEC 62443 面向工业自动化和控制系统（IACS）。这类场景与普通 IT 的关键差别，不在于“有没有网络安全”，而在于安全措施必须服从生产连续性、现场安全、工艺稳定和长生命周期约束。</p>
+          <table className={styles.table}>
+            <thead><tr><th>维度</th><th>IT 常见特点</th><th>OT / IACS 常见特点</th></tr></thead>
+            <tbody>
+              <tr><td>主要目标</td><td>优先保护数据、业务应用和办公效率。</td><td>优先保护安全生产、连续运行、设备和工艺过程。</td></tr>
+              <tr><td>变化速度</td><td>系统更新、自动化部署和版本迭代相对频繁。</td><td>系统生命周期长，变更必须谨慎评估停机、工艺和安全影响。</td></tr>
+              <tr><td>安全措施</td><td>可较快采用新工具、新代理、新补丁和自动化策略。</td><td>很多控制系统不能随意安装代理、重启、扫描或自动更新，需要通过分区、边界、白名单、受控远程维护、审计和补偿措施保护。</td></tr>
+              <tr><td>风险后果</td><td>主要影响数据泄露、业务中断和合规风险。</td><td>可能影响生产停机、设备损坏、人员安全、环境事件和供应连续性。</td></tr>
+              <tr><td>验证方式</td><td>更容易通过 IT 测试环境、自动化策略和集中管理验证。</td><td>需要结合现场架构、维护窗口、供应商支持、工艺约束和验收边界验证。</td></tr>
+            </tbody>
+          </table>
+          <div className={styles.compareNote}><strong>重点区分：</strong><span>IEC 62443 不是把 IT 安全措施直接搬进工业现场，而是要求安全控制与生产、工艺、维护和验收约束一起成立。</span></div>
+          <div className={styles.note}>对设备供应商来说，能力说明不仅要说“设备具备什么”，还要说明这些能力在现场约束下如何使用、有哪些依赖条件、哪些不能替代系统级控制。</div>
+        </section>
+
+        <section className={styles.section}>
           <h2>2. IEC 62443 体系分层</h2>
           <p>IEC 62443 可以从四个层面理解：系统层、组件层、开发流程层、运行维护层。先把层面分清，再看概念和编号，理解会更稳定。</p>
           <div className={styles.compareNote}><strong>重点区分：</strong><span>IEC 62443 是分层理解的体系，不要把它理解成只讨论设备功能，或只讨论网络边界的一套规则。</span></div>
@@ -119,6 +136,22 @@ export function Iec62443Tutorial() {
               <article key={item.title} className={styles.card}><strong>{item.title}</strong><p>{item.text}</p></article>
             ))}
           </div>
+        </section>
+
+        <section className={styles.section}>
+          <h2>2.1 IEC 62443 标准体系速览</h2>
+          <p>IEC 62443 可以按标准分部快速理解。先看每一类主要对象，再看它们在项目里如何衔接。</p>
+          <table className={styles.table}>
+            <thead><tr><th>系列</th><th>主要对象</th><th>简明理解</th></tr></thead>
+            <tbody>
+              <tr><td>IEC 62443-1-x</td><td>通用</td><td>术语、概念、模型和方法基础。</td></tr>
+              <tr><td>IEC 62443-2-x</td><td>业主 / 运营组织</td><td>网络安全管理系统、补丁管理、运行维护和安全计划。</td></tr>
+              <tr><td>IEC 62443-3-x</td><td>系统与项目</td><td>风险评估、系统安全要求、安全等级、Zone / Conduit。</td></tr>
+              <tr><td>IEC 62443-4-x</td><td>产品与组件</td><td>安全开发生命周期和组件技术安全要求。</td></tr>
+            </tbody>
+          </table>
+          <div className={styles.compareNote}><strong>重点区分：</strong><span>不要机械地把某一系列只交给某一方。IEC 62443 更像一条信任链：业主输入、系统设计、产品能力和运行维护需要相互衔接。</span></div>
+          <div className={styles.note}>对设备供应商来说，4-2 和 4-1 通常是重点，但能力表达必须能够对接 3-x 的系统需求，否则很难说明设备能力如何在项目中成立。</div>
         </section>
 
         <section className={styles.section}>
@@ -137,6 +170,22 @@ export function Iec62443Tutorial() {
           </table>
           <div className={styles.compareNote}><strong>重点区分：</strong><span>Zone / Conduit 用于理解系统边界与跨边界通信；FR / SR / CR / SL 用于理解安全目标、要求与目标强度，它们不是同一层面的概念。</span></div>
           <div className={styles.note}>主线顺序可以概括为：业务输入 → 目标强度 → 架构与边界 → 系统要求 → 组件能力 → 运行维护 → 审核判断。</div>
+        </section>
+
+        <section className={styles.section}>
+          <h2>3.1 SL 安全等级的含义</h2>
+          <p>SL 不是分数，而是抵御能力目标。它表达的是希望系统或区域具备怎样的防护强度，而不是简单的功能数量。</p>
+          <table className={styles.table}>
+            <thead><tr><th>等级</th><th>标准含义</th><th>非专业理解</th></tr></thead>
+            <tbody>
+              <tr><td>SL 1</td><td>防止偶然或意外违规</td><td>非恶意误用、操作失误、偶发配置问题。</td></tr>
+              <tr><td>SL 2</td><td>抵御使用简单手段的故意违规</td><td>低资源、通用技能、低动机的攻击者。</td></tr>
+              <tr><td>SL 3</td><td>抵御使用复杂手段的故意违规</td><td>中等资源、具备 IACS 专业知识、目标明确的攻击者。</td></tr>
+              <tr><td>SL 4</td><td>抵御高能力攻击者的复杂违规</td><td>扩展资源、高 IACS 专业能力、高动机攻击者。</td></tr>
+            </tbody>
+          </table>
+          <div className={styles.compareNote}><strong>重点区分：</strong><span>SL 表达的是抵御能力目标，不是设备打分，也不是“具备几个功能就自动对应某一级别”。</span></div>
+          <div className={styles.note}>对设备供应商来说，SL 不是设备等级标签，而是项目或区域的目标强度参考。设备可以声明支撑能力，但不能脱离系统场景直接宣称项目级结论。</div>
         </section>
 
         <section className={styles.section}>

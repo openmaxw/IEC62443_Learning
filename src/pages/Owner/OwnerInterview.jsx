@@ -377,7 +377,7 @@ export function OwnerInterview() {
       outputLabel="标准化项目输入"
       statusText={isSummaryStep ? '已形成业主输入与目标摘要，可生成需求与目标摘要' : '正在梳理业主输入、目标要求和约束条件'}
       statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成需求与目标摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, isSummaryStep ? '可生成需求与目标摘要' : '待继续完善']} />}
-      guidance={{ summary: activeGuidance || (['impacts', 'exposure', 'maturity'].includes(step.id) ? '点击任一字段卡片可查看当前选项的详细解释。' : `${step.guidance} 当前页面重点解释业主在案例里提供什么输入、目标和约束，以及这些内容如何成为后续系统、产品和审核的起点。`) }}
+      guidance={{ summary: activeGuidance || (['impacts', 'exposure', 'maturity'].includes(step.id) ? '点击任一字段卡片可查看当前选项的详细解释。' : `${step.guidance} 当前页面重点解释业主在案例里提供什么输入、目标和约束，以及这些内容如何成为后续系统、产品和审核的起点。`), details: [{ label: '本页作用', text: '明确项目目标、业务约束和后果判断，为后续系统设计提供输入。' }, { label: '阅读重点', text: '重点确认关键资产、远程维护、运行约束、外部连接和验收关注。' }, { label: '完成标志', text: '形成可供后续设计直接使用的项目输入摘要。' }] }}
     >
       {({ statusBar }) => (
         <>

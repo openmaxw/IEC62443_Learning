@@ -26,7 +26,18 @@ export function ProjectStageShell({
       {toolbar ? <section className={styles.toolbarRow}><div className={styles.actionGroup}>{toolbar}</div></section> : null}
       {guidance ? (
         <section className={styles.guidanceRow}>
-          <p>{guidance.summary}</p>
+          <div className={styles.guidanceLabel}>学习导读</div>
+          {guidance.summary ? <p>{guidance.summary}</p> : null}
+          {guidance.details?.length ? (
+            <div className={styles.guidanceGrid}>
+              {guidance.details.map((item) => (
+                <div key={item.label} className={styles.guidanceItem}>
+                  <strong>{item.label}</strong>
+                  <span>{item.text}</span>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </section>
       ) : null}
       <section className={styles.body}>{typeof children === 'function' ? children({ statusBar }) : children}</section>
