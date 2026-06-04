@@ -56,12 +56,6 @@ export function SelectionMatrix({ initialStep = 0 }) {
     return () => window.clearTimeout(timer);
   }, [viewModel.gapItems, gapItems, dirtyGapItems]);
 
-  const handleSaveSelection = () => {
-    const nextResults = { results: viewModel.selection.rows, summary: viewModel.selection.summary };
-    if (!isSameObject(state.selectionAnalysis?.results, nextResults)) {
-      actions.setMatchResults(nextResults);
-    }
-  };
 
   const updateGapItem = (id, field, value) => {
     setValidationMessage('');
@@ -147,7 +141,7 @@ export function SelectionMatrix({ initialStep = 0 }) {
   let content;
   switch (step.id) {
     case 'overview':
-      content = <section className={styles.page}><div className={styles.hero}><div><strong>匹配概览</strong><p>请先确认当前设计能力需求与最新能力说明的匹配结果。</p><span className={styles.meta}>{viewModel.latestCapability ? '已识别最新能力说明。' : '尚未生成能力说明，结果将显示为待满足。'}</span></div><div className={styles.actions}><Button variant="secondary" size="medium" onClick={handleSaveSelection}>保存匹配结果</Button><Button variant="primary" size="medium" onClick={() => goToStepWithValidation(1)}>查看待处置项</Button></div></div><DataTable><thead><tr><th>能力项</th><th>控制目标</th><th>满足情况</th><th>证据类型</th><th>差距说明</th></tr></thead><tbody>{viewModel.selection.rows.length ? viewModel.selection.rows.map((item) => <tr key={item.id}><td>{getCapabilityDisplay(item.capabilityId).label}</td><td>{item.controlObjective}</td><td><StatusBadge tone={item.status === 'missing' ? 'danger' : item.status === 'external' || item.status === 'configured' || item.status === 'compensating' || item.status === 'partial' ? 'warning' : 'success'}>{STATUS_LABELS[item.status] || item.status}</StatusBadge></td><td>{item.evidenceType}</td><td>{item.gapNote}</td></tr>) : <tr><td colSpan="5" className={styles.empty}>当前没有可分析的能力需求，请先返回方案转译与能力说明页面补充输入。</td></tr>}</tbody></DataTable></section>;
+      content = <section className={styles.page}><div className={styles.hero}><div><strong>匹配概览</strong><p>请先确认当前设计能力需求与最新能力说明的匹配结果。</p><span className={styles.meta}>{viewModel.latestCapability ? '已识别最新能力说明。' : '尚未生成能力说明，结果将显示为待满足。'}</span></div></div><DataTable><thead><tr><th>能力项</th><th>控制目标</th><th>满足情况</th><th>证据类型</th><th>差距说明</th></tr></thead><tbody>{viewModel.selection.rows.length ? viewModel.selection.rows.map((item) => <tr key={item.id}><td>{getCapabilityDisplay(item.capabilityId).label}</td><td>{item.controlObjective}</td><td><StatusBadge tone={item.status === 'missing' ? 'danger' : item.status === 'external' || item.status === 'configured' || item.status === 'compensating' || item.status === 'partial' ? 'warning' : 'success'}>{STATUS_LABELS[item.status] || item.status}</StatusBadge></td><td>{item.evidenceType}</td><td>{item.gapNote}</td></tr>) : <tr><td colSpan="5" className={styles.empty}>当前没有可分析的能力需求，请先返回方案转译与能力说明页面补充输入。</td></tr>}</tbody></DataTable></section>;
       break;
     case 'gaps':
       content = <section className={styles.page}><div className={styles.hero}><div><strong>待处置项</strong><p>{pendingGapItems.length ? '以下差距仍需补充补偿措施、责任方、验收影响或残余风险。' : '当前差距项均已完成处置记录。'}</p><span className={styles.meta}>已处置 {closedGapItems.length} / {gapItems.length}</span></div></div><DataTable><thead><tr><th>能力项</th><th>控制目标</th><th>严重度</th><th>差距说明</th><th>责任建议</th></tr></thead><tbody>{pendingGapItems.length ? pendingGapItems.map((item) => <tr key={item.id}><td>{getCapabilityDisplay(item.capabilityId).label}</td><td>{item.controlObjective}</td><td><StatusBadge tone={item.severity === 'high' ? 'danger' : item.severity === 'medium' ? 'warning' : 'success'}>{item.severity}</StatusBadge></td><td>{item.gapNote}</td><td>{item.owner || '未填写'}</td></tr>) : <tr><td colSpan="5" className={styles.empty}>当前没有待处置差距项；如需查看已处置内容，请前往“闭环确认”。</td></tr>}</tbody></DataTable></section>;
@@ -163,7 +157,7 @@ export function SelectionMatrix({ initialStep = 0 }) {
   }
 
   return (
-    <CaseStageLayout><ProjectStageShell stageNumber="04" title="分析差距" projectName={viewModel.projectName} outputLabel="匹配差距闭环" statusText={viewModel.statusSummary.headline} guidance={{ summary: step.guidance }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={validationMessage || viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="05" title="分析差距" projectName={viewModel.projectName} outputLabel="匹配差距闭环" statusText={viewModel.statusSummary.headline} guidance={{ summary: step.guidance }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline.replace('仍有 ', '有 ')} note={(validationMessage || viewModel.statusSummary.detail).replace('仍有 ', '有 ')} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
         <section className={styles.page}>
           <StepTabs items={STEPS} currentIndex={currentStep} onChange={goToStepWithValidation} />

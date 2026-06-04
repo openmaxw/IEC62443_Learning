@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { ActionBar, Button, Card, PillTag, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
+import { ActionBar, Button, DataTable, PillTag, StatusSummaryPanel } from '../../components/Common';
 import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useOwnerPath } from '../../hooks/useProject';
 import { getOwnerResultViewModel } from '../../domain/viewModels/resultViewModels';
@@ -37,11 +37,11 @@ export function OwnerResult() {
       {({ statusBar }) => (
       <>
       <article className={styles.document}>
-        <section className={styles.section}><h3>一、项目边界</h3><SummaryStatGrid items={boundaryItems} /></section>
-        <section className={styles.section}><h3>二、业务后果判断</h3><div className={styles.list}>{IMPACT_FIELDS.map((field) => <Card key={field.key} className={styles.item}><div className={styles.itemHead}><strong>{field.label}</strong><PillTag tone="primary">{IMPACT_LABEL[viewModel.assessment[field.key]] || '未填写'}</PillTag></div></Card>)}</div></section>
-        <section className={styles.section}><h3>三、关键对象与外部约束</h3><div className={styles.assetRow}>{viewModel.criticalAssets.length ? viewModel.criticalAssets.map((item) => <PillTag key={item.id} tone="primary">{item.label}</PillTag>) : <span className={styles.emptyText}>未填写关键对象</span>}</div><SummaryStatGrid items={constraintItems} valueTone="soft" /></section>
-        <section className={styles.section}><h3>四、设计输入</h3><div className={styles.cardGrid}>{viewModel.ownerRequirements.length ? viewModel.ownerRequirements.map((item) => <Card key={item.id} className={styles.item}><div className={styles.itemHead}><strong>{item.sourceLabel}</strong><PillTag tone="primary">{item.priority}</PillTag></div><p>{item.text}</p></Card>) : <p className={styles.emptyText}>暂无设计输入。</p>}</div></section>
-        <section className={styles.section}><h3>五、验收关注</h3><div className={styles.cardGrid}>{viewModel.acceptanceFocus.length ? viewModel.acceptanceFocus.map((item) => <Card key={item.id} className={styles.item}><p>{item.text}</p></Card>) : <p className={styles.emptyText}>暂无验收关注。</p>}<Card className={styles.item}><div className={styles.itemHead}><strong>验收偏好</strong><PillTag tone="primary">{viewModel.acceptancePreferenceLabel}</PillTag></div></Card></div></section>
+        <section className={styles.section}><h3>一、项目边界</h3><DataTable><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody>{boundaryItems.map((item) => <tr key={item.label}><td>{item.label}</td><td className={styles.contentCell}>{item.value}</td></tr>)}</tbody></DataTable></section>
+        <section className={styles.section}><h3>二、业务后果判断</h3><DataTable><thead><tr><th>项目</th><th>等级</th></tr></thead><tbody>{IMPACT_FIELDS.map((field) => <tr key={field.key}><td className={styles.contentCell}>{field.label}</td><td><PillTag tone="primary">{IMPACT_LABEL[viewModel.assessment[field.key]] || '未填写'}</PillTag></td></tr>)}</tbody></DataTable></section>
+        <section className={styles.section}><h3>三、关键对象与外部约束</h3><div className={styles.assetRow}>{viewModel.criticalAssets.length ? viewModel.criticalAssets.map((item) => <PillTag key={item.id} tone="primary">{item.label}</PillTag>) : <span className={styles.emptyText}>未填写关键对象</span>}</div><DataTable><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody>{constraintItems.map((item) => <tr key={item.label}><td>{item.label}</td><td className={styles.contentCell}>{item.value}</td></tr>)}</tbody></DataTable></section>
+        <section className={styles.section}><h3>四、设计输入</h3>{viewModel.ownerRequirements.length ? <DataTable><thead><tr><th>来源</th><th>内容</th><th>优先级</th></tr></thead><tbody>{viewModel.ownerRequirements.map((item) => <tr key={item.id}><td>{item.sourceLabel}</td><td className={styles.contentCell}>{item.text}</td><td><PillTag tone="primary">{item.priority}</PillTag></td></tr>)}</tbody></DataTable> : <p className={styles.emptyText}>暂无设计输入。</p>}</section>
+        <section className={styles.section}><h3>五、验收关注</h3><DataTable><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody>{viewModel.acceptanceFocus.length ? viewModel.acceptanceFocus.map((item, index) => <tr key={item.id}><td>{`关注点 ${index + 1}`}</td><td className={styles.contentCell}>{item.text}</td></tr>) : <tr><td colSpan="2" className={styles.emptyText}>暂无验收关注。</td></tr>}<tr><td>验收偏好</td><td><PillTag tone="primary">{viewModel.acceptancePreferenceLabel}</PillTag></td></tr></tbody></DataTable></section>
       </article>
       {statusBar}
       <ActionBar align="between">

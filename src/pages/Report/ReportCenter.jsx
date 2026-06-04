@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, DataTable, PillTag, SectionBlock, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
 import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useProject, useOwnerPath, useIntegratorPath, useVendorPath } from '../../hooks/useProject';
@@ -8,6 +8,7 @@ import { copyMarkdownToClipboard, exportReportAsMarkdown } from '../../utils/rep
 import styles from './ReportCenter.module.css';
 
 export function ReportCenter() {
+  const navigate = useNavigate();
   const { state, actions } = useProject();
   const { projectMeta, riskProfile } = useOwnerPath();
   const { plan } = useIntegratorPath();
@@ -17,6 +18,11 @@ export function ReportCenter() {
   const [markdownPreview, setMarkdownPreview] = useState('');
   const [markdownFilename, setMarkdownFilename] = useState('');
   const handleExportMarkdown = async () => {
+    if (viewModel.gapRows.length) {
+      window.alert(`当前有 ${viewModel.gapRows.length} 项差距尚未完成闭环，系统将跳转到闭环确认步骤。`);
+      navigate('/selection?step=4');
+      return;
+    }
     const result = exportReportAsMarkdown(viewModel.reportPayload);
     setMarkdownPreview(result.markdown);
     setMarkdownFilename(result.filename);
@@ -42,12 +48,12 @@ export function ReportCenter() {
       outputLabel={`协作差距与补偿措施 ${viewModel.gapClosureItems.length} / 高严重度 ${viewModel.highRiskCount}`}
       statusText={viewModel.statusSummary.headline}
       statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}
-      prevAction={{ to: '/selection', label: '上一步' }}
+      prevAction={{ to: '/selection', label: '返回闭环环节' }}
       guidance={{ summary: '本页由审核 / 复核视角汇总前面的目标、设计、能力和差距，形成一份有依据、有边界、可复核的综合判断。' }}
     >
       {({ statusBar }) => (
         <section className={styles.page}>
-        <div className={styles.exportActionsInline}><Button variant="primary" size="small" onClick={handleExportMarkdown}>生成 Markdown</Button>{exportStatus ? <span>{exportStatus}</span> : null}</div>
+        <div className={styles.exportActionsInline}><Button variant="primary" size="small" onClick={handleExportMarkdown}>完成本轮判断并生成 Markdown</Button>{exportStatus ? <span>{exportStatus}</span> : null}</div>
 
         {markdownPreview ? <SectionBlock title={`Markdown 内容预览：${markdownFilename}`}><textarea className={styles.markdownPreview} value={markdownPreview} readOnly onFocus={(event) => event.target.select()} /></SectionBlock> : null}
 

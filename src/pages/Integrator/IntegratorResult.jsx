@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { ActionBar, Button, DataTable, PillTag, SectionBlock, StatusBadge, StatusSummaryPanel, SummaryStatGrid } from '../../components/Common';
+import { ActionBar, Button, DataTable, PillTag, SectionBlock, StatusBadge, StatusSummaryPanel } from '../../components/Common';
 import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useIntegratorPath, useOwnerPath } from '../../hooks/useProject';
 import { getIntegratorResultViewModel, resolveMatchLabel } from '../../domain/viewModels/resultViewModels';
@@ -37,7 +37,10 @@ export function IntegratorResult() {
       {({ statusBar }) => (
       <>
       <SectionBlock title="设计依据">
-        <SummaryStatGrid items={summaryItems} columns={2} valueTone="soft" />
+        <DataTable className={styles.compareTable}>
+          <thead><tr><th>项目</th><th>内容</th></tr></thead>
+          <tbody>{summaryItems.map((item) => <tr key={item.label}><td>{item.label}</td><td className={styles.assetNameCell}>{item.value}</td></tr>)}</tbody>
+        </DataTable>
       </SectionBlock>
 
       <SectionBlock title="资产归组与 Zone 说明">

@@ -45,12 +45,15 @@ export function VendorResult() {
           </SectionBlock>
 
           <SectionBlock title="统一约束">
-            <SummaryStatGrid columns={2} compact valueTone="soft" items={[{ label: '统一依赖', value: viewModel.latest.dependencies || '未填写' }, { label: '统一限制', value: viewModel.latest.limitations || '未填写' }]} />
+            <DataTable>
+              <thead><tr><th>项目</th><th>内容</th></tr></thead>
+              <tbody><tr><td>统一依赖</td><td className={styles.contentCell}>{viewModel.latest.dependencies || '未填写'}</td></tr><tr><td>统一限制</td><td className={styles.contentCell}>{viewModel.latest.limitations || '未填写'}</td></tr></tbody>
+            </DataTable>
           </SectionBlock>
 
           {statusBar}
 
-          <ActionBar align="end"><Link to={isReviewMode ? '/report' : '/selection'}><Button variant={isReviewMode ? 'ghost' : 'primary'} size="medium">{isReviewMode ? '返回上一页' : '进入下一步'}</Button></Link></ActionBar>
+          <ActionBar align="end"><Link to={isReviewMode ? '/report' : '/translation-center'}><Button variant={isReviewMode ? 'ghost' : 'primary'} size="medium">{isReviewMode ? '返回上一页' : '进入下一步'}</Button></Link></ActionBar>
         </>
       )}
     </ProjectStageShell></CaseStageLayout>
