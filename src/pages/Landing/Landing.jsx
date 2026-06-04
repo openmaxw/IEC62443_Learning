@@ -1,50 +1,90 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, HeroPanel, InfoBanner, SectionBlock } from '../../components/Common';
+import { Button, HeroPanel, InfoBanner } from '../../components/Common';
 import { useProject } from '../../hooks/useProject';
-import learningStyles from '../Learning/LearningMode.module.css';
 import styles from './Landing.module.css';
 
-const POSITIONING = [
-  '本平台通过一个共享案例，把 IEC 62443 从提出目标、形成方案、提供能力、建立对应、分析差距到形成判断的主线串起来。',
-  '它不是正式认证工具，也不是替代工程设计的软件，而是一个帮助学习者理解角色协作、概念落地和证据链逻辑的教学与演示平台。',
-  '如果你是第一次接触 IEC 62443，建议先阅读简明教程，再进入案例工作台。'
+const CORE_VALUE_ITEMS = [
+  {
+    title: '完成从零到一的认知建立',
+    text: '帮助学习者从分散术语进入系统理解，建立对 IEC 62443 整体结构、核心概念与项目主线的基础认知。'
+  },
+  {
+    title: '形成系统级理解能力',
+    text: '帮助学习者不只停留在功能或条款层面，而是能够从角色、设计、能力与证据的联动关系理解项目。'
+  },
+  {
+    title: '建立更有竞争力的认知优势',
+    text: '帮助团队更早区分能力边界、项目判断与交付责任，在内部协同、客户沟通与方案表达中形成更高质量的判断力。'
+  }
 ];
 
-const ROLE_CARDS = [
-  { role: '业主 / Asset Owner', focus: '提出业务目标、后果判断与运行约束。' },
-  { role: '服务提供方 / Service Provider', focus: '把输入转成系统设计、边界控制与责任分工。' },
-  { role: '产品供应商 / Product Supplier', focus: '说明产品能力、适用边界和支撑证据。' },
-  { role: '审核者 / Assessor', focus: '判断整条证据链是否前后一致并可被证明。' }
+const ROLE_BENEFITS = [
+  {
+    role: '产品经理',
+    items: [
+      '从客户诉求中提炼真正影响产品路线的安全目标。',
+      '建立产品能力边界与项目结论边界的清晰判断。',
+      '提升需求表达、能力说明与证据准备的一致性。'
+    ]
+  },
+  {
+    role: 'FAE / TS',
+    items: [
+      '建立项目输入、系统设计与产品能力之间的系统对应。',
+      '准确把握客户问题背后的项目语境与验证逻辑。',
+      '提升能力前提、适用范围与限制条件的表达质量。'
+    ]
+  },
+  {
+    role: '销售',
+    items: [
+      '理解客户关注点从来不只是功能点，而是整体成立性。',
+      '建立对角色责任、交付边界与证据支撑的准确判断。',
+      '提升对外表述中能力说明与项目判断的区分能力。'
+    ]
+  },
+  {
+    role: '研发',
+    items: [
+      '理解组件能力如何支撑系统级要求与项目目标。',
+      '建立功能实现、能力声明与合规表达的清晰区分。',
+      '理解项目结论为何往往依赖集成设计与运行管理。'
+    ]
+  },
+  {
+    role: '交付 / 方案 / 实施',
+    items: [
+      '建立对各阶段输入输出衔接方式的整体把握。',
+      '理解 Zone / Conduit、设计响应与差距分析在项目中的定位。',
+      '形成系统设计、能力说明与最终判断的闭环组织能力。'
+    ]
+  }
 ];
 
-const TEACHING_FEATURES = [
-  '按项目主线组织学习：从提出目标到形成判断，理解 IEC 62443 在项目里如何流转。',
-  '按角色协作组织学习：理解不同参与方各自在回答什么问题。',
-  '按案例产出组织学习：输入、设计、能力、对应关系、差距与判断可以前后追溯。'
+const LEARNING_RESULTS = [
+  'IEC 62443 的标准体系、适用对象与整体结构。',
+  'FR、SR、CR、SL 之间的对应关系及常见混淆点。',
+  '不同岗位在项目链路中的职责位置与协作关系。',
+  '项目如何从目标输入逐步形成设计、能力说明与综合判断。'
 ];
 
 const LEARNING_PATH = [
-  { title: '先看简明教程', text: '先建立 IEC 62443 的框架、角色、概念和对应关系认知，再进入系统。', action: '打开教程', to: '/tutorial' },
-  { title: '再走共享案例', text: '按六个阶段体验同一个项目如何从目标走到判断，理解每一步的输入与输出。', action: '进入案例', to: '/owner' },
-  { title: '最后看协作闭环', text: '重点理解为什么系统、产品、开发、维护和审核必须放在同一条证据链里看。', action: '查看总览', to: '/report' }
+  { number: '01', title: '入门教程', text: '先建立标准框架、核心概念、角色分工与对应关系的基础认知。', action: '进入教程', to: '/tutorial' },
+  { number: '02', title: '案例演示', text: '再按步骤查看同一项目如何从输入走向设计、能力说明、差距分析与判断。', action: '进入案例', to: '/owner' }
 ];
 
 export function Landing() {
   const { actions } = useProject();
   const navigate = useNavigate();
 
-  const handleLoadDemo = () => {
-    if (window.confirm('将加载当前共享案例数据，用于直接查看 IEC 62443 角色协作与案例链路。是否继续？')) {
-      actions.loadDemoProject();
-      navigate('/owner');
-    }
+  const handleEnterCase = () => {
+    actions.loadDemoProject();
+    navigate('/owner');
   };
 
   const handleReset = () => {
-    if (window.confirm('将清空当前输入并回到全新输入状态。是否继续？')) {
-      actions.resetProject();
-      navigate('/owner');
-    }
+    actions.resetProject();
+    navigate('/owner');
   };
 
   return (
@@ -52,75 +92,87 @@ export function Landing() {
       <HeroPanel className={styles.hero} align="stack">
         <div className={styles.heroText}>
           <span className={styles.eyebrow}>IEC 62443 Learning Hub</span>
-          <h1>这是一个帮助你学会 IEC 62443 项目协作逻辑的教学系统</h1>
+          <h1>帮助你从概念入门走向 IEC 62443 的系统理解</h1>
           <p>
-            本平台通过一个共享案例，把 IEC 62443 从提出目标、形成方案、提供能力、建立对应、分析差距到形成判断的主线串起来。
-            它重点帮助学习者理解“谁在做什么、为什么这样配合、这些概念为什么要连成证据链”。
+            本系统以“入门教程 + 案例演示”为主线，帮助学习者建立对 IEC 62443 概念、角色、项目链路与判断边界的系统理解。
           </p>
           <div className={styles.actions}>
-            <Button onClick={handleLoadDemo}>加载案例数据</Button>
-            <Button onClick={handleReset} variant="secondary">全新输入</Button>
-            <Link to="/tutorial"><Button variant="ghost">先看 10 分钟教程</Button></Link>
+            <div className={styles.primaryActions}>
+              <Link to="/tutorial" className={styles.actionLink}><Button className={styles.primaryEntryButton}>进入 01 入门教程</Button></Link>
+              <Button onClick={handleEnterCase} variant="secondary" className={styles.primaryEntryButton}>进入 02 案例演示</Button>
+              <Button onClick={handleReset} variant="ghost" className={styles.primaryEntryButton}>进入 03 自己动手演练</Button>
+            </div>
+
           </div>
         </div>
       </HeroPanel>
 
       <section className={styles.sectionBlock}>
         <header>
-          <span>平台定位</span>
-          <h2>通过共享案例理解 IEC 62443</h2>
+          <h2>本系统的核心价值</h2>
         </header>
-        <div className={styles.cardGrid}>
-          {POSITIONING.map((item) => (
-            <article key={item} className={styles.infoCard}>
-              <p>{item}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.sectionBlock}>
-        <header>
-          <span>教学价值</span>
-          <h2>你可以在这里学到什么</h2>
-        </header>
-        <div className={styles.cardGrid}>
-          {TEACHING_FEATURES.map((item) => (
-            <article key={item} className={styles.infoCard}>
-              <p>{item}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.sectionBlock}>
-        <header>
-          <span>学习路径</span>
-          <h2>建议按这个顺序进入</h2>
-        </header>
-        <div className={styles.cardGrid}>
-          {LEARNING_PATH.map((item) => (
-            <article key={item.title} className={styles.infoCard}>
+        <div className={styles.valueLayout}>
+          {CORE_VALUE_ITEMS.map((item, index) => (
+            <article
+              key={item.title}
+              className={`${styles.infoCard} ${index === 0 ? styles.featuredCard : ''}`}
+            >
               <h3>{item.title}</h3>
               <p>{item.text}</p>
-              <div className={styles.inlineAction}><Link to={item.to}><Button variant="ghost" size="medium">{item.action}</Button></Link></div>
             </article>
           ))}
         </div>
       </section>
 
-      <SectionBlock title="角色理解（平台视角）">
-        <div className={learningStyles.misconceptionList}>
-          {ROLE_CARDS.map((item) => (
-            <article key={item.role} className={learningStyles.misconceptionCard}>
-              <strong>{item.role}</strong>
-              <p>{item.focus}</p>
+      <section className={styles.sectionBlock}>
+        <header>
+          <h2>不同岗位的能力提升</h2>
+        </header>
+        <div className={styles.roleGrid}>
+          {ROLE_BENEFITS.map((item) => (
+            <article key={item.role} className={styles.roleCard}>
+              <h3>{item.role}</h3>
+              <ul>
+                {item.items.map((text) => <li key={text}>{text}</li>)}
+              </ul>
             </article>
           ))}
         </div>
-      </SectionBlock>
+      </section>
 
-      <InfoBanner className={learningStyles.memoryBanner} tone="warning">首页负责带你进入这个教学系统；完整的 IEC 62443 入门认知，请从顶部导航右侧的“IEC 62443 简明教程”进入。</InfoBanner>
+      <section className={styles.sectionBlock}>
+        <header>
+          <h2>可建立的核心认知</h2>
+        </header>
+        <div className={styles.resultGrid}>
+          {LEARNING_RESULTS.map((item) => (
+            <article key={item} className={styles.resultCard}>
+              <p>{item}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.sectionBlock}>
+        <header>
+          <h2>建议学习路径</h2>
+        </header>
+        <div className={styles.pathGrid}>
+          {LEARNING_PATH.map((item) => (
+            <article key={item.number} className={styles.pathCard}>
+              <div className={styles.pathHead}><span>{item.number}</span><h3>{item.title}</h3></div>
+              <p>{item.text}</p>
+              <div className={styles.inlineAction}>
+                {item.mode === 'reset'
+                  ? <Button variant="ghost" size="medium" onClick={handleReset}>{item.action}</Button>
+                  : <Link to={item.to}><Button variant="ghost" size="medium">{item.action}</Button></Link>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <InfoBanner className={styles.banner} tone="warning">建议先完成入门教程，再进入案例演示。前者用于建立概念与结构认知，后者用于理解这些内容如何在项目中形成闭环。</InfoBanner>
     </main>
   );
 }

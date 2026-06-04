@@ -169,6 +169,7 @@ export function Iec62443Tutorial() {
             </tbody>
           </table>
           <div className={styles.compareNote}><strong>重点区分：</strong><span>Zone / Conduit 用于理解系统边界与跨边界通信；FR / SR / CR / SL 用于理解安全目标、要求与目标强度，它们不是同一层面的概念。</span></div>
+          <div className={styles.note}>对应案例：如需查看 Zone、Conduit 和系统设计如何落地，可继续查看案例链路中的“形成方案”。</div>
           <div className={styles.note}>主线顺序可以概括为：业务输入 → 目标强度 → 架构与边界 → 系统要求 → 组件能力 → 运行维护 → 审核判断。</div>
         </section>
 
@@ -219,6 +220,7 @@ export function Iec62443Tutorial() {
               ))}
             </tbody>
           </table>
+          <div className={styles.note}>对应案例：如需查看项目输入、设计响应和能力声明如何形成对应关系，可继续查看“建立对应关系”。</div>
         </section>
 
         <section className={styles.section}>
@@ -260,6 +262,7 @@ export function Iec62443Tutorial() {
             <div className={styles.caseItem}><strong>8. 角色分工</strong><p>业主提出约束，集成商完成系统设计，产品供应商说明能力，维护方落实流程，审核者判断这条链是否有足够证据。</p></div>
             <div className={styles.caseItem}><strong>9. 审核判断</strong><p>最终判断的不是“某个设备有没有某项功能”，而是这个场景是否在系统、产品、运行和证据上整体成立。</p></div>
           </div>
+          <div className={styles.note}>对应案例：如需继续查看差距如何被识别、解释并形成判断，可继续查看“分析差距”和“形成审核判断”。</div>
         </section>
 
         <section className={styles.section}>
@@ -300,6 +303,7 @@ export function Iec62443Tutorial() {
 
         <section className={styles.section}>
           <h2>11. 本平台学习路径</h2>
+          <div className={styles.compareNote}><strong>重点区分：</strong><span>在本系统中，一个完整闭环通常至少包含：项目输入、设计响应、能力声明、差距说明、责任分工和判断依据。</span></div>
           <div className={styles.grid2}>
             <article className={styles.card}><strong>先看教程</strong><p>先建立体系、概念和对应关系的整体认知。</p></article>
             <article className={styles.card}><strong>再进共享案例</strong><p>从提出目标到形成判断，观察它们如何在一个案例里串起来。</p></article>
