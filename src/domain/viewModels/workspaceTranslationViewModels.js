@@ -55,6 +55,17 @@ function buildMatrixRows({ assessment, riskProfile, plan, matchResults, gapClosu
 
     return {
       id: requirement.id || `${requirement.capabilityId}-${index}`,
+      stage1Input: joinList(traceability.inputConditions, fallbackInputs.length ? fallbackInputs.join('；') : '未形成明确输入'),
+      stage1Risk: joinList(traceability.riskConcerns, fallbackRisks.length ? fallbackRisks.join('、') : '无明确风险关注'),
+      stage2Objective: requirement.controlObjective || '未形成控制目标',
+      stage2Need: display.label,
+      stage2Ref: [display.frText, display.srText].filter(Boolean).join(' / ') || joinList(requirement.sourceFR),
+      stage2TargetSL: requirement.targetSL ? `SL-${requirement.targetSL}` : '未填写',
+      stage2Hint: requirement.implementationHint || '未填写',
+      stage3Response: statusMeta.label,
+      stage3Tone: statusMeta.badge,
+      stage3Evidence: matchDetail?.evidenceType && matchDetail.evidenceType !== 'none' ? matchDetail.evidenceType : '未提供',
+      stage3Boundary: savedClosure?.mitigation || matchDetail?.gapNote || statusMeta.description || '未形成匹配说明',
       projectInput: joinList(traceability.inputConditions, fallbackInputs.length ? fallbackInputs.join('；') : '未形成明确输入'),
       riskConcern: joinList(traceability.riskConcerns, fallbackRisks.length ? fallbackRisks.join('、') : '无明确风险关注'),
       designResponse: requirement.controlObjective || '未形成控制目标',

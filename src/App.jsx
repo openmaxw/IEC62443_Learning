@@ -5,11 +5,8 @@ import { AppErrorBoundary } from './components/ErrorBoundary/AppErrorBoundary';
 import { Footer } from './components/Footer/Footer';
 import { Landing } from './pages/Landing/Landing';
 import { OwnerInterview } from './pages/Owner/OwnerInterview';
-import { OwnerResult } from './pages/Owner/OwnerResult';
 import { IntegratorWorkspace } from './pages/Integrator/IntegratorWorkspace';
-import { IntegratorResult } from './pages/Integrator/IntegratorResult';
 import { VendorCapability } from './pages/Vendor/VendorCapability';
-import { VendorResult } from './pages/Vendor/VendorResult';
 import { SelectionMatrix } from './pages/Selection/SelectionMatrix';
 import { ReportCenter } from './pages/Report/ReportCenter';
 import { LearningMode } from './pages/Learning/LearningMode';
@@ -41,11 +38,8 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/owner" element={<OwnerInterview />} />
-              <Route path="/owner/result" element={<OwnerResult />} />
               <Route path="/integrator" element={<IntegratorWorkspace />} />
-              <Route path="/integrator/result" element={<IntegratorResult />} />
               <Route path="/vendor" element={<VendorCapability />} />
-              <Route path="/vendor/result" element={<VendorResult />} />
               <Route path="/selection" element={<SelectionMatrix />} />
               <Route path="/gap" element={<GapCenter />} />
               <Route path="/dashboard" element={<Dashboard />} />

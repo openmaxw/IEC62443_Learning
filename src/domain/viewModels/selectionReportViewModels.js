@@ -134,11 +134,11 @@ export function getReportCenterViewModel({ projectMeta, riskProfile, plan, capab
     .filter((item) => item.mapping);
 
   const items = [
-    { title: '项目输入摘要', ready: Boolean(riskProfile), desc: '查看需求澄清摘要与标准化项目输入。', route: '/owner/result?review=1' },
-    { title: '设计响应摘要', ready: Boolean(plan), desc: '查看 Zone / Conduit、通信响应与能力需求。', route: '/integrator/result?review=1' },
-    { title: '能力声明摘要', ready: Boolean(latestCapability), desc: '查看产品能力声明摘要。', route: '/vendor/result?review=1' },
-    { title: '匹配闭环', ready: Boolean(asArray(matchResults?.results).length || liveSelection.rows.length) && gapClosureReady, desc: gapRows.length ? '查看差距项、补偿措施、责任方、验收影响与残余风险。' : '当前没有待处置差距项。', route: '/selection' },
-    { title: '需求追溯链', ready: Boolean(riskProfile && plan), desc: '查看从项目输入到能力/差距的追溯。', route: '/translation-center' }
+    { title: '目标定义结果', ready: Boolean(riskProfile), desc: '查看业主侧已形成的目标、约束、关键对象与设计输入。', route: '/owner?step=7' },
+    { title: '系统设计结果', ready: Boolean(plan), desc: '查看系统目标、分区、跨区通信与能力需求的最终汇总。', route: '/integrator?step=6' },
+    { title: '能力说明结果', ready: Boolean(latestCapability), desc: '查看产品对能力依据的正式响应、边界、证据与限制说明。', route: '/vendor?step=6' },
+    { title: '匹配闭环', ready: Boolean(asArray(matchResults?.results).length || liveSelection.rows.length) && gapClosureReady, desc: gapRows.length ? '查看差距项、补偿措施、责任方、验收影响与残余风险。' : '当前没有待处置差距项。', route: '/selection?step=5' },
+    { title: '需求追溯链', ready: Boolean(riskProfile && plan), desc: '查看三阶段结果如何形成整体对应，并进入逐项追溯总表。', route: '/translation-center?step=2' }
   ];
 
   return {

@@ -20,3 +20,15 @@
 .success { border-color: rgba(68,209,123,.28); background: rgba(68,209,123,.12); color: #dcffe8; }
 .warning { border-color: rgba(245,158,11,.28); background: rgba(245,158,11,.12); color: #ffe7bf; }
 .neutral { border-color: var(--color-table-border); background: rgba(255,255,255,.03); color: var(--color-text-secondary); }
+
+.levelHigh, .riskHigh { border-color: rgba(239,68,68,.26); background: rgba(239,68,68,.10); color: #ffd6d6; }
+.levelMedium, .riskMedium { border-color: rgba(245,158,11,.28); background: rgba(245,158,11,.12); color: #ffe7bf; }
+.levelLow, .riskLow { border-color: rgba(68,209,123,.28); background: rgba(68,209,123,.12); color: #dcffe8; }
+.sl1 { border-color: rgba(148,163,184,.28); background: rgba(148,163,184,.12); color: #e4ebf5; }
+.sl2 { border-color: rgba(59,130,246,.26); background: rgba(59,130,246,.12); color: #dbeafe; }
+.sl3 { border-color: rgba(99,102,241,.26); background: rgba(99,102,241,.12); color: #e0e7ff; }
+.sl4 { border-color: rgba(139,92,246,.26); background: rgba(139,92,246,.12); color: #ede9fe; }
+.statusNative, .statusFulfilled, .statusSuccess { border-color: rgba(68,209,123,.28); background: rgba(68,209,123,.12); color: #dcffe8; }
+.statusConfigured, .statusPartial, .statusExternal, .statusCompensating, .statusWarning { border-color: rgba(245,158,11,.28); background: rgba(245,158,11,.12); color: #ffe7bf; }
+.statusMissing, .statusDanger { border-color: rgba(239,68,68,.26); background: rgba(239,68,68,.10); color: #ffd6d6; }
+.statusNa, .statusNeutral { border-color: var(--color-table-border); background: rgba(255,255,255,.03); color: var(--color-text-secondary); }

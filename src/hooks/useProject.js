@@ -114,7 +114,7 @@ function getMissingInputs(state) {
   if (assessment && !isFilled(assessment.initialBoundaryNotes)) items.push({ id: 'owner-boundary-notes', label: '在需求澄清中补充初始网络边界', route: '/owner' });
   if (assessment && !isFilled(assessment.continuityRequirements)) items.push({ id: 'owner-continuity', label: '在需求澄清中补充工艺连续性要求', route: '/owner' });
   if (assessment && !isFilled(assessment.complianceNotes)) items.push({ id: 'owner-compliance-notes', label: '在需求澄清中补充合规补充说明', route: '/owner' });
-  if (assessment && !riskProfile) items.push({ id: 'owner-summary', label: '生成需求澄清摘要', route: '/owner/result' });
+  if (assessment && !riskProfile) items.push({ id: 'owner-summary', label: '生成需求澄清摘要', route: '/owner?step=7' });
   if (!plan) items.push({ id: 'integrator-plan', label: '完成设计响应草案', route: '/integrator' });
   if (!isNonEmptyArray(capabilities)) items.push({ id: 'vendor-capability', label: '录入能力声明', route: '/vendor' });
   if (!matchResults) items.push({ id: 'selection-analysis', label: '完成匹配闭环结果', route: '/selection' });

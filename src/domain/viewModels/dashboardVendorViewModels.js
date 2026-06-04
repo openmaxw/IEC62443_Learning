@@ -31,48 +31,6 @@ function normalizeSubsteps(value) {
   };
 }
 
-export function getVendorResultViewModel({ projectMeta, capabilities }) {
-  const latest = asArray(capabilities)[asArray(capabilities).length - 1] || null;
-  const claims = asArray(latest?.capabilityClaims);
-  const claimRows = claims.map((item) => {
-    const status = normalizeClaimStatus(item.satisfaction, item.implementationType);
-    return {
-      ...item,
-      status,
-      statusLabel: claimStatusLabel(status),
-      implementationTypeLabel: implementationTypeLabel(item.implementationType),
-      closureRequired: needsClosure(status)
-    };
-  });
-  const groups = {
-    fulfilled: claimRows.filter((item) => item.status === 'native'),
-    partial: claimRows.filter((item) => item.status === 'configured' || item.status === 'compensating'),
-    missing: claimRows.filter((item) => item.status === 'missing'),
-    external: claimRows.filter((item) => item.status === 'external')
-  };
-
-  return {
-    hasCapability: Boolean(latest),
-    projectName: projectMeta?.projectName || '',
-    latest,
-    claims: claimRows,
-    boundaryRows: claimRows.filter((item) => item.claimScope || item.dependencyNote || item.limitationNote),
-    closureRows: claimRows.filter((item) => item.closureRequired),
-    groups,
-    summary: {
-      total: claims.length,
-      fulfilled: groups.fulfilled.length,
-      gap: groups.partial.length + groups.missing.length + groups.external.length
-    },
-    statusSummary: {
-      title: claims.length ? '当前声明判断' : '当前待补充项',
-      headline: claims.length ? '已具备进入差距分析的能力声明基础' : '尚未形成可用于匹配的有效声明',
-      detail: claims.length ? '建议进入匹配闭环阶段核对项目需求与设备能力满足情况。' : '请先补充产品信息、能力声明、依赖条件与限制说明。',
-      pills: [`已声明 ${claims.length}`, `差距 ${groups.partial.length + groups.missing.length + groups.external.length}`]
-    }
-  };
-}
-
 export function getDashboardViewModel({ projectMeta, assessment, riskProfile, plan, capabilities, matchResults, progress, missingInputs, nextAction }) {
   const cards = [
     {
@@ -80,7 +38,7 @@ export function getDashboardViewModel({ projectMeta, assessment, riskProfile, pl
       title: '需求澄清',
       ready: progress.stageStatus.owner,
       detail: assessment ? `已形成风险关注与项目输入摘要${riskProfile ? '，可进入设计响应' : ''}` : '待完成项目场景、业务后果与约束输入',
-      route: progress.stageStatus.owner ? '/owner/result' : '/owner',
+      route: progress.stageStatus.owner ? '/owner?step=7' : '/owner',
       substeps: normalizeSubsteps(progress.substeps.owner)
     },
     {
@@ -88,7 +46,7 @@ export function getDashboardViewModel({ projectMeta, assessment, riskProfile, pl
       title: '设计响应',
       ready: progress.stageStatus.integrator,
       detail: plan ? `已形成 ${asArray(plan?.zones).length} 个 zone、${asArray(plan?.communicationFlows).length} 条通信流` : '待完成 Zone / Conduit 与通信响应',
-      route: progress.stageStatus.integrator ? '/integrator/result' : '/integrator',
+      route: progress.stageStatus.integrator ? '/integrator?step=6' : '/integrator',
       substeps: normalizeSubsteps(progress.substeps.integrator)
     },
     {
@@ -96,7 +54,7 @@ export function getDashboardViewModel({ projectMeta, assessment, riskProfile, pl
       title: '能力声明',
       ready: progress.stageStatus.vendor,
       detail: asArray(capabilities).length ? `已录入 ${asArray(capabilities).length} 份能力声明` : '待录入产品能力、边界与证据',
-      route: progress.stageStatus.vendor ? '/vendor/result' : '/vendor',
+      route: progress.stageStatus.vendor ? '/vendor?step=6' : '/vendor',
       substeps: normalizeSubsteps(progress.substeps.vendor)
     },
     {

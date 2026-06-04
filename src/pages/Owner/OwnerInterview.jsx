@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { StatusSummaryPanel, StepTabs, WorkflowNavBar } from '../../components/Common';
+import { PillTag, StatusSummaryPanel, StepTabs, WorkflowNavBar } from '../../components/Common';
 import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useProject } from '../../hooks/useProject';
 import { generateRiskProfile } from '../../utils/riskEngine';
+import { resolveStepIndex } from '../../utils/stepRouting';
 import { ACCEPTANCE_PREFERENCE_OPTIONS, REMOTE_OWNERSHIP_OPTIONS } from '../../data/enums';
 import { INDUSTRIES } from '../../data/industries';
 import styles from './OwnerInterview.module.css';
@@ -128,6 +129,7 @@ function LevelCards({ field, value, onChange, invalid = false }) {
   return <div className={invalid ? styles.invalidField : ''}>{field?.hint ? <div className={styles.optionExplain}>{field.hint}</div> : null}<div className={styles.optionHints}>{Object.entries(field.levels).map(([level, text]) => <button key={level} type="button" className={`${styles.optionHint} ${value === level ? styles.optionHintActive : ''}`} onClick={() => onChange(level)}><strong>{level === 'low' ? '低' : level === 'medium' ? '中' : '高'}</strong><span>{text}</span></button>)}</div></div>;
 }
 function resolveLevel(value) { return value === 'low' ? '低' : value === 'medium' ? '中' : value === 'high' ? '高' : '未填写'; }
+function getLevelTone(value) { return value === 'high' ? 'levelHigh' : value === 'medium' ? 'levelMedium' : value === 'low' ? 'levelLow' : 'neutral'; }
 
 function FieldHint({ title, hint }) {
   return <div className={styles.fieldHint}><strong>{title}</strong>{hint ? <span>{hint}</span> : null}</div>;
@@ -158,9 +160,9 @@ export function OwnerInterview() {
   }, [formData, state.ownerProfile?.draft, actions]);
 
   useEffect(() => {
-    const stepParam = Number(searchParams.get('step'));
-    if (Number.isInteger(stepParam) && stepParam >= 0 && stepParam < STEPS.length) {
-      setCurrentStep(stepParam);
+    const targetIndex = resolveStepIndex(searchParams.get('step'), STEPS.length);
+    if (targetIndex !== null) {
+      setCurrentStep(targetIndex);
     }
   }, [searchParams]);
 
@@ -322,7 +324,7 @@ export function OwnerInterview() {
                 {IMPACT_FIELDS.map((field) => {
                   const currentLevel = formData[field.key];
                   const currentText = currentLevel ? field.levels[currentLevel] : '未填写';
-                  return <tr key={field.key}><td>{field.label}</td><td>{resolveLevel(currentLevel)}</td><td className={styles.summaryValue}>{currentText}</td></tr>;
+                  return <tr key={field.key}><td>{field.label}</td><td><PillTag tone={getLevelTone(currentLevel)}>{resolveLevel(currentLevel)}</PillTag></td><td className={styles.summaryValue}>{currentText}</td></tr>;
                 })}
               </tbody>
             </table>
@@ -350,7 +352,7 @@ export function OwnerInterview() {
                 {MATURITY_FIELDS.map((field) => {
                   const currentLevel = formData[field.key];
                   const currentText = currentLevel ? field.levels[currentLevel] : '未填写';
-                  return <tr key={field.key}><td>{field.label}</td><td>{resolveLevel(currentLevel)}</td><td className={styles.summaryValue}>{currentText}</td></tr>;
+                  return <tr key={field.key}><td>{field.label}</td><td><PillTag tone={getLevelTone(currentLevel)}>{resolveLevel(currentLevel)}</PillTag></td><td className={styles.summaryValue}>{currentText}</td></tr>;
                 })}
               </tbody>
             </table>
@@ -390,11 +392,11 @@ export function OwnerInterview() {
   return (
     <CaseStageLayout><ProjectStageShell
       stageNumber="01"
-      title="提出目标"
+      title="目标定义"
       projectName={state.projectMeta?.projectName || formData.projectName}
       outputLabel="标准化项目输入"
-      statusText={isSummaryStep ? '已形成业主输入与目标摘要，可生成需求与目标摘要' : '正在梳理业主输入、目标要求和约束条件'}
-      statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成摘要。' : '当前步骤完成后可进入下一步。')} pills={[step.title, isSummaryStep ? '可生成需求与目标摘要' : '待继续完善']} />}
+      statusText={isSummaryStep ? '业主输入已完成，可进入下一阶段' : '正在梳理业主输入、目标要求和约束条件'}
+      statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '确认无误后可进入下一阶段。' : '当前步骤完成后可进入下一步。')} pills={[step.title, isSummaryStep ? '可进入下一阶段' : '待继续完善']} />}
       guidance={{ summary: activeGuidance || step.guidance }}
     >
       {({ statusBar }) => (
@@ -406,9 +408,9 @@ export function OwnerInterview() {
           </section>
           <WorkflowNavBar
             leftLabel={currentStep === 0 ? '返回框架总览' : '上一步'}
-            rightLabel={isSummaryStep ? '生成需求与目标摘要' : '下一步'}
+            rightLabel={isSummaryStep ? '进入下一阶段' : '下一步'}
             onLeftClick={currentStep === 0 ? () => navigate('/dashboard') : () => setCurrentStep((prev) => Math.max(prev - 1, 0))}
-            onRightClick={isSummaryStep ? () => handleFinalizeSummary('/owner/result') : handleNextStep}
+            onRightClick={isSummaryStep ? () => handleFinalizeSummary('/integrator') : handleNextStep}
           />
         </>
       )}
