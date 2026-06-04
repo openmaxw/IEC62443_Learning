@@ -11,13 +11,13 @@ import styles from './OwnerInterview.module.css';
 const IMPACT_LEVEL_SCORE = { low: 1, medium: 2, high: 3 };
 
 const STEPS = [
-  { id: 'industry', title: '项目场景', guidance: '填写项目名称、行业、站点和项目目标，形成后续风险转译的基础上下文。' },
-  { id: 'impacts', title: '业务后果', guidance: '判断安全、环境、生产、质量、财务和合规后果，帮助系统识别风险关注强度。' },
-  { id: 'exposure', title: '暴露面', guidance: '说明远程运维和第三方接入情况，明确外部访问路径是否需要重点控制。' },
-  { id: 'maturity', title: '现状基础', guidance: '评估当前网络隔离、身份管理、日志审计和补丁维护成熟度，识别需要补强的基础能力。' },
-  { id: 'constraints', title: '约束条件', guidance: '补充维护窗口、改造窗口、远程责任和验收偏好，避免后续设计脱离现场约束。' },
-  { id: 'assets', title: '关键对象', guidance: '选择关键资产并补充系统、连接、边界和连续性要求，形成可交接的标准化项目输入。' },
-  { id: 'summary', title: '需求汇总', guidance: '复核需求澄清摘要，确认无误后生成风险转译并进入设计响应阶段。' }
+  { id: 'industry', title: '项目场景', guidance: '项目场景用于交代案例背景与目标边界；由业主视角提供项目名称、行业、站点和项目目标，作为后续风险转译的基础上下文。' },
+  { id: 'impacts', title: '业务后果', guidance: '业务后果用于判断一旦受影响会产生多大后果；由业主视角评估安全、环境、生产、质量、财务和合规影响，为后续判断关注强度提供依据。' },
+  { id: 'exposure', title: '暴露面', guidance: '暴露面用于说明外部访问如何进入系统；由业主视角交代远程运维、第三方接入和外部路径，为后续边界控制提供依据。' },
+  { id: 'maturity', title: '现状基础', guidance: '现状基础用于说明当前防护起点；由业主视角评估网络隔离、身份管理、日志审计和补丁维护成熟度，识别需要补强的基础能力。' },
+  { id: 'constraints', title: '约束条件', guidance: '约束条件用于说明设计不能脱离哪些现场现实；由业主视角补充维护窗口、改造窗口、远程责任和验收偏好。' },
+  { id: 'assets', title: '关键对象', guidance: '关键对象用于明确后续重点保护和重点讨论的对象；由业主视角选择关键资产，并补充系统、连接、边界和连续性要求。' },
+  { id: 'summary', title: '需求汇总', guidance: '需求汇总用于确认前面输入是否已经整理成可交接的项目基础；由业主视角复核摘要，确认后进入后续风险转译与设计阶段。' }
 ];
 
 function isSameObject(a, b) {
@@ -377,7 +377,7 @@ export function OwnerInterview() {
       outputLabel="标准化项目输入"
       statusText={isSummaryStep ? '已形成业主输入与目标摘要，可生成需求与目标摘要' : '正在梳理业主输入、目标要求和约束条件'}
       statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成需求与目标摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, isSummaryStep ? '可生成需求与目标摘要' : '待继续完善']} />}
-      guidance={{ summary: activeGuidance || (['impacts', 'exposure', 'maturity'].includes(step.id) ? '点击任一字段卡片可查看当前选项的详细解释。' : `${step.guidance} 当前页面重点解释业主在案例里提供什么输入、目标和约束，以及这些内容如何成为后续系统、产品和审核的起点。`), details: [{ label: '本页作用', text: '明确项目目标、业务约束和后果判断，为后续系统设计提供输入。' }, { label: '阅读重点', text: '重点确认关键资产、远程维护、运行约束、外部连接和验收关注。' }, { label: '完成标志', text: '形成可供后续设计直接使用的项目输入摘要。' }] }}
+      guidance={{ summary: activeGuidance || step.guidance }}
     >
       {({ statusBar }) => (
         <>

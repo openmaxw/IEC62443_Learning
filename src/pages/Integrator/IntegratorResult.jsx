@@ -33,7 +33,7 @@ export function IntegratorResult() {
   ];
 
   return (
-    <CaseStageLayout><ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看设计响应结论、能力需求与需求—设计对应关系。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="02" title="设计响应摘要" projectName={viewModel.projectName} outputLabel="设计响应与依据" statusText={viewModel.statusSummary.headline} guidance={{ summary: '本页用于回看系统级设计响应，确认项目输入是否已经被设计层正确承接，并形成后续能力匹配与判断所需基础。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
       <>
       <SectionBlock title="设计依据">

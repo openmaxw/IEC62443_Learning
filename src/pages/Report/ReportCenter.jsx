@@ -43,7 +43,7 @@ export function ReportCenter() {
       statusText={viewModel.statusSummary.headline}
       statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}
       prevAction={{ to: '/selection', label: '上一步' }}
-      guidance={{ summary: '形成判断用于汇总目标、方案、能力、差距以及审核视角下的案例判断。', details: [{ label: '本页作用', text: '从审核视角汇总依据，判断项目说明是否完整、合理且可被支撑。' }, { label: '阅读重点', text: '重点区分已具备、部分具备、依赖补偿和仍需解释的内容。' }, { label: '阅读顺序', text: '建议先看已具备 / 部分具备 / 外部补偿，再看审核判断样例。' }, { label: '完成标志', text: '形成可解释、可复核的审核判断结论。' }] }}
+      guidance={{ summary: '本页由审核 / 复核视角汇总前面的目标、设计、能力和差距，形成一份有依据、有边界、可复核的综合判断。' }}
     >
       {({ statusBar }) => (
         <section className={styles.page}>

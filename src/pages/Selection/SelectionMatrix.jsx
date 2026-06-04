@@ -163,7 +163,7 @@ export function SelectionMatrix({ initialStep = 0 }) {
   }
 
   return (
-    <CaseStageLayout><ProjectStageShell stageNumber="04" title="分析差距" projectName={viewModel.projectName} outputLabel="匹配差距闭环" statusText={viewModel.statusSummary.headline} guidance={{ summary: step.guidance, details: [{ label: '本页作用', text: '识别未满足项、补偿措施、责任分工和验收影响，形成闭环思路。' }, { label: '阅读重点', text: '优先关注高影响差距、补偿措施可行性和责任是否明确。' }, { label: '阅读顺序', text: '建议先看高影响差距，再看补偿措施、责任分工和验收影响。' }, { label: '完成标志', text: '形成差距闭环建议与责任记录。' }] }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={validationMessage || viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="04" title="分析差距" projectName={viewModel.projectName} outputLabel="匹配差距闭环" statusText={viewModel.statusSummary.headline} guidance={{ summary: step.guidance }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={validationMessage || viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
         <section className={styles.page}>
           <StepTabs items={STEPS} currentIndex={currentStep} onChange={goToStepWithValidation} />

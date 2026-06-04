@@ -130,9 +130,9 @@ export const DEMO_PROJECT_STATE = {
         capabilityClaims: [
           { capabilityId: 'auth-password', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '厂家声明', claimScope: '设备本机管理、VPN 维护接入与管理员登录鉴别', dependencyNote: '建议结合企业统一账号与强密码策略', limitationNote: '如需统一身份联动需结合外围系统' },
           { capabilityId: 'access-rbac', satisfaction: 'partial', implementationType: 'shared', evidenceType: '厂家声明', claimScope: '设备管理角色与策略操作分权', dependencyNote: '更细粒度权限建议结合集中管理平台', limitationNote: '单机侧角色粒度有限' },
-          { capabilityId: 'logging-event', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '测试报告', claimScope: '系统事件、策略变更、VPN 与安全告警日志', dependencyNote: '建议转发至集中 Syslog/SIEM 平台保存与分析', limitationNote: '' },
-          { capabilityId: 'access-whitelist', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '测试报告', claimScope: 'ACL、策略控制、NAT 与边界访问白名单', dependencyNote: '', limitationNote: '' },
-          { capabilityId: 'logging-syslog', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '厂家声明', claimScope: '支持事件转发至 Syslog 服务器', dependencyNote: '需部署集中日志平台', limitationNote: '' },
+          { capabilityId: 'logging-event', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '测试报告', claimScope: '系统事件、策略变更、VPN 与安全告警日志', dependencyNote: '建议转发至集中 Syslog/SIEM 平台保存与分析', limitationNote: '日志留存周期、检索与关联分析能力需结合集中日志平台统一实现' },
+          { capabilityId: 'access-whitelist', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '测试报告', claimScope: 'ACL、策略控制、NAT 与边界访问白名单', dependencyNote: '需结合现网分区规划、地址对象与访问策略统一维护', limitationNote: '白名单策略有效性依赖项目实施阶段的对象梳理与持续更新' },
+          { capabilityId: 'logging-syslog', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '厂家声明', claimScope: '支持事件转发至 Syslog 服务器', dependencyNote: '需部署集中日志平台', limitationNote: '仅提供日志转发能力，不直接替代集中留存、检索与报表分析功能' },
           { capabilityId: 'audit-report', satisfaction: 'external', implementationType: 'external', evidenceType: '项目案例', claimScope: '设备侧提供日志来源与审计证据基础', dependencyNote: '正式审计报表需由集中日志/SIEM 平台生成', limitationNote: '设备本机不直接提供完整项目级审计报表' }
         ],
         dependencies: '建议配合集中身份管理、Syslog/SIEM 平台与远程访问审批流程使用。',
@@ -145,9 +145,9 @@ export const DEMO_PROJECT_STATE = {
       capabilityClaims: [
         { capabilityId: 'auth-password', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '厂家声明', claimScope: '设备本机管理、VPN 维护接入与管理员登录鉴别', dependencyNote: '建议结合企业统一账号与强密码策略', limitationNote: '如需统一身份联动需结合外围系统' },
         { capabilityId: 'access-rbac', satisfaction: 'partial', implementationType: 'shared', evidenceType: '厂家声明', claimScope: '设备管理角色与策略操作分权', dependencyNote: '更细粒度权限建议结合集中管理平台', limitationNote: '单机侧角色粒度有限' },
-        { capabilityId: 'logging-event', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '测试报告', claimScope: '系统事件、策略变更、VPN 与安全告警日志', dependencyNote: '建议转发至集中 Syslog/SIEM 平台保存与分析', limitationNote: '' },
-        { capabilityId: 'access-whitelist', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '测试报告', claimScope: 'ACL、策略控制、NAT 与边界访问白名单', dependencyNote: '', limitationNote: '' },
-        { capabilityId: 'logging-syslog', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '厂家声明', claimScope: '支持事件转发至 Syslog 服务器', dependencyNote: '需部署集中日志平台', limitationNote: '' },
+        { capabilityId: 'logging-event', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '测试报告', claimScope: '系统事件、策略变更、VPN 与安全告警日志', dependencyNote: '建议转发至集中 Syslog/SIEM 平台保存与分析', limitationNote: '日志留存周期、检索与关联分析能力需结合集中日志平台统一实现' },
+        { capabilityId: 'access-whitelist', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '测试报告', claimScope: 'ACL、策略控制、NAT 与边界访问白名单', dependencyNote: '需结合现网分区规划、地址对象与访问策略统一维护', limitationNote: '白名单策略有效性依赖项目实施阶段的对象梳理与持续更新' },
+        { capabilityId: 'logging-syslog', satisfaction: 'fulfilled', implementationType: 'product', evidenceType: '厂家声明', claimScope: '支持事件转发至 Syslog 服务器', dependencyNote: '需部署集中日志平台', limitationNote: '仅提供日志转发能力，不直接替代集中留存、检索与报表分析功能' },
         { capabilityId: 'audit-report', satisfaction: 'external', implementationType: 'external', evidenceType: '项目案例', claimScope: '设备侧提供日志来源与审计证据基础', dependencyNote: '正式审计报表需由集中日志/SIEM 平台生成', limitationNote: '设备本机不直接提供完整项目级审计报表' }
       ],
       dependencies: '建议配合集中身份管理、Syslog/SIEM 平台与远程访问审批流程使用。',
@@ -167,5 +167,5 @@ export const DEMO_PROJECT_STATE = {
       summary: { high: 0, medium: 2, low: 4 }
     }
   },
-  deliverables: { reports: [] }
+  deliverables: { reports: [{ id: 'demo-owner-summary', title: '业主输入摘要（示例）', type: 'owner-summary', generatedAt: '2026-06-04T09:00:00.000Z' }, { id: 'demo-integrator-draft', title: '设计响应摘要（示例）', type: 'integrator-draft', generatedAt: '2026-06-04T09:10:00.000Z' }, { id: 'demo-vendor-capability', title: '产品与开发摘要（示例）', type: 'vendor-capability', generatedAt: '2026-06-04T09:20:00.000Z' }, { id: 'demo-acceptance-checklist', title: '审核判断摘要（示例）', type: 'acceptance-checklist', generatedAt: '2026-06-04T09:30:00.000Z' }] }
 };

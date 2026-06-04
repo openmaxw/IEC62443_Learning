@@ -28,6 +28,7 @@ export function ProjectStageShell({
         <section className={styles.guidanceRow}>
           <div className={styles.guidanceLabel}>学习导读</div>
           {guidance.summary ? <p>{guidance.summary}</p> : null}
+          {guidance.hint ? <div className={styles.guidanceHint}><strong>导师提示</strong><span>{guidance.hint}</span></div> : null}
           {guidance.details?.length ? (
             <div className={styles.guidanceGrid}>
               {guidance.details.map((item) => (

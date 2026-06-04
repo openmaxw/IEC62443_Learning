@@ -16,7 +16,7 @@ export function VendorResult() {
   }
 
   return (
-    <CaseStageLayout><ProjectStageShell stageNumber="03" title="能力声明摘要" projectName={viewModel.projectName} outputLabel="产品响应摘要" statusText={viewModel.statusSummary.headline} guidance={{ summary: '您可在本页查看设备能力对项目需求的满足情况、依赖条件与限制说明。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="03" title="能力声明摘要" projectName={viewModel.projectName} outputLabel="产品响应摘要" statusText={viewModel.statusSummary.headline} guidance={{ summary: '本页用于回看产品能力声明，确认满足情况、依赖条件、限制边界和证据线索能否被后续匹配与判断直接引用。' }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline} note={viewModel.statusSummary.detail} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
         <>
           <SectionBlock title="声明概览">
