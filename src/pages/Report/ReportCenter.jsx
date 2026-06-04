@@ -42,7 +42,7 @@ export function ReportCenter() {
 
   return (
     <CaseStageLayout><ProjectStageShell
-      stageNumber="05"
+      stageNumber="06"
       title="形成判断"
       projectName={viewModel.projectName}
       outputLabel={`协作差距与补偿措施 ${viewModel.gapClosureItems.length} / 高严重度 ${viewModel.highRiskCount}`}

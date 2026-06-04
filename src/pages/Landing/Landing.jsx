@@ -71,7 +71,7 @@ const LEARNING_RESULTS = [
 const LEARNING_PATH = [
   { number: '01', title: '入门教程', text: '先建立标准框架、核心概念、角色分工与对应关系的基础认知。', action: '进入教程', to: '/tutorial' },
   { number: '02', title: '案例演示', text: '再按步骤查看同一项目如何从输入走向设计、能力说明、差距分析与判断。', action: '进入案例', to: '/owner', mode: 'demo' },
-  { number: '03', title: '动手演练', text: '在理解案例链路后，再从头完成一轮自己的输入、分析与推演。', action: '开始演练', to: '/owner', mode: 'reset' }
+  { number: '03', title: '动手演练', text: '在理解案例链路后，再从头完成一轮自己的输入、分析与推演。', action: '进入 03 动手演练', to: '/owner', mode: 'reset' }
 ];
 
 export function Landing() {

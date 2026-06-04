@@ -5,7 +5,7 @@ export const DEMO_PROJECT_STATE = {
     projectName: '某半导体制造企业－12 英寸晶圆厂 OT 安全协同演示',
     organizationName: '某半导体制造企业',
     siteName: '12 英寸晶圆厂',
-    industry: 'electronics',
+    industry: 'semiconductor',
     scenarioType: 'retrofit',
     projectObjective: '完成晶圆厂制造区、厂务区与远程维护边界梳理，并验证关键边界设备能力与闭环路径',
     status: 'demo-loaded',
@@ -14,7 +14,7 @@ export const DEMO_PROJECT_STATE = {
   ownerProfile: {
     assessment: {
       projectName: '某半导体制造企业－12 英寸晶圆厂 OT 安全协同演示',
-      industry: 'electronics',
+      industry: 'semiconductor',
       safetyImpact: 'high',
       environmentalImpact: 'medium',
       productionImpact: 'high',

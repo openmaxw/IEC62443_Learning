@@ -53,7 +53,7 @@ export function VendorResult() {
 
           {statusBar}
 
-          <ActionBar align="end"><Link to={isReviewMode ? '/report' : '/translation-center'}><Button variant={isReviewMode ? 'ghost' : 'primary'} size="medium">{isReviewMode ? '返回上一页' : '进入下一步'}</Button></Link></ActionBar>
+          <ActionBar align="end"><Link to={isReviewMode ? '/report' : '/vendor?step=5'}><Button variant="ghost" size="medium">{isReviewMode ? '返回上一页' : '返回上一步'}</Button></Link>{isReviewMode ? null : <Link to="/translation-center"><Button variant="primary" size="medium">进入下一步</Button></Link>}</ActionBar>
         </>
       )}
     </ProjectStageShell></CaseStageLayout>

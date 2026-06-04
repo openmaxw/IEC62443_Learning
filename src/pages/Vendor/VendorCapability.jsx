@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, DataTable, StatusSummaryPanel, SummaryStatGrid, StepTabs, SurfacePanel, WorkflowNavBar } from '../../components/Common';
 import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useIntegratorPath, useProject } from '../../hooks/useProject';
@@ -64,6 +64,7 @@ function normalizeClaimStatus(value) {
 
 export function VendorCapability() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { state, actions } = useProject();
   const { projectMeta, plan } = useIntegratorPath();
   const integratorDraft = state.integratorDesign?.draft;

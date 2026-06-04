@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Card, DataTable, PillTag, StatusSummaryPanel, StepTabs, StructuredRecordTable, SummaryStatGrid, SurfacePanel, WorkflowNavBar } from '../../components/Common';
 import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useOwnerPath, useProject } from '../../hooks/useProject';
@@ -77,6 +77,7 @@ function getScenarioTypeLabel(value) {
 
 export function IntegratorWorkspace() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { assessment, riskProfile, projectMeta } = useOwnerPath();
   const { state, actions } = useProject();
   const integratorDraft = state.integratorDesign?.draft;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { StatusSummaryPanel, StepTabs, WorkflowNavBar } from '../../components/Common';
 import { CaseStageLayout, ProjectStageShell } from '../../components/ProjectFlow';
 import { useProject } from '../../hooks/useProject';
@@ -135,6 +135,7 @@ function FieldHint({ title, hint }) {
 
 export function OwnerInterview() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { state, actions } = useProject();
   const [currentStep, setCurrentStep] = useState(0);
   const [activeGuidance, setActiveGuidance] = useState('');
@@ -155,6 +156,13 @@ export function OwnerInterview() {
       actions.setOwnerDraft(formData);
     }
   }, [formData, state.ownerProfile?.draft, actions]);
+
+  useEffect(() => {
+    const stepParam = Number(searchParams.get('step'));
+    if (Number.isInteger(stepParam) && stepParam >= 0 && stepParam < STEPS.length) {
+      setCurrentStep(stepParam);
+    }
+  }, [searchParams]);
 
 
   const step = STEPS[currentStep];

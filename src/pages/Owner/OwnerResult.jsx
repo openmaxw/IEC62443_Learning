@@ -45,7 +45,7 @@ export function OwnerResult() {
       </article>
       {statusBar}
       <ActionBar align="between">
-        <Link to={isReviewMode ? '/report' : '/owner'}><Button variant="ghost" size="medium">{isReviewMode ? '返回上一页' : '返回本页'}</Button></Link>
+        <Link to={isReviewMode ? '/report' : '/owner?step=6'}><Button variant="ghost" size="medium">{isReviewMode ? '返回上一页' : '返回上一步'}</Button></Link>
         {isReviewMode ? null : <Link to="/integrator"><Button variant="primary" size="medium">进入下一步</Button></Link>}
       </ActionBar>
       </>
