@@ -218,8 +218,8 @@ export function IntegratorWorkspace() {
       projectName={state.projectMeta?.projectName}
       outputLabel="系统实现结果"
       statusText={isReviewStep ? '设计输入已形成规划结果候选' : '正在完善系统规划输入'}
-      statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isReviewStep ? '复核无误后可生成系统实现摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, isReviewStep ? '可生成系统实现摘要' : '待继续补齐']} />}
-      guidance={{ summary: step.guidance }}
+      statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isReviewStep ? '复核无误后可生成摘要。' : '当前步骤完成后可进入下一步。')} pills={[step.title, isReviewStep ? '可生成系统实现摘要' : '待继续补齐']} />}
+      guidance={{ summary: `${step.guidance}${step.id === 'basis' ? ' 建议先核对项目输入，再进入分区、通信与边界设计。' : step.id === 'zones' ? ' 建议先看关键对象，再看分区归属与归组原因。' : step.id === 'flows' ? ' 建议先看源区与目标区，再看协议、业务理由和必要性。' : step.id === 'conduits' ? ' 建议先看分区边界，再看控制措施与默认策略。' : step.id === 'requirements' ? ' 建议先看控制目标，再看需要供应商支撑的能力项。' : ' 建议按设计依据、资产归组、通信、边界和能力需求的顺序复核。'}` }}
     >
       {({ statusBar }) => (
       <section className={styles.workspace}>

@@ -287,81 +287,91 @@ export function OwnerInterview() {
       content = (
         <article className={styles.documentPage}>
           <header className={styles.documentHeader}>
-            <span>IEC 62443 需求访谈摘要</span>
+            <span>需求汇总摘要</span>
             <h2>{state.projectMeta?.projectName || formData.projectName || '未命名项目'}</h2>
           </header>
 
-          <div className={styles.summaryTop}>
           <section className={styles.documentSection}>
             <h3>一、项目概况</h3>
-            <div className={styles.documentGrid}>
-              <div><span>项目名称</span><strong>{state.projectMeta?.projectName || formData.projectName || '未填写'}</strong></div>
-              <div><span>行业场景</span><strong>{selectedIndustry?.name || '未填写'}</strong></div>
-              <div><span>业主单位</span><strong>{state.projectMeta?.organizationName || '未填写'}</strong></div>
-              <div><span>项目站点</span><strong>{state.projectMeta?.siteName || '未填写'}</strong></div>
-              <div><span>项目类型</span><strong>{state.projectMeta?.scenarioType || '未填写'}</strong></div>
-              <div><span>项目目标</span><strong>{state.projectMeta?.projectObjective || '未填写'}</strong></div>
-            </div>
+            <table className={styles.tableForm}>
+              <tbody>
+                <tr><th>项目名称</th><td className={styles.summaryValue}>{state.projectMeta?.projectName || formData.projectName || '未填写'}</td></tr>
+                <tr><th>行业场景</th><td className={styles.summaryValue}>{selectedIndustry?.name || '未填写'}</td></tr>
+                <tr><th>业主单位</th><td className={styles.summaryValue}>{state.projectMeta?.organizationName || '未填写'}</td></tr>
+                <tr><th>项目站点</th><td className={styles.summaryValue}>{state.projectMeta?.siteName || '未填写'}</td></tr>
+                <tr><th>项目类型</th><td className={styles.summaryValue}>{state.projectMeta?.scenarioType || '未填写'}</td></tr>
+                <tr><th>项目目标</th><td className={styles.summaryValue}>{state.projectMeta?.projectObjective || '未填写'}</td></tr>
+              </tbody>
+            </table>
           </section>
-
-          <section className={styles.documentSection}>
-            <ImpactRadarChart fields={IMPACT_FIELDS} values={formData} />
-          </section>
-          </div>
 
           <section className={styles.documentSection}>
             <h3>二、业务后果判断</h3>
-            <div className={styles.documentQuadList}>
-              {IMPACT_FIELDS.map((field) => {
-                const currentLevel = formData[field.key];
-                const currentText = currentLevel ? field.levels[currentLevel] : '未填写';
-                return <div key={field.key} className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>{field.label}</strong><span>{resolveLevel(currentLevel)}</span></div><p>{currentText}</p></div>;
-              })}
-            </div>
+            <ImpactRadarChart fields={IMPACT_FIELDS} values={formData} />
+            <table className={styles.levelMatrix}>
+              <thead><tr><th>项目</th><th>等级</th><th>说明</th></tr></thead>
+              <tbody>
+                {IMPACT_FIELDS.map((field) => {
+                  const currentLevel = formData[field.key];
+                  const currentText = currentLevel ? field.levels[currentLevel] : '未填写';
+                  return <tr key={field.key}><td>{field.label}</td><td>{resolveLevel(currentLevel)}</td><td className={styles.summaryValue}>{currentText}</td></tr>;
+                })}
+              </tbody>
+            </table>
           </section>
 
           <section className={styles.documentSection}>
             <h3>三、暴露面与运维方式</h3>
-            <div className={styles.documentQuadList}>
-              {EXPOSURE_FIELDS.map((field) => {
-                const currentOption = field.options.find((item) => item.value === formData[field.key]);
-                return <div key={field.key} className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>{field.label}</strong><span>{currentOption?.label || '未填写'}</span></div><p>{currentOption?.description || '未填写'}</p></div>;
-              })}
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>责任归属</strong><span>{ownershipOption?.label || '未填写'}</span></div><p>{ownershipOption?.description || '未填写'}</p></div>
-            </div>
+            <table className={styles.levelMatrix}>
+              <thead><tr><th>项目</th><th>当前判断</th><th>说明</th></tr></thead>
+              <tbody>
+                {EXPOSURE_FIELDS.map((field) => {
+                  const currentOption = field.options.find((item) => item.value === formData[field.key]);
+                  return <tr key={field.key}><td>{field.label}</td><td>{currentOption?.label || '未填写'}</td><td className={styles.summaryValue}>{currentOption?.description || '未填写'}</td></tr>;
+                })}
+                <tr><td>责任归属</td><td>{ownershipOption?.label || '未填写'}</td><td className={styles.summaryValue}>{ownershipOption?.description || '未填写'}</td></tr>
+              </tbody>
+            </table>
           </section>
 
           <section className={styles.documentSection}>
             <h3>四、现状基础</h3>
-            <div className={styles.documentQuadList}>
-              {MATURITY_FIELDS.map((field) => {
-                const currentLevel = formData[field.key];
-                const currentText = currentLevel ? field.levels[currentLevel] : '未填写';
-                return <div key={field.key} className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>{field.label}</strong><span>{resolveLevel(currentLevel)}</span></div><p>{currentText}</p></div>;
-              })}
-            </div>
+            <table className={styles.levelMatrix}>
+              <thead><tr><th>项目</th><th>等级</th><th>说明</th></tr></thead>
+              <tbody>
+                {MATURITY_FIELDS.map((field) => {
+                  const currentLevel = formData[field.key];
+                  const currentText = currentLevel ? field.levels[currentLevel] : '未填写';
+                  return <tr key={field.key}><td>{field.label}</td><td>{resolveLevel(currentLevel)}</td><td className={styles.summaryValue}>{currentText}</td></tr>;
+                })}
+              </tbody>
+            </table>
           </section>
 
           <section className={styles.documentSection}>
             <h3>五、关键约束与对象</h3>
-            <div className={styles.documentQuadList}>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>常规维护窗口</strong><span>{formData.maintenanceWindow || '未填写'}</span></div></div>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>改造窗口</strong><span>{formData.upgradeWindow || '未填写'}</span></div></div>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>验收偏好</strong><span>{acceptanceOption?.label || '未填写'}</span></div><p>{acceptanceOption?.description || '未填写'}</p></div>
-              <div className={`${styles.documentEntry} ${styles.documentEntryWide}`}><div className={styles.documentEntryHead}><strong>关键对象</strong><span>{formData.criticalAssets.length} 个</span></div><div className={styles.assetSummary}>{formData.criticalAssets.length ? formData.criticalAssets.map((item) => <span key={item} className={styles.assetTag}>{ASSETS.find((asset) => asset.id === item)?.name || item}</span>) : <span className={styles.emptyText}>未选择</span>}</div></div>
-            </div>
+            <table className={styles.tableForm}>
+              <tbody>
+                <tr><th>常规维护窗口</th><td className={styles.summaryValue}>{formData.maintenanceWindow || '未填写'}</td></tr>
+                <tr><th>改造窗口</th><td className={styles.summaryValue}>{formData.upgradeWindow || '未填写'}</td></tr>
+                <tr><th>验收偏好</th><td className={styles.summaryValue}>{acceptanceOption?.label || '未填写'}{acceptanceOption?.description ? `：${acceptanceOption.description}` : ''}</td></tr>
+                <tr><th>关键对象</th><td className={styles.summaryValue}>{formData.criticalAssets.length ? formData.criticalAssets.map((item) => ASSETS.find((asset) => asset.id === item)?.name || item).join('、') : '未选择'}</td></tr>
+              </tbody>
+            </table>
           </section>
 
           <section className={styles.documentSection}>
             <h3>六、系统与边界补充</h3>
-            <div className={styles.documentColumns}>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>关键系统/角色</strong><span>{formData.keySystems ? '已填写' : '未填写'}</span></div><p>{formData.keySystems || '未填写'}</p></div>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>外部连接方式</strong><span>{formData.externalConnections ? '已填写' : '未填写'}</span></div><p>{formData.externalConnections || '未填写'}</p></div>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>维护接入方式</strong><span>{formData.maintenanceAccessPath ? '已填写' : '未填写'}</span></div><p>{formData.maintenanceAccessPath || '未填写'}</p></div>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>初始网络边界</strong><span>{formData.initialBoundaryNotes ? '已填写' : '未填写'}</span></div><p>{formData.initialBoundaryNotes || '未填写'}</p></div>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>工艺连续性要求</strong><span>{formData.continuityRequirements ? '已填写' : '未填写'}</span></div><p>{formData.continuityRequirements || '未填写'}</p></div>
-              <div className={styles.documentEntry}><div className={styles.documentEntryHead}><strong>合规补充说明</strong><span>{formData.complianceNotes ? '已填写' : '未填写'}</span></div><p>{formData.complianceNotes || '未填写'}</p></div>
-            </div>
+            <table className={styles.tableForm}>
+              <tbody>
+                <tr><th>关键系统/角色</th><td className={styles.summaryValue}>{formData.keySystems || '未填写'}</td></tr>
+                <tr><th>外部连接方式</th><td className={styles.summaryValue}>{formData.externalConnections || '未填写'}</td></tr>
+                <tr><th>维护接入方式</th><td className={styles.summaryValue}>{formData.maintenanceAccessPath || '未填写'}</td></tr>
+                <tr><th>初始网络边界</th><td className={styles.summaryValue}>{formData.initialBoundaryNotes || '未填写'}</td></tr>
+                <tr><th>工艺连续性要求</th><td className={styles.summaryValue}>{formData.continuityRequirements || '未填写'}</td></tr>
+                <tr><th>合规补充说明</th><td className={styles.summaryValue}>{formData.complianceNotes || '未填写'}</td></tr>
+              </tbody>
+            </table>
           </section>
         </article>
       );
@@ -376,7 +386,7 @@ export function OwnerInterview() {
       projectName={state.projectMeta?.projectName || formData.projectName}
       outputLabel="标准化项目输入"
       statusText={isSummaryStep ? '已形成业主输入与目标摘要，可生成需求与目标摘要' : '正在梳理业主输入、目标要求和约束条件'}
-      statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成需求与目标摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, isSummaryStep ? '可生成需求与目标摘要' : '待继续完善']} />}
+      statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成摘要。' : '当前步骤完成后可进入下一步。')} pills={[step.title, isSummaryStep ? '可生成需求与目标摘要' : '待继续完善']} />}
       guidance={{ summary: activeGuidance || step.guidance }}
     >
       {({ statusBar }) => (

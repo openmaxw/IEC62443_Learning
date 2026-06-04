@@ -251,7 +251,7 @@ export function VendorCapability() {
   }
 
   return (
-    <CaseStageLayout><ProjectStageShell stageNumber="03" title="提供能力" projectName={capabilityViewModel.projectName} outputLabel="产品与开发结果" statusText={isSummaryStep ? '产品与开发内容已可生成结果页' : '正在完善产品能力、开发证据、依赖条件和限制说明'} statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成产品与开发摘要。' : '点击下一步时会检查当前页必填内容。')} pills={[step.title, `覆盖项目要求 ${claimedRequiredCount}/${requirementRows.length || 0}`]} />} guidance={{ summary: step.guidance }}>
+    <CaseStageLayout><ProjectStageShell stageNumber="03" title="提供能力" projectName={capabilityViewModel.projectName} outputLabel="产品与开发结果" statusText={isSummaryStep ? '产品与开发内容已可生成结果页' : '正在完善产品能力、开发证据、依赖条件和限制说明'} statusPanel={<StatusSummaryPanel label="当前步骤" value={`${currentStep + 1} / ${STEPS.length}`} note={validationMessage || (isSummaryStep ? '复核无误后可生成摘要。' : '当前步骤完成后可进入下一步。')} pills={[step.title, `覆盖项目要求 ${claimedRequiredCount}/${requirementRows.length || 0}`]} />} guidance={{ summary: `${step.guidance}${step.id === 'meta' ? ' 建议先确认当前声明对象与部署范围。' : step.id === 'claims' ? ' 建议先看满足状态，再决定哪些项需要进入后续说明。' : step.id === 'scope' ? ' 建议先看适用范围，再看依赖条件与限制说明。' : step.id === 'evidence' ? ' 建议先看证据类型，再看实现方式是否能支撑当前声明。' : step.id === 'limits' ? ' 建议先看哪些结论受边界影响，再看限制如何表述。' : ' 建议按能力、边界、证据和限制的顺序复核。'}` }}>
       {({ statusBar }) => (
       <section className={styles.workspace}>
                 <StepTabs items={STEPS} currentIndex={currentStep} onChange={validateBeforeStepChange} />

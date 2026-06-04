@@ -157,7 +157,7 @@ export function SelectionMatrix({ initialStep = 0 }) {
   }
 
   return (
-    <CaseStageLayout><ProjectStageShell stageNumber="05" title="分析差距" projectName={viewModel.projectName} outputLabel="匹配差距闭环" statusText={viewModel.statusSummary.headline} guidance={{ summary: step.guidance }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline.replace('仍有 ', '有 ')} note={(validationMessage || viewModel.statusSummary.detail).replace('仍有 ', '有 ')} pills={viewModel.statusSummary.pills} />}>
+    <CaseStageLayout><ProjectStageShell stageNumber="05" title="分析差距" projectName={viewModel.projectName} outputLabel="匹配差距闭环" statusText={viewModel.statusSummary.headline} guidance={{ summary: `${step.guidance}${step.id === 'overview' ? ' 建议先看整体匹配状态，再进入待处置项。' : step.id === 'gaps' ? ' 建议先看高影响差距，再判断哪些项需要优先闭环。' : step.id === 'mitigation' ? ' 建议先写补偿措施，再进入责任与验收影响说明。' : step.id === 'risk' ? ' 建议先明确责任方，再写验收影响与残余风险。' : ' 建议先确认补偿措施，再确认责任、验收影响和残余风险是否齐备。'}` }} statusPanel={<StatusSummaryPanel label={viewModel.statusSummary.title} value={viewModel.statusSummary.headline.replace('仍有 ', '有 ')} note={(validationMessage || viewModel.statusSummary.detail).replace('仍有 ', '有 ')} pills={viewModel.statusSummary.pills} />}>
       {({ statusBar }) => (
         <section className={styles.page}>
           <StepTabs items={STEPS} currentIndex={currentStep} onChange={goToStepWithValidation} />

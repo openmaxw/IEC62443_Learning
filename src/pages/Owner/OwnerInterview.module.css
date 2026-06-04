@@ -233,3 +233,29 @@
   line-height: var(--line-height-normal);
 }
 @media (max-width: 820px) { .levelMatrix, .levelMatrix tbody, .levelMatrix tr, .levelMatrix th, .levelMatrix td { display: block; width: 100%; } .levelMatrix th { border-bottom: none; } }
+
+.summaryValue {
+  color: rgba(237, 243, 247, 0.88);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.documentHeader span {
+  color: #ffd6ae;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.documentHeader h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  line-height: 1.35;
+}
+
+.documentSection .radarCard {
+  border: 1px solid var(--color-table-border);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.018);
+}
