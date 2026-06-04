@@ -5,7 +5,7 @@ import styles from './Header.module.css';
 const TOP_ITEMS = [
   { to: '/tutorial', number: '01', label: '入门教程', type: 'link' },
   { to: '/owner', number: '02', label: '案例演示', type: 'demo' },
-  { to: '/owner', number: '03', label: '自己动手演练', type: 'reset' }
+  { to: '/owner', number: '03', label: '动手演练', type: 'reset' }
 ];
 
 export function Header() {

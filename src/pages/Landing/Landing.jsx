@@ -70,7 +70,8 @@ const LEARNING_RESULTS = [
 
 const LEARNING_PATH = [
   { number: '01', title: '入门教程', text: '先建立标准框架、核心概念、角色分工与对应关系的基础认知。', action: '进入教程', to: '/tutorial' },
-  { number: '02', title: '案例演示', text: '再按步骤查看同一项目如何从输入走向设计、能力说明、差距分析与判断。', action: '进入案例', to: '/owner' }
+  { number: '02', title: '案例演示', text: '再按步骤查看同一项目如何从输入走向设计、能力说明、差距分析与判断。', action: '进入案例', to: '/owner', mode: 'demo' },
+  { number: '03', title: '动手演练', text: '在理解案例链路后，再从头完成一轮自己的输入、分析与推演。', action: '开始演练', to: '/owner', mode: 'reset' }
 ];
 
 export function Landing() {
@@ -100,7 +101,7 @@ export function Landing() {
             <div className={styles.primaryActions}>
               <Link to="/tutorial" className={styles.actionLink}><Button className={styles.primaryEntryButton}>进入 01 入门教程</Button></Link>
               <Button onClick={handleEnterCase} variant="secondary" className={styles.primaryEntryButton}>进入 02 案例演示</Button>
-              <Button onClick={handleReset} variant="ghost" className={styles.primaryEntryButton}>进入 03 自己动手演练</Button>
+              <Button onClick={handleReset} variant="ghost" className={styles.primaryEntryButton}>进入 03 动手演练</Button>
             </div>
 
           </div>
@@ -165,7 +166,9 @@ export function Landing() {
               <div className={styles.inlineAction}>
                 {item.mode === 'reset'
                   ? <Button variant="ghost" size="medium" onClick={handleReset}>{item.action}</Button>
-                  : <Link to={item.to}><Button variant="ghost" size="medium">{item.action}</Button></Link>}
+                  : item.mode === 'demo'
+                    ? <Button variant="ghost" size="medium" onClick={handleEnterCase}>{item.action}</Button>
+                    : <Link to={item.to}><Button variant="ghost" size="medium">{item.action}</Button></Link>}
               </div>
             </article>
           ))}
