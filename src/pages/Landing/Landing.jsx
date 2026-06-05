@@ -93,7 +93,7 @@ export function Landing() {
       <HeroPanel className={styles.hero} align="stack">
         <div className={styles.heroText}>
           <span className={styles.eyebrow}>IEC 62443 Learning Hub</span>
-          <h1>帮助你从概念入门走向 IEC 62443 的系统理解</h1>
+          <h1>帮助初学者从概念入门到系统理解 IEC 62443</h1>
           <p>
             本系统以“入门教程 + 案例演示”为主线，帮助学习者建立对 IEC 62443 概念、角色、项目链路与判断边界的系统理解。
           </p>
